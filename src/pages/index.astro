@@ -1,50 +1,271 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const products = [
+	{
+		id: 'four-radio-kit',
+		name: '4-Radio Field Kit',
+		model: 'Baofeng UV-5R Mini',
+		price: '$200',
+		paypalId: '7L264VEBTJMMQ',
+		label: 'Complete system',
+		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
+		images: [
+			{ src: '/images/four-kit-open.jpg', alt: 'Four Baofeng handheld radios beside an open Signal Ready hard case' },
+			{ src: '/images/four-kit-packed.jpg', alt: 'Four radios and charging accessories organized inside a protective hard case' },
+			{ src: '/images/four-kit-closed.jpg', alt: 'Closed black Signal Ready radio case with a custom identification badge' },
+		],
+		included: [
+			'4 Baofeng UV-5R Mini HAM-version radios',
+			'Rechargeable batteries installed',
+			'Custom-fitted protective hard case',
+			'Precision-cut foam insert',
+			'1-to-4 USB-C charging splitter',
+			'Custom exterior identification badge',
+			'Case exterior: 9¼ × 7½ × 4⅜ in.',
+		],
+	},
+	{
+		id: 'two-radio-kit',
+		name: '2-Radio Field Kit',
+		model: 'Baofeng Mini-5',
+		price: '$150',
+		label: 'Compact system',
+		description: 'The same field-ready preparation in a streamlined two-radio package for vehicles, travel, and small teams.',
+		images: [
+			{ src: '/images/two-kit-open.jpg', alt: 'Two Baofeng handheld radios beside an open protective hard case' },
+			{ src: '/images/two-kit-packed.jpg', alt: 'Two radios and charging accessories secured inside a fitted hard case' },
+			{ src: '/images/two-kit-closed.jpg', alt: 'Closed black radio case with a Signal Ready identification badge' },
+		],
+		included: [
+			'2 Baofeng Mini-5 HAM-version radios',
+			'Rechargeable batteries installed',
+			'Custom-fitted protective hard case',
+			'Precision-cut foam insert',
+			'1-to-2 USB-C charging splitter',
+			'Custom exterior identification badge',
+			'Case exterior: 9¼ × 7½ × 4⅜ in.',
+		],
+	},
+	{
+		id: 'case-only',
+		name: '4-Radio Case',
+		model: 'Case + custom foam',
+		price: '$75',
+		label: 'Case only',
+		description: 'A clean, grab-and-go storage system for owners who already have Baofeng UV-5R Mini radios.',
+		images: [
+			{ src: '/images/case-open.jpg', alt: 'Open protective hard case with custom-cut foam for four handheld radios' },
+			{ src: '/images/case-closed.jpg', alt: 'Closed black protective four-radio case' },
+		],
+		included: [
+			'Case and foam only — radios not included',
+			'Durable polypropylene hard case',
+			'Custom-cut four-radio foam insert',
+			'Dedicated accessory storage area',
+			'Protective egg-crate foam lid',
+			'Rubber seals and compact carry handle',
+			'Optional custom identification badge',
+			'Exterior: 9¼ × 7½ × 4⅜ in.',
+		],
+	},
+];
+
+const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og.png" />
+		<meta name="theme-color" content="#101310" />
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<div class="utility-bar">
+			<div><span>Free shipping</span> anywhere in the United States</div>
+			<div>Assembled in Maryland <i aria-hidden="true"></i> 30-day returns</div>
+		</div>
+
+		<header class="site-header">
+			<a class="brand" href="#top" aria-label="Signal Ready home">
+				<span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+				<span>SIGNAL <strong>READY</strong></span>
+			</a>
+			<nav aria-label="Main navigation">
+				<a href="#shop">Shop</a>
+				<a href="#field-ready">What you get</a>
+				<a href="#about">About</a>
+				<a href="#policies">Policies</a>
+			</nav>
+			<div class="cart-control" aria-label="Shopping cart">
+				<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+			</div>
+		</header>
+
+		<main id="main">
+			<section class="hero" id="top">
+				<div class="hero-copy">
+					<p class="eyebrow">Field-ready communication systems</p>
+					<h1>Ready when<br /><em>networks fail.</em></h1>
+					<p class="lede">Professionally assembled, pre-programmed radio kits built for preparedness, travel, team coordination, and off-grid communication.</p>
+					<div class="hero-actions">
+						<a class="button button-primary" href="#shop">Shop the systems <span aria-hidden="true">↓</span></a>
+						<div class="availability"><span aria-hidden="true"></span> Built and shipped from Maryland</div>
+					</div>
+				</div>
+				<div class="hero-visual">
+					<div class="image-frame">
+						<img src="/images/four-kit-open.jpg" alt="Four handheld radios with antennas beside an open Signal Ready protective case" width="794" height="1059" fetchpriority="high" />
+					</div>
+					<div class="status-card"><span aria-hidden="true"></span> Programmed · Packed · Ready</div>
+					<div class="coordinates" aria-hidden="true">38.7218° N<br />76.6605° W</div>
+				</div>
+			</section>
+
+			<section class="trust-strip" aria-label="Store benefits">
+				<div><strong>01</strong><span>Pre-programmed<br />before delivery</span></div>
+				<div><strong>02</strong><span>Organized in a<br />custom foam case</span></div>
+				<div><strong>03</strong><span>Free shipping<br />across the U.S.</span></div>
+				<div><strong>04</strong><span>30-day<br />return window</span></div>
+			</section>
+
+			<section class="shop-section" id="shop">
+				<div class="section-heading">
+					<div>
+						<p class="eyebrow">Choose your setup</p>
+						<h2>Built for the field.<br />Not the shelf.</h2>
+					</div>
+					<p>Every system is carefully organized and prepared for quick deployment—without a complicated setup process.</p>
+				</div>
+
+				<div class="product-grid">
+					{products.map((product, index) => (
+						<article class="product-card" id={product.id}>
+							<div class="product-gallery" data-gallery>
+								<div class="product-label"><span>{String(index + 1).padStart(2, '0')}</span>{product.label}</div>
+								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="794" height="1059" loading={index === 0 ? 'eager' : 'lazy'} data-main-image />
+								<div class="product-thumbnails" aria-label={`${product.name} photos`}>
+									{product.images.map((image, imageIndex) => (
+										<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
+											<img src={image.src} alt="" width="72" height="72" loading="lazy" />
+										</button>
+									))}
+								</div>
+							</div>
+							<div class="product-info">
+								<p class="product-model">{product.model}</p>
+								<h3>{product.name}</h3>
+								<p class="product-description">{product.description}</p>
+								<ul class="check-list">
+									{product.included.map(item => <li>{item}</li>)}
+								</ul>
+								<div class="product-purchase">
+									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
+									{product.paypalId ? (
+										<div class="paypal-button-wrap">
+											<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
+										</div>
+									) : (
+										<button class="button-coming" type="button" disabled>PayPal checkout coming soon</button>
+									)}
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="field-ready" id="field-ready">
+				<div class="field-ready-copy">
+					<p class="eyebrow">Configured before it ships</p>
+					<h2>No setup.<br /><em>No guesswork.</em></h2>
+					<p>Radio kits arrive organized and pre-programmed with a practical field configuration. Additional custom channel configurations are available upon request.</p>
+					<a class="text-link" href="mailto:ansman@gmail.com?subject=Signal%20Ready%20custom%20configuration">Ask about a custom configuration <span aria-hidden="true">→</span></a>
+				</div>
+				<div class="channel-panel">
+					<div class="panel-head"><span>Standard channel groups</span><span>SR–01</span></div>
+					<ol>
+						{programming.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}<i aria-hidden="true"></i></li>)}
+					</ol>
+					<p>Frequency availability and transmit authorization depend on radio service, licensing, location, and applicable regulations.</p>
+				</div>
+			</section>
+
+			<section class="about-section" id="about">
+				<div class="about-number" aria-hidden="true">SR</div>
+				<div class="about-copy">
+					<p class="eyebrow">Why Signal Ready</p>
+					<h2>Communication should still work when everything else doesn’t.</h2>
+					<div class="about-columns">
+						<p>Signal Ready builds portable radio systems for people who value reliability, simplicity, and fast deployment.</p>
+						<p>Whether you are preparing a family emergency kit, outfitting a vehicle recovery team, coordinating an event, or traveling off-grid, every kit is assembled to be practical, durable, and easy to use.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="use-cases" aria-labelledby="use-cases-title">
+				<div class="section-heading compact">
+					<div><p class="eyebrow">Made to move</p><h2 id="use-cases-title">One system.<br />Plenty of missions.</h2></div>
+				</div>
+				<div class="use-grid">
+					<span>Emergency preparedness</span><span>Camping & overlanding</span><span>Vehicle recovery</span><span>Event coordination</span><span>Family communication</span><span>Travel & off-grid use</span>
+				</div>
+			</section>
+
+			<section class="policy-section" id="policies">
+				<div class="section-heading compact">
+					<div><p class="eyebrow">Straightforward policies</p><h2>Know before<br />you order.</h2></div>
+				</div>
+				<div class="policy-grid">
+					<div><span>Shipping</span><h3>Free. Every day.</h3><p>All orders ship free to addresses within the United States. International shipping is not currently available.</p></div>
+					<div><span>Returns</span><h3>30 days to decide.</h3><p>Contact us within 30 days of delivery to begin a return. Items should be returned in their original condition.</p></div>
+					<div><span>Support</span><h3>Talk to the builder.</h3><p>Questions about a system, custom badge, or channel configuration? Email <a href="mailto:ansman@gmail.com">ansman@gmail.com</a>.</p></div>
+					<div><span>Payment</span><h3>Checkout by PayPal.</h3><p>Payments and payment details are handled securely by PayPal. This storefront does not store your payment card information.</p></div>
+				</div>
+			</section>
+
+			<section class="legal-note" aria-labelledby="legal-title">
+				<h2 id="legal-title">Responsible radio use</h2>
+				<p>The user is responsible for proper licensing, frequency use, and legal operation where applicable. Some frequencies may be programmed for monitoring only depending on local laws, radio service rules, and licensing requirements.</p>
+			</section>
 		</main>
-		<Footer />
+
+		<footer>
+			<div class="footer-main">
+				<a class="brand footer-brand" href="#top">
+					<span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+					<span>SIGNAL <strong>READY</strong></span>
+				</a>
+				<p>Field-ready communication systems.<br />Built in Dunkirk, Maryland.</p>
+				<a class="footer-email" href="mailto:ansman@gmail.com">ansman@gmail.com</a>
+			</div>
+			<div class="footer-bottom">
+				<span>© {new Date().getFullYear()} Signal Ready</span>
+				<span>Free U.S. shipping · 30-day returns</span>
+			</div>
+		</footer>
+
+		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
+		<script is:inline>
+			cartPaypal.Cart({ id: "pp-view-cart" });
+			cartPaypal.AddToCart({ id: "7L264VEBTJMMQ" });
+
+			document.querySelectorAll('[data-gallery]').forEach((gallery) => {
+				const mainImage = gallery.querySelector('[data-main-image]');
+				gallery.querySelectorAll('[data-gallery-button]').forEach((button) => {
+					button.addEventListener('click', () => {
+						if (!(mainImage instanceof HTMLImageElement) || !(button instanceof HTMLElement)) return;
+						mainImage.src = button.dataset.src || mainImage.src;
+						mainImage.alt = button.dataset.alt || mainImage.alt;
+						gallery.querySelectorAll('[data-gallery-button]').forEach((item) => {
+							item.classList.toggle('active', item === button);
+							item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+						});
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
