@@ -85,12 +85,12 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 		<a class="skip-link" href="#main">Skip to content</a>
 		<div class="utility-bar">
 			<div><span>Free shipping</span> anywhere in the United States</div>
-			<div>Assembled in Maryland <i aria-hidden="true"></i> 30-day returns</div>
+			<div>Assembled in Maryland <i aria-hidden="true"></i> Veteran owned business</div>
 		</div>
 
 		<header class="site-header">
 			<a class="brand" href="#top" aria-label="Signal Ready home">
-				<span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+				<img class="brand-logo" src="/images/signal-ready-logo.png" alt="" width="40" height="40" />
 				<span>SIGNAL <strong>READY</strong></span>
 			</a>
 			<nav aria-label="Main navigation">
@@ -117,7 +117,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 				</div>
 				<div class="hero-visual">
 					<div class="image-frame">
-						<img src="/images/four-kit-open.jpg" alt="Four handheld radios with antennas beside an open Signal Ready protective case" width="794" height="1059" fetchpriority="high" />
+						<img src="/images/four-kit-open.jpg" alt="Four handheld radios with antennas beside an open Signal Ready protective case" width="1086" height="1448" fetchpriority="high" />
 					</div>
 					<div class="status-card"><span aria-hidden="true"></span> Programmed · Packed · Ready</div>
 					<div class="coordinates" aria-hidden="true">38.7218° N<br />76.6605° W</div>
@@ -128,7 +128,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 				<div><strong>01</strong><span>Pre-programmed<br />before delivery</span></div>
 				<div><strong>02</strong><span>Organized in a<br />custom foam case</span></div>
 				<div><strong>03</strong><span>Free shipping<br />across the U.S.</span></div>
-				<div><strong>04</strong><span>30-day<br />return window</span></div>
+				<div><strong>04</strong><span>Veteran owned<br />business</span></div>
 			</section>
 
 			<section class="shop-section" id="shop">
@@ -145,7 +145,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 						<article class="product-card" id={product.id}>
 							<div class="product-gallery" data-gallery>
 								<div class="product-label"><span>{String(index + 1).padStart(2, '0')}</span>{product.label}</div>
-								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="794" height="1059" loading={index === 0 ? 'eager' : 'lazy'} data-main-image />
+								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading={index === 0 ? 'eager' : 'lazy'} data-main-image />
 								<div class="product-thumbnails" aria-label={`${product.name} photos`}>
 									{product.images.map((image, imageIndex) => (
 										<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
@@ -173,6 +173,10 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 						</article>
 					))}
 				</div>
+			</section>
+
+			<section class="brand-banner" aria-label="Signal Ready Communications">
+				<img src="/images/store-banner.jpg" alt="Signal Ready Communications — ready when networks fail" width="1921" height="819" loading="lazy" />
 			</section>
 
 			<section class="field-ready" id="field-ready">
@@ -218,7 +222,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 				</div>
 				<div class="policy-grid">
 					<div><span>Shipping</span><h3>Free. Every day.</h3><p>All orders ship free to addresses within the United States. International shipping is not currently available.</p></div>
-					<div><span>Returns</span><h3>30 days to decide.</h3><p>Contact us within 30 days of delivery to begin a return. Items should be returned in their original condition.</p></div>
+					<div><span>Ownership</span><h3>Veteran owned business.</h3><p>Signal Ready is proudly veteran owned and focused on practical, dependable communication systems.</p></div>
 					<div><span>Support</span><h3>Talk to the builder.</h3><p>Questions about a system, custom badge, or channel configuration? Email <a href="mailto:ansman@gmail.com">ansman@gmail.com</a>.</p></div>
 					<div><span>Payment</span><h3>Checkout by PayPal.</h3><p>Payments and payment details are handled securely by PayPal. This storefront does not store your payment card information.</p></div>
 				</div>
@@ -233,7 +237,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 		<footer>
 			<div class="footer-main">
 				<a class="brand footer-brand" href="#top">
-					<span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+					<img class="brand-logo" src="/images/signal-ready-logo.png" alt="" width="40" height="40" loading="lazy" />
 					<span>SIGNAL <strong>READY</strong></span>
 				</a>
 				<p>Field-ready communication systems.<br />Built in Dunkirk, Maryland.</p>
@@ -241,7 +245,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 			</div>
 			<div class="footer-bottom">
 				<span>© {new Date().getFullYear()} Signal Ready</span>
-				<span>Free U.S. shipping · 30-day returns</span>
+				<span>Free U.S. shipping · Veteran owned business</span>
 			</div>
 		</footer>
 

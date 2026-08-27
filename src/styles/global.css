@@ -30,9 +30,7 @@ button, input { font: inherit; }
 .site-header { position: relative; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 22px 0; border-bottom: 1px solid var(--line); }
 .brand { display: flex; gap: 12px; align-items: center; width: fit-content; font-size: 15px; letter-spacing: .16em; text-decoration: none; white-space: nowrap; }
 .brand strong { color: var(--signal); }
-.signal-mark { display: flex; align-items: end; gap: 2px; height: 22px; transform: rotate(90deg); }
-.signal-mark i { display: block; width: 3px; background: var(--signal); border-radius: 2px; }
-.signal-mark i:nth-child(1) { height: 6px; } .signal-mark i:nth-child(2) { height: 11px; } .signal-mark i:nth-child(3) { height: 16px; } .signal-mark i:nth-child(4) { height: 21px; }
+.brand-logo { width: 40px; height: 40px; flex: 0 0 auto; border: 1px solid var(--line-strong); border-radius: 50%; object-fit: cover; }
 nav { display: flex; gap: 30px; font-size: 14px; }
 nav a { color: var(--muted); text-decoration: none; }
 nav a:hover, nav a:focus-visible { color: var(--ink); }
@@ -90,6 +88,9 @@ h2 { margin-bottom: 0; font-size: clamp(48px, 6.1vw, 82px); line-height: .91; le
 .button-buy { min-height: 50px; padding: 12px 18px; border: 1px solid var(--signal); border-radius: 2px; background: var(--signal); color: var(--ground); font-weight: 700; cursor: pointer; }
 .button-buy:hover, .button-buy:focus-visible { background: var(--signal-dark); border-color: var(--signal-dark); }
 .button-coming { min-height: 50px; padding: 10px 16px; border: 1px dashed var(--line-strong); background: transparent; color: var(--muted); font-size: 13px; cursor: not-allowed; }
+
+.brand-banner { overflow: hidden; border: 1px solid var(--line); background: #000; }
+.brand-banner img { width: 100%; height: auto; }
 
 .paypal-dialog { width: min(960px, calc(100vw - 32px)); max-height: min(86vh, 900px); margin: auto; padding: 0; overflow: hidden; border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink); box-shadow: 0 30px 100px rgba(0,0,0,.65); }
 .paypal-dialog::backdrop { background: rgba(4, 6, 4, .84); backdrop-filter: blur(5px); }
