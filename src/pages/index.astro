@@ -7,7 +7,7 @@ const products = [
 		id: 'four-radio-kit',
 		name: '4-Radio Field Kit',
 		model: 'Baofeng UV-5R Mini',
-		price: '$200',
+		price: '$185',
 		paypalId: '7L264VEBTJMMQ',
 		label: 'Complete system',
 		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
@@ -164,9 +164,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
-										<div class="paypal-button-wrap">
-											<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
-										</div>
+										<button class="button-buy" type="button" data-open-paypal>Configure & add to cart</button>
 									) : (
 										<button class="button-coming" type="button" disabled>PayPal checkout coming soon</button>
 									)}
@@ -247,10 +245,35 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 			</div>
 		</footer>
 
+		<dialog class="paypal-dialog" id="paypal-product-dialog" aria-labelledby="paypal-dialog-title">
+			<div class="paypal-dialog-inner">
+				<div class="paypal-dialog-header">
+					<div>
+						<p class="eyebrow">Secure PayPal checkout</p>
+						<h2 id="paypal-dialog-title">Configure your 4-radio kit</h2>
+					</div>
+					<form method="dialog"><button class="dialog-close" type="submit" aria-label="Close checkout">Close</button></form>
+				</div>
+				<div class="paypal-dialog-body">
+					<paypal-add-to-cart-button data-id="7L264VEBTJMMQ"></paypal-add-to-cart-button>
+				</div>
+			</div>
+		</dialog>
+
 		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 		<script is:inline>
 			cartPaypal.Cart({ id: "pp-view-cart" });
 			cartPaypal.AddToCart({ id: "7L264VEBTJMMQ" });
+
+			const paypalDialog = document.querySelector('#paypal-product-dialog');
+			document.querySelectorAll('[data-open-paypal]').forEach((button) => {
+				button.addEventListener('click', () => {
+					if (paypalDialog instanceof HTMLDialogElement) paypalDialog.showModal();
+				});
+			});
+			paypalDialog?.addEventListener('click', (event) => {
+				if (event.target === paypalDialog && paypalDialog instanceof HTMLDialogElement) paypalDialog.close();
+			});
 
 			document.querySelectorAll('[data-gallery]').forEach((gallery) => {
 				const mainImage = gallery.querySelector('[data-main-image]');
