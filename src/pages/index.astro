@@ -10,7 +10,9 @@ const products = [
 		price: '$200',
 		paypalId: '7L264VEBTJMMQ',
 		label: 'Complete system',
+		bestFor: 'Families, teams, and preparedness kits',
 		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
+		highlights: ['Four-radio team setup', 'Custom programming', '1-to-4 USB-C charging'],
 		images: [
 			{ src: '/images/four-kit-open.jpg', alt: 'Four Baofeng handheld radios beside an open Signal Ready hard case' },
 			{ src: '/images/four-kit-packed.jpg', alt: 'Four radios and charging accessories organized inside a protective hard case' },
@@ -32,7 +34,9 @@ const products = [
 		model: 'Baofeng Mini-5',
 		price: '$125',
 		label: 'Newer-generation radio',
+		bestFor: 'Vehicles, couples, travel, and small teams',
 		description: 'Built around the newer Baofeng Mini-5, with a larger battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
+		highlights: ['Newer Mini-5 platform', 'Larger-capacity battery', 'Improved audio, reception, and keypad'],
 		images: [
 			{ src: '/images/two-kit-open.jpg', alt: 'Two Baofeng handheld radios beside an open protective hard case' },
 			{ src: '/images/two-kit-packed.jpg', alt: 'Two radios and charging accessories secured inside a fitted hard case' },
@@ -54,7 +58,9 @@ const products = [
 		model: 'Case + custom foam',
 		price: '$50',
 		label: 'Case only',
+		bestFor: 'Owners who already have compatible radios',
 		description: 'A clean, grab-and-go storage system for owners who already have Baofeng UV-5R Mini radios.',
+		highlights: ['Fits four UV-5R Mini radios', 'Dedicated accessory storage', 'Radios not included'],
 		images: [
 			{ src: '/images/case-open.jpg', alt: 'Open protective hard case with custom-cut foam for four handheld radios' },
 			{ src: '/images/case-closed.jpg', alt: 'Closed black protective four-radio case' },
@@ -73,6 +79,19 @@ const products = [
 ];
 
 const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
+
+const storeSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'OnlineStore',
+	name: 'Signal Ready',
+	url: 'https://steven.ansman.io',
+	email: 'ansman@gmail.com',
+	description: SITE_DESCRIPTION,
+	areaServed: 'US',
+	currenciesAccepted: 'USD',
+	paymentAccepted: 'PayPal',
+	slogan: 'Ready when networks fail.',
+};
 ---
 
 <!doctype html>
@@ -80,6 +99,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og.png" />
 		<meta name="theme-color" content="#101310" />
+		<script type="application/ld+json" set:html={JSON.stringify(storeSchema)}></script>
 	</head>
 	<body>
 		<a class="skip-link" href="#main">Skip to content</a>
@@ -95,6 +115,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 			</a>
 			<nav aria-label="Main navigation">
 				<a href="#shop">Shop</a>
+				<a href="#how-it-works">How it works</a>
 				<a href="#field-ready">What you get</a>
 				<a href="#about">About</a>
 				<a href="#policies">Policies</a>
@@ -131,6 +152,21 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 				<div><strong>04</strong><span>Veteran owned<br />business</span></div>
 			</section>
 
+			<section class="process-section" id="how-it-works" aria-labelledby="process-title">
+				<div class="section-heading">
+					<div>
+						<p class="eyebrow">From the bench to your door</p>
+						<h2 id="process-title">Ready in<br />three steps.</h2>
+					</div>
+					<p>No complicated setup list. Choose the right kit, tell us what you need, and receive an organized system ready for the field.</p>
+				</div>
+				<ol class="process-grid">
+					<li><span>01</span><h3>Choose your system</h3><p>Select a complete two- or four-radio kit, or the fitted case by itself.</p></li>
+					<li><span>02</span><h3>We configure it</h3><p>Your complete radio kit is programmed, checked, organized, and packed in Maryland.</p></li>
+					<li><span>03</span><h3>It ships free</h3><p>Your order ships free anywhere in the United States, with direct support from the builder.</p></li>
+				</ol>
+			</section>
+
 			<section class="shop-section" id="shop">
 				<div class="section-heading">
 					<div>
@@ -138,6 +174,20 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 						<h2>Built for the field.<br />Not the shelf.</h2>
 					</div>
 					<p>Every system is carefully organized and prepared for quick deployment—without a complicated setup process.</p>
+				</div>
+
+				<div class="setup-selector" aria-label="Compare Signal Ready setups">
+					{products.map((product, index) => (
+						<a class="setup-option" href={`#${product.id}`}>
+							<div class="setup-option-top">
+								<span>{String(index + 1).padStart(2, '0')}</span>
+								<small>{product.paypalId ? 'Buy online' : 'Ask about availability'}</small>
+							</div>
+							<strong>{product.name}</strong>
+							<p>{product.bestFor}</p>
+							<div class="setup-option-meta"><b>{product.price}</b><em>{product.model}</em></div>
+						</a>
+					))}
 				</div>
 
 				<div class="product-grid">
@@ -158,6 +208,9 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 								<p class="product-model">{product.model}</p>
 								<h3>{product.name}</h3>
 								<p class="product-description">{product.description}</p>
+								<ul class="product-highlights" aria-label={`${product.name} highlights`}>
+									{product.highlights.map(item => <li>{item}</li>)}
+								</ul>
 								<ul class="check-list">
 									{product.included.map(item => <li>{item}</li>)}
 								</ul>
@@ -166,7 +219,7 @@ const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine ch
 									{product.paypalId ? (
 										<button class="button-buy" type="button" data-open-paypal>Configure & add to cart</button>
 									) : (
-										<button class="button-coming" type="button" disabled>PayPal checkout coming soon</button>
+										<a class="button-inquiry" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}>Ask about availability</a>
 									)}
 								</div>
 							</div>
