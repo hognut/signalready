@@ -89,8 +89,17 @@ h2 { margin-bottom: 0; font-size: clamp(48px, 6.1vw, 82px); line-height: .91; le
 .button-buy:hover, .button-buy:focus-visible { background: var(--signal-dark); border-color: var(--signal-dark); }
 .button-coming { min-height: 50px; padding: 10px 16px; border: 1px dashed var(--line-strong); background: transparent; color: var(--muted); font-size: 13px; cursor: not-allowed; }
 
-.brand-banner { overflow: hidden; border: 1px solid var(--line); background: #000; }
-.brand-banner img { width: 100%; height: auto; }
+.brand-banner { position: relative; display: grid; grid-template-columns: .32fr 1fr .72fr; gap: clamp(28px, 5vw, 78px); align-items: end; min-height: 430px; padding: clamp(38px, 6vw, 76px); overflow: hidden; border: 1px solid var(--line); background: radial-gradient(circle at 10% 88%, rgba(215,250,67,.17), transparent 28%), linear-gradient(135deg, #181d18 0%, #101310 70%); }
+.brand-banner::before { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(242,241,234,.035) 80px); content: ''; pointer-events: none; }
+.brand-banner > * { position: relative; }
+.brand-banner-index { display: flex; flex-direction: column; align-items: flex-start; color: var(--signal); font-size: clamp(72px, 9vw, 128px); font-weight: 700; letter-spacing: -.09em; line-height: .68; opacity: .22; }
+.brand-banner-index span { margin: 22px 0 0 8px; font-size: 12px; letter-spacing: .2em; }
+.brand-banner-copy .eyebrow { margin-bottom: 22px; }
+.brand-banner-copy h2 { font-size: clamp(48px, 6vw, 78px); }
+.brand-banner-copy h2 em { color: var(--signal); font-style: normal; }
+.brand-banner-notes { display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+.brand-banner-notes span { position: relative; padding: 17px 0 17px 23px; border-bottom: 1px solid var(--line); color: #c8cac3; font-size: 13px; }
+.brand-banner-notes span::before { position: absolute; left: 0; color: var(--signal); content: '+'; }
 
 .paypal-dialog { width: min(960px, calc(100vw - 32px)); max-height: min(86vh, 900px); margin: auto; padding: 0; overflow: hidden; border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink); box-shadow: 0 30px 100px rgba(0,0,0,.65); }
 .paypal-dialog::backdrop { background: rgba(4, 6, 4, .84); backdrop-filter: blur(5px); }
@@ -150,6 +159,7 @@ footer { padding: 100px 0 34px; }
 	.product-card:nth-child(even) .product-gallery { order: 0; }
 	.product-gallery, .product-main-image { min-height: 680px; }
 	.field-ready { gap: 50px; }
+	.brand-banner { grid-template-columns: .2fr 1fr .72fr; }
 }
 
 @media (max-width: 760px) {
@@ -173,6 +183,9 @@ footer { padding: 100px 0 34px; }
 	.product-purchase { grid-template-columns: 1fr; }
 	.paypal-dialog-header { padding: 20px; }
 	.paypal-dialog-body { padding: 12px; }
+	.brand-banner { grid-template-columns: 1fr; min-height: 0; }
+	.brand-banner-index { display: none; }
+	.brand-banner-notes { margin-top: 12px; }
 	.about-number { display: none; }
 	.use-grid { grid-template-columns: 1fr 1fr; }
 	.policy-grid { grid-template-columns: 1fr; }
