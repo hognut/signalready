@@ -427,6 +427,23 @@ const faqSchema = {
 
 		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 		<script is:inline>
+			const alignInitialShortcut = () => {
+				if (window.location.hash.length < 2) return;
+				const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+				if (!target) return;
+				const root = document.documentElement;
+				const previousBehavior = root.style.scrollBehavior;
+				root.style.scrollBehavior = 'auto';
+				target.scrollIntoView({ block: 'start' });
+				root.style.scrollBehavior = previousBehavior;
+			};
+
+			window.addEventListener('load', () => {
+				Promise.resolve(document.fonts?.ready).then(() => {
+					requestAnimationFrame(() => requestAnimationFrame(alignInitialShortcut));
+				});
+			}, { once: true });
+
 			document.querySelectorAll('[data-gallery]').forEach((gallery) => {
 				const mainImage = gallery.querySelector('[data-main-image]');
 				gallery.querySelectorAll('[data-gallery-button]').forEach((button) => {
