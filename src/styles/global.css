@@ -73,7 +73,7 @@ h1 em, .field-ready h2 em { color: var(--signal); font-style: normal; }
 .trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .trust-strip div { display: flex; gap: 18px; align-items: center; min-height: 112px; padding: 18px 24px; border-right: 1px solid var(--line); }
 .trust-strip div:last-child { border-right: 0; }
-.trust-strip strong { color: var(--signal); font-size: 12px; }
+.trust-strip strong { color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 21px; font-weight: 800; line-height: 1; }
 .trust-strip span { color: #c4c6bf; font-size: 14px; line-height: 1.35; }
 
 .shop-section, .process-section, .field-ready, .about-section, .use-cases, .policy-section { padding: 118px 0; }
@@ -85,6 +85,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .setup-option:hover, .setup-option:focus-visible { position: relative; z-index: 1; background: var(--panel); transform: translateY(-3px); }
 .setup-option-top, .setup-option-meta { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
 .setup-option-top { margin-bottom: 38px; color: var(--signal); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.setup-option-top > span { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 21px; font-weight: 800; line-height: 1; }
 .setup-option-top small { color: var(--muted); font-size: 10px; letter-spacing: .08em; }
 .setup-option > strong { display: block; margin-bottom: 7px; font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 28px; font-weight: 800; line-height: 1; }
 .setup-option > p { min-height: 48px; margin-bottom: 28px; color: var(--muted); font-size: 14px; line-height: 1.45; }
@@ -97,7 +98,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .product-gallery { position: relative; overflow: hidden; min-height: 620px; background: #2b322b; }
 .product-main-image { width: 100%; height: 100%; min-height: 620px; object-fit: cover; filter: brightness(1.18) saturate(.96) contrast(1.02); transition: opacity .18s ease; }
 .product-label { position: absolute; z-index: 2; top: 18px; left: 18px; display: flex; gap: 10px; align-items: center; padding: 8px 11px; background: rgba(16,19,16,.86); backdrop-filter: blur(8px); color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
-.product-label span { color: var(--signal); }
+.product-label span { color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 19px; font-weight: 800; line-height: 1; }
 .product-thumbnails { position: absolute; z-index: 2; right: 16px; bottom: 16px; display: flex; gap: 8px; }
 .product-thumbnails button { width: 62px; height: 62px; padding: 3px; overflow: hidden; background: #111; border: 1px solid rgba(255,255,255,.2); cursor: pointer; }
 .product-thumbnails button:hover, .product-thumbnails button:focus-visible, .product-thumbnails button.active { border-color: var(--signal); }
@@ -122,7 +123,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .process-section { border-top: 1px solid var(--line); }
 .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); list-style: none; counter-reset: process; }
 .process-grid li { min-height: 280px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(145deg, rgba(215,250,67,.035), transparent 55%); }
-.process-grid li > span { display: block; margin-bottom: 76px; color: var(--signal); font-size: 12px; font-weight: 700; letter-spacing: .13em; }
+.process-grid li > span { display: block; margin-bottom: 76px; color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 22px; font-weight: 800; letter-spacing: .08em; line-height: 1; }
 .process-grid h3 { margin-bottom: 12px; font-size: 27px; line-height: 1.1; }
 .process-grid p { max-width: 300px; margin-bottom: 0; color: var(--muted); font-size: 15px; }
 
@@ -130,7 +131,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .brand-banner::before { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(242,241,234,.035) 80px); content: ''; pointer-events: none; }
 .brand-banner > * { position: relative; }
 .brand-banner-index { display: flex; flex-direction: column; align-items: flex-start; color: var(--signal); font-size: clamp(72px, 9vw, 128px); font-weight: 700; letter-spacing: -.09em; line-height: .68; opacity: .22; }
-.brand-banner-index span { margin: 22px 0 0 8px; font-size: 12px; letter-spacing: .2em; }
+.brand-banner-index span { margin: 22px 0 0 8px; font-size: 18px; letter-spacing: .16em; }
 .brand-banner-copy .eyebrow { margin-bottom: 22px; }
 .brand-banner-copy h2 { font-size: clamp(52px, 6.3vw, 84px); }
 .brand-banner-copy h2 em { color: var(--signal); font-style: normal; }
@@ -157,7 +158,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .panel-head { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 2px solid rgba(16,19,16,.3); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .channel-panel ol { margin: 0; padding: 0; list-style: none; }
 .channel-panel li { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; padding: 17px 0; border-bottom: 1px solid rgba(16,19,16,.24); font-size: 17px; font-weight: 700; }
-.channel-panel li span { font-size: 11px; opacity: .7; }
+.channel-panel li span { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 18px; font-weight: 800; opacity: .72; }
 .channel-panel li i { width: 8px; height: 8px; border-radius: 50%; background: #2a702f; }
 .channel-panel > p { margin: 18px 0 0; font-size: 11px; line-height: 1.45; opacity: .75; }
 
