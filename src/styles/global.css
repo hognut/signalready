@@ -89,6 +89,7 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .setup-option-top small { color: var(--muted); font-size: 10px; letter-spacing: .08em; }
 .setup-option-visual { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 17px; align-items: center; margin-bottom: 22px; }
 .setup-option-image { width: 96px; height: 84px; object-fit: cover; object-position: center 58%; border: 1px solid var(--line-strong); border-radius: 2px; background: var(--panel); filter: brightness(1.18) saturate(.96) contrast(1.01); }
+.setup-option-badge { display: inline-flex; margin-bottom: 8px; padding: 4px 7px; border: 1px solid rgba(215,250,67,.38); border-radius: 2px; background: rgba(215,250,67,.12); color: var(--signal); font-size: 9px; font-weight: 800; letter-spacing: .09em; line-height: 1; text-transform: uppercase; }
 .setup-option-title { display: block; margin-bottom: 8px; color: var(--ink); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 28px; font-weight: 800; line-height: 1; text-decoration: none; }
 .setup-option-title:hover, .setup-option-title:focus-visible { color: var(--signal); }
 .setup-option-copy p { min-height: 42px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.4; }
