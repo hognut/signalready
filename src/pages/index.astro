@@ -192,15 +192,27 @@ const storeSchema = {
 
 				<div class="setup-selector" aria-label="Compare Signal Ready setups">
 					{products.map((product, index) => (
-						<a class="setup-option" href={`#${product.id}`}>
+						<article class="setup-option">
 							<div class="setup-option-top">
 								<span>{String(index + 1).padStart(2, '0')}</span>
-								<small>{product.paypalId ? 'Buy online' : 'Ask about availability'}</small>
+								<small>{product.paypalId ? 'Ready to order' : 'Ask about availability'}</small>
 							</div>
-							<strong>{product.name}</strong>
-							<p>{product.bestFor}</p>
+							<div class="setup-option-visual">
+								<img class="setup-option-image" src={product.images[0].src} alt="" width="1086" height="1448" loading="lazy" decoding="async" />
+								<div class="setup-option-copy">
+									<a class="setup-option-title" href={`#${product.id}`}>{product.name}</a>
+									<p>{product.bestFor}</p>
+								</div>
+							</div>
 							<div class="setup-option-meta"><b>{product.price}</b><em>{product.model}</em></div>
-						</a>
+							{product.paypalId ? (
+								<button class="setup-buy-button" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>
+									<span>Buy online</span><b aria-hidden="true">→</b>
+								</button>
+							) : (
+								<a class="setup-buy-button" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}><span>Ask about availability</span><b aria-hidden="true">→</b></a>
+							)}
+						</article>
 					))}
 				</div>
 
