@@ -120,12 +120,23 @@ const storeSchema = {
 				<a href="#about">About</a>
 				<a href="#policies">Policies</a>
 			</nav>
+			<details class="mobile-menu">
+				<summary>Menu</summary>
+				<nav aria-label="Mobile navigation">
+					<a href="#shop">Shop</a>
+					<a href="#how-it-works">How it works</a>
+					<a href="#field-ready">What you get</a>
+					<a href="#about">About</a>
+					<a href="#policies">Policies</a>
+				</nav>
+			</details>
 			<div class="cart-control" aria-label="Shopping cart">
 				<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
 			</div>
 		</header>
 
 		<main id="main">
+			<noscript><p class="noscript-notice">PayPal checkout requires JavaScript. <a href="mailto:ansman@gmail.com?subject=Signal%20Ready%20order">Email Signal Ready to order.</a></p></noscript>
 			<section class="hero" id="top">
 				<div class="hero-copy">
 					<p class="eyebrow">Field-ready communication systems</p>
@@ -196,11 +207,11 @@ const storeSchema = {
 						<article class="product-card" id={product.id}>
 							<div class="product-gallery" data-gallery>
 								<div class="product-label"><span>{String(index + 1).padStart(2, '0')}</span>{product.label}</div>
-								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading={index === 0 ? 'eager' : 'lazy'} data-main-image />
+								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" data-main-image />
 								<div class="product-thumbnails" aria-label={`${product.name} photos`}>
 									{product.images.map((image, imageIndex) => (
 										<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
-											<img src={image.src} alt="" width="72" height="72" loading="lazy" />
+											<img src={image.src} alt="" width="72" height="72" loading="lazy" decoding="async" />
 										</button>
 									))}
 								</div>
@@ -329,19 +340,6 @@ const storeSchema = {
 
 		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 		<script is:inline>
-			cartPaypal.Cart({ id: "pp-view-cart" });
-			cartPaypal.AddToCart({ id: "7L264VEBTJMMQ" });
-
-			const paypalDialog = document.querySelector('#paypal-product-dialog');
-			document.querySelectorAll('[data-open-paypal]').forEach((button) => {
-				button.addEventListener('click', () => {
-					if (paypalDialog instanceof HTMLDialogElement) paypalDialog.showModal();
-				});
-			});
-			paypalDialog?.addEventListener('click', (event) => {
-				if (event.target === paypalDialog && paypalDialog instanceof HTMLDialogElement) paypalDialog.close();
-			});
-
 			document.querySelectorAll('[data-gallery]').forEach((gallery) => {
 				const mainImage = gallery.querySelector('[data-main-image]');
 				gallery.querySelectorAll('[data-gallery-button]').forEach((button) => {
@@ -355,6 +353,53 @@ const storeSchema = {
 						});
 					});
 				});
+			});
+
+			const mobileMenu = document.querySelector('.mobile-menu');
+			mobileMenu?.querySelectorAll('a').forEach((link) => {
+				link.addEventListener('click', () => mobileMenu.removeAttribute('open'));
+			});
+
+			const paypalDialog = document.querySelector('#paypal-product-dialog');
+			const purchaseButtons = document.querySelectorAll('[data-open-paypal]');
+			let paypalReady = false;
+
+			try {
+				if (window.cartPaypal) {
+					window.cartPaypal.Cart({ id: 'pp-view-cart' });
+					window.cartPaypal.AddToCart({ id: '7L264VEBTJMMQ' });
+					paypalReady = true;
+				}
+			} catch {
+				paypalReady = false;
+			}
+
+			if (paypalReady) {
+				purchaseButtons.forEach((button) => {
+					button.addEventListener('click', () => {
+						if (paypalDialog instanceof HTMLDialogElement) paypalDialog.showModal();
+					});
+				});
+			} else {
+				const cartControl = document.querySelector('.cart-control');
+				if (cartControl) {
+					cartControl.replaceChildren();
+					const fallbackLink = document.createElement('a');
+					fallbackLink.className = 'cart-fallback';
+					fallbackLink.href = 'mailto:ansman@gmail.com?subject=Signal%20Ready%20order';
+					fallbackLink.textContent = 'Order by email';
+					cartControl.append(fallbackLink);
+				}
+				purchaseButtons.forEach((button) => {
+					button.textContent = 'Email to order';
+					button.addEventListener('click', () => {
+						window.location.href = 'mailto:ansman@gmail.com?subject=Signal%20Ready%204-Radio%20Field%20Kit';
+					});
+				});
+			}
+
+			paypalDialog?.addEventListener('click', (event) => {
+				if (event.target === paypalDialog && paypalDialog instanceof HTMLDialogElement) paypalDialog.close();
 			});
 		</script>
 	</body>

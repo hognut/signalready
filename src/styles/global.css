@@ -37,9 +37,14 @@ button, input { font: inherit; }
 nav { display: flex; gap: 24px; font-size: 14px; }
 nav a { color: var(--muted); text-decoration: none; }
 nav a:hover, nav a:focus-visible { color: var(--ink); }
+.mobile-menu { display: none; }
 .cart-control { display: flex; justify-content: flex-end; min-height: 38px; }
+.cart-fallback { display: inline-flex; align-items: center; min-height: 38px; padding: 7px 11px; border: 1px solid var(--line-strong); color: var(--ink); font-size: 12px; font-weight: 700; text-decoration: none; }
+.cart-fallback:hover, .cart-fallback:focus-visible { border-color: var(--signal); color: var(--signal); }
 
 main, footer { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.noscript-notice { margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--signal); background: rgba(215,250,67,.08); color: #dfe9b0; font-size: 14px; }
+.noscript-notice a { color: var(--signal); font-weight: 700; }
 .hero { position: relative; isolation: isolate; min-height: 720px; display: grid; grid-template-columns: 1.08fr .92fr; gap: 76px; align-items: center; padding: 70px 0 100px; }
 .hero::before { position: absolute; z-index: -1; inset: 7% 48% 10% -20vw; background: repeating-radial-gradient(ellipse at 30% 55%, transparent 0 40px, rgba(215,250,67,.035) 41px 42px, transparent 43px 58px); content: ''; mask-image: linear-gradient(90deg, #000, transparent 90%); pointer-events: none; }
 .eyebrow { margin: 0 0 18px; color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .17em; text-transform: uppercase; }
@@ -184,8 +189,17 @@ footer { padding: 100px 0 34px; }
 .footer-bottom { display: flex; justify-content: space-between; padding-top: 22px; border-top: 1px solid var(--line); color: #777b73; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 
 @media (max-width: 980px) {
-	.site-header { grid-template-columns: 1fr 1fr; }
-	.site-header nav { display: none; }
+	.site-header { grid-template-columns: 1fr auto auto; gap: 12px; }
+	.site-header > nav { display: none; }
+	.mobile-menu { position: relative; display: block; }
+	.mobile-menu summary { display: flex; align-items: center; gap: 9px; min-height: 38px; padding: 7px 11px; border: 1px solid var(--line-strong); color: var(--ink); font-size: 12px; font-weight: 700; list-style: none; cursor: pointer; }
+	.mobile-menu summary::-webkit-details-marker { display: none; }
+	.mobile-menu summary::after { color: var(--signal); content: '+'; font-size: 17px; font-weight: 400; line-height: 1; }
+	.mobile-menu[open] summary { border-color: var(--signal); }
+	.mobile-menu[open] summary::after { content: '−'; }
+	.mobile-menu nav { position: absolute; z-index: 40; top: calc(100% + 12px); right: 0; display: grid; width: min(260px, calc(100vw - 28px)); gap: 0; padding: 8px; border: 1px solid var(--line-strong); background: #171b17; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+	.mobile-menu nav a { padding: 13px 12px; border-bottom: 1px solid var(--line); color: var(--ink); }
+	.mobile-menu nav a:last-child { border-bottom: 0; }
 	.hero { grid-template-columns: 1fr .8fr; gap: 42px; }
 	.product-card { grid-template-columns: 1fr; }
 	.product-card:nth-child(even) .product-gallery { order: 0; }
@@ -245,3 +259,14 @@ footer { padding: 100px 0 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+@supports (content-visibility: auto) {
+	.shop-section { content-visibility: auto; contain-intrinsic-size: auto 2600px; }
+	.process-section { content-visibility: auto; contain-intrinsic-size: auto 700px; }
+	.brand-banner { content-visibility: auto; contain-intrinsic-size: auto 430px; }
+	.field-ready { content-visibility: auto; contain-intrinsic-size: auto 850px; }
+	.about-section, .use-cases { content-visibility: auto; contain-intrinsic-size: auto 650px; }
+	.policy-section { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+	.legal-note { content-visibility: auto; contain-intrinsic-size: auto 180px; }
+	footer { content-visibility: auto; contain-intrinsic-size: auto 360px; }
+}
