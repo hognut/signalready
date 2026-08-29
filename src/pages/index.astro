@@ -83,6 +83,41 @@ const products = [
 
 const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
 
+const faqs = [
+	{
+		question: 'How far can these handheld radios transmit?',
+		answer: 'Handheld-to-handheld range is usually measured in a few miles on flat, relatively clear terrain—not the maximum-range numbers often printed on packaging. Buildings, hills, dense woods, vehicles, and low antenna height can cut that sharply. High ground, clear line of sight, a suitable antenna, or an authorized repeater can extend range dramatically.',
+	},
+	{
+		question: 'How long do the batteries last, and which radio has the larger battery?',
+		answer: 'Baofeng’s current published specifications list both the UV-5R Mini and MINI-5 at 1,600mAh. Some Mini-5 packages may ship with a differently rated pack, so the capacity printed on the included battery is the final specification. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. USB-C makes vehicle or power-bank top-ups easy.',
+	},
+	{
+		question: 'What is the difference between HAM, GMRS, and FRS?',
+		answer: 'Amateur radio (HAM) offers broad frequency privileges and repeater access but requires passing an exam for an individual FCC license. GMRS requires a no-exam FCC license and certified GMRS equipment; one individual license normally covers the license holder and immediate family. FRS is license-free but must be used with compliant FRS radios.',
+	},
+	{
+		question: 'Do I need a license?',
+		answer: 'Receiving ordinary over-the-air signals generally does not require a radio license. Transmitting on amateur bands requires the appropriate amateur license, and transmitting on GMRS requires a GMRS license. FRS does not require an individual license when used with an FCC-compliant FRS radio. The operator is always responsible for the service, frequency, and equipment rules.',
+	},
+	{
+		question: 'Can a HAM-version radio transmit on GMRS, FRS, Marine, or Aviation channels?',
+		answer: 'Programming a channel does not certify the radio for that service or authorize transmission. These kits contain HAM-version transceivers, so GMRS, FRS, Marine, Aviation, and NOAA entries may be provided for monitoring where lawful. Transmit only when both the operator and the equipment are authorized for that radio service; NOAA and Aviation channels in these kits are receive-only.',
+	},
+	{
+		question: 'Do “privacy codes” make a conversation private?',
+		answer: 'No. CTCSS and DCS tones only filter which signals open your radio’s speaker. Anyone listening on the same frequency without that filter can still hear the transmission. They reduce unwanted chatter; they do not encrypt it.',
+	},
+	{
+		question: 'Will these radios communicate with other brands?',
+		answer: 'Usually yes when the radios use the same legal radio service, frequency, channel width, tone settings, and repeater configuration. Brand names do not have to match. Signal Ready can help coordinate a compatible channel plan for your team’s existing equipment.',
+	},
+	{
+		question: 'Does programming increase range?',
+		answer: 'No. Programming makes the radio faster and easier to use, but range depends mainly on antenna height and quality, terrain, obstructions, frequency, transmit power, and repeater access. Moving to higher, clearer ground is often the most effective improvement.',
+	},
+];
+
 const storeSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'OnlineStore',
@@ -95,6 +130,16 @@ const storeSchema = {
 	paymentAccepted: 'PayPal',
 	slogan: 'Ready when networks fail.',
 };
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(faq => ({
+		'@type': 'Question',
+		name: faq.question,
+		acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+	})),
+};
 ---
 
 <!doctype html>
@@ -103,6 +148,7 @@ const storeSchema = {
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og.png" />
 		<meta name="theme-color" content="#2a312a" />
 		<script type="application/ld+json" set:html={JSON.stringify(storeSchema)}></script>
+		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
 	</head>
 	<body>
 		<a class="skip-link" href="#main">Skip to content</a>
@@ -120,6 +166,7 @@ const storeSchema = {
 				<a href="#shop">Shop</a>
 				<a href="#how-it-works">How it works</a>
 				<a href="#field-ready">What you get</a>
+				<a href="#faq">Radio Q&A</a>
 				<a href="#about">About</a>
 				<a href="#policies">Policies</a>
 			</nav>
@@ -129,6 +176,7 @@ const storeSchema = {
 					<a href="#shop">Shop</a>
 					<a href="#how-it-works">How it works</a>
 					<a href="#field-ready">What you get</a>
+					<a href="#faq">Radio Q&A</a>
 					<a href="#about">About</a>
 					<a href="#policies">Policies</a>
 				</nav>
@@ -304,6 +352,26 @@ const storeSchema = {
 				<div class="use-grid">
 					<span>Emergency preparedness</span><span>Camping & overlanding</span><span>Vehicle recovery</span><span>Event coordination</span><span>Family communication</span><span>Travel & off-grid use</span>
 				</div>
+			</section>
+
+			<section class="faq-section" id="faq" aria-labelledby="faq-title">
+				<div class="section-heading">
+					<div><p class="eyebrow">HAM + GMRS basics</p><h2 id="faq-title">Radio questions.<br />Straight answers.</h2></div>
+					<p>Realistic guidance about range, batteries, compatibility, licensing, and responsible operation before you head into the field.</p>
+				</div>
+				<div class="faq-grid">
+					{faqs.map((faq, index) => (
+						<details class="faq-item" open={index === 0}>
+							<summary>
+								<span class="faq-number">{String(index + 1).padStart(2, '0')}</span>
+								<strong>{faq.question}</strong>
+								<span class="faq-toggle" aria-hidden="true">+</span>
+							</summary>
+							<p>{faq.answer}</p>
+						</details>
+					))}
+				</div>
+				<p class="faq-sources">Specifications and operating guidance checked August 2026 against <a href="https://www.baofengradio.com/collections/analog/products/5r-mini">Baofeng UV-5R Mini</a> and <a href="https://www.baofengradio.com/products/mini-5">Baofeng MINI-5</a> specifications, <a href="https://docs.fcc.gov/public/attachments/FCC-17-57A1_Rcd.pdf">FCC Personal Radio Service rules</a>, and <a href="https://www.arrl.org/find-a-high-spot-for-vhf">ARRL VHF range guidance</a>.</p>
 			</section>
 
 			<section class="policy-section" id="policies">

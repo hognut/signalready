@@ -76,7 +76,7 @@ h1 em, .field-ready h2 em { color: var(--signal); font-style: normal; }
 .trust-strip strong { color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 21px; font-weight: 800; line-height: 1; }
 .trust-strip span { color: #c4c6bf; font-size: 14px; line-height: 1.35; }
 
-.shop-section, .process-section, .field-ready, .about-section, .use-cases, .policy-section { padding: 118px 0; }
+.shop-section, .process-section, .field-ready, .about-section, .use-cases, .faq-section, .policy-section { padding: 118px 0; }
 .section-heading { display: grid; grid-template-columns: 1.3fr .7fr; gap: 80px; align-items: end; margin-bottom: 64px; }
 .section-heading > p { max-width: 430px; margin-bottom: 2px; color: var(--muted); }
 h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; letter-spacing: -.02em; }
@@ -179,6 +179,20 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .use-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .use-grid span { display: flex; align-items: flex-end; min-height: 150px; padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #c8cac3; font-size: 17px; }
 .use-grid span::before { content: '+'; align-self: flex-start; margin-right: auto; color: var(--signal); }
+.faq-section { border-top: 1px solid var(--line); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.faq-item { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ground-soft); }
+.faq-item summary { display: grid; grid-template-columns: 42px minmax(0, 1fr) 22px; gap: 14px; align-items: start; min-height: 112px; padding: 24px; cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-number { color: var(--signal); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 19px; font-weight: 800; letter-spacing: .08em; line-height: 1.2; }
+.faq-item summary strong { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 23px; line-height: 1.12; }
+.faq-toggle { display: grid; width: 22px; height: 22px; place-items: center; border: 1px solid var(--line-strong); color: var(--signal); font-size: 18px; line-height: 1; transition: transform .18s ease; }
+.faq-item[open] { background: var(--panel); }
+.faq-item[open] .faq-toggle { transform: rotate(45deg); }
+.faq-item > p { margin: 0; padding: 0 24px 26px 80px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.faq-sources { max-width: 980px; margin: 22px 0 0; color: #969d91; font-size: 12px; line-height: 1.6; }
+.faq-sources a { color: #c9cec3; text-underline-offset: 4px; }
+.faq-sources a:hover, .faq-sources a:focus-visible { color: var(--signal); }
 .policy-section { border-top: 1px solid var(--line); }
 .policy-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .policy-grid > div { min-height: 240px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -233,7 +247,7 @@ footer { padding: 100px 0 34px; }
 	.trust-strip { grid-template-columns: 1fr 1fr; }
 	.trust-strip div:nth-child(2) { border-right: 0; }
 	.trust-strip div:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
-	.shop-section, .process-section, .field-ready, .about-section, .use-cases, .policy-section { padding: 86px 0; }
+	.shop-section, .process-section, .field-ready, .about-section, .use-cases, .faq-section, .policy-section { padding: 86px 0; }
 	.section-heading, .field-ready, .about-section { grid-template-columns: 1fr; gap: 38px; }
 	.setup-selector, .process-grid { grid-template-columns: 1fr; }
 	.setup-option-visual { grid-template-columns: 110px minmax(0, 1fr); }
@@ -254,6 +268,8 @@ footer { padding: 100px 0 34px; }
 	.brand-banner-notes { margin-top: 12px; }
 	.about-number { display: none; }
 	.use-grid { grid-template-columns: 1fr 1fr; }
+	.faq-grid { grid-template-columns: 1fr; }
+	.faq-item summary { min-height: 0; }
 	.policy-grid { grid-template-columns: 1fr; }
 	.footer-main { grid-template-columns: 1fr; }
 	.footer-email { justify-self: start; }
@@ -270,6 +286,8 @@ footer { padding: 100px 0 34px; }
 	.use-grid { grid-template-columns: 1fr; }
 	.use-grid span { min-height: 110px; }
 	.about-columns { grid-template-columns: 1fr; gap: 12px; }
+	.faq-item summary { grid-template-columns: 34px minmax(0, 1fr) 22px; gap: 10px; padding: 20px 16px; }
+	.faq-item > p { padding: 0 16px 22px 60px; }
 	.footer-bottom { align-items: flex-start; flex-direction: column; gap: 10px; }
 }
 
@@ -283,6 +301,7 @@ footer { padding: 100px 0 34px; }
 	.shop-section { content-visibility: auto; contain-intrinsic-size: auto 2600px; }
 	.process-section { content-visibility: auto; contain-intrinsic-size: auto 700px; }
 	.brand-banner { content-visibility: auto; contain-intrinsic-size: auto 430px; }
+	.faq-section { content-visibility: auto; contain-intrinsic-size: auto 1200px; }
 	.field-ready { content-visibility: auto; contain-intrinsic-size: auto 850px; }
 	.about-section, .use-cases { content-visibility: auto; contain-intrinsic-size: auto 650px; }
 	.policy-section { content-visibility: auto; contain-intrinsic-size: auto 900px; }
