@@ -191,8 +191,6 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .faq-item[open] .faq-toggle { transform: rotate(45deg); }
 .faq-item > p { margin: 0; padding: 0 24px 26px 80px; color: var(--muted); font-size: 15px; line-height: 1.55; }
 .faq-sources { max-width: 980px; margin: 22px 0 0; color: #969d91; font-size: 12px; line-height: 1.6; }
-.faq-sources a { color: #c9cec3; text-underline-offset: 4px; }
-.faq-sources a:hover, .faq-sources a:focus-visible { color: var(--signal); }
 .policy-section { border-top: 1px solid var(--line); }
 .policy-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .policy-grid > div { min-height: 240px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -296,15 +294,3 @@ footer { padding: 100px 0 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-@supports (content-visibility: auto) {
-	.shop-section { content-visibility: auto; contain-intrinsic-size: auto 2600px; }
-	.process-section { content-visibility: auto; contain-intrinsic-size: auto 700px; }
-	.brand-banner { content-visibility: auto; contain-intrinsic-size: auto 430px; }
-	.faq-section { content-visibility: auto; contain-intrinsic-size: auto 1200px; }
-	.field-ready { content-visibility: auto; contain-intrinsic-size: auto 850px; }
-	.about-section, .use-cases { content-visibility: auto; contain-intrinsic-size: auto 650px; }
-	.policy-section { content-visibility: auto; contain-intrinsic-size: auto 900px; }
-	.legal-note { content-visibility: auto; contain-intrinsic-size: auto 180px; }
-	footer { content-visibility: auto; contain-intrinsic-size: auto 360px; }
-}
