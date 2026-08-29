@@ -94,7 +94,7 @@ const faqs = [
 	},
 	{
 		question: 'How long do the batteries last, and which radio has the larger battery?',
-		answer: 'The UV-5R Mini uses a 1,600mAh battery. The newer Mini-5 included in the 2-radio kit has a 2,200mAh battery—600mAh, or 37.5%, more rated capacity. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. The larger capacity does not guarantee 37.5% longer runtime because the two radios can draw power differently. USB-C makes vehicle or power-bank top-ups easy.',
+		answer: 'The UV-5R Mini uses a 1,600mAh battery. The next-generation Mini-5 included in the 2- and 5-radio kits has a 2,200mAh battery—600mAh, or 37.5%, more rated capacity. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. The larger capacity does not guarantee 37.5% longer runtime because the two radios can draw power differently. USB-C makes vehicle or power-bank top-ups easy.',
 	},
 	{
 		question: 'What is the difference between HAM, GMRS, and FRS?',
@@ -149,7 +149,7 @@ const faqSchema = {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og.png" />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og-v2.png" />
 		<meta name="theme-color" content="#2a312a" />
 		<script type="application/ld+json" set:html={JSON.stringify(storeSchema)}></script>
 		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
@@ -163,14 +163,14 @@ const faqSchema = {
 
 		<header class="site-header">
 			<a class="brand" href="#top" aria-label="Signal Ready home">
-				<img class="brand-logo" src="/images/signal-ready-logo.png" alt="" width="40" height="40" />
+				<img class="brand-logo" src="/images/signal-ready-logo-lime.png" alt="" width="40" height="40" />
 				<span>SIGNAL <strong>READY</strong></span>
 			</a>
 			<nav aria-label="Main navigation">
 				<a href="#shop">Shop</a>
 				<a href="#how-it-works">How it works</a>
 				<a href="#field-ready">What you get</a>
-				<a href="#faq">Radio Q&A</a>
+				<a href="#faq">FAQ</a>
 				<a href="#about">About</a>
 				<a href="#policies">Policies</a>
 			</nav>
@@ -180,7 +180,7 @@ const faqSchema = {
 					<a href="#shop">Shop</a>
 					<a href="#how-it-works">How it works</a>
 					<a href="#field-ready">What you get</a>
-					<a href="#faq">Radio Q&A</a>
+					<a href="#faq">FAQ</a>
 					<a href="#about">About</a>
 					<a href="#policies">Policies</a>
 				</nav>
@@ -360,7 +360,7 @@ const faqSchema = {
 
 			<section class="faq-section" id="faq" aria-labelledby="faq-title">
 				<div class="section-heading">
-					<div><p class="eyebrow">HAM + GMRS basics</p><h2 id="faq-title">Radio questions.<br />Straight answers.</h2></div>
+					<div><p class="eyebrow">HAM + GMRS basics</p><h2 id="faq-title">Frequently asked<br />questions.</h2></div>
 					<p>Realistic guidance about range, batteries, compatibility, licensing, and responsible operation before you head into the field.</p>
 				</div>
 				<div class="faq-grid">
@@ -399,7 +399,7 @@ const faqSchema = {
 		<footer>
 			<div class="footer-main">
 				<a class="brand footer-brand" href="#top">
-					<img class="brand-logo" src="/images/signal-ready-logo.png" alt="" width="40" height="40" loading="lazy" />
+					<img class="brand-logo" src="/images/signal-ready-logo-lime.png" alt="" width="40" height="40" loading="lazy" />
 					<span>SIGNAL <strong>READY</strong></span>
 				</a>
 				<p>Field-ready communication systems.<br />Built in Dunkirk, Maryland.</p>
