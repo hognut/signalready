@@ -33,6 +33,7 @@ const products = [
 		name: '2-Radio Field Kit',
 		model: 'Baofeng Mini-5',
 		price: '$125',
+		paypalId: 'ZZL7S6UZS5VKN',
 		label: 'Newer-generation radio',
 		bestFor: 'Vehicles, couples, travel, and small teams',
 		description: 'Built around the newer Baofeng Mini-5, with a larger battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
@@ -229,7 +230,7 @@ const storeSchema = {
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
-										<button class="button-buy" type="button" data-open-paypal>Configure & add to cart</button>
+										<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`}>Configure & add to cart</button>
 									) : (
 										<a class="button-inquiry" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}>Ask about availability</a>
 									)}
@@ -323,20 +324,22 @@ const storeSchema = {
 			</div>
 		</footer>
 
-		<dialog class="paypal-dialog" id="paypal-product-dialog" aria-labelledby="paypal-dialog-title">
-			<div class="paypal-dialog-inner">
-				<div class="paypal-dialog-header">
-					<div>
-						<p class="eyebrow">Secure PayPal checkout</p>
-						<h2 id="paypal-dialog-title">Configure your 4-radio kit</h2>
+		{products.filter(product => product.paypalId).map(product => (
+			<dialog class="paypal-dialog" id={`paypal-product-dialog-${product.id}`} aria-labelledby={`paypal-dialog-title-${product.id}`} data-paypal-dialog>
+				<div class="paypal-dialog-inner">
+					<div class="paypal-dialog-header">
+						<div>
+							<p class="eyebrow">Secure PayPal checkout</p>
+							<h2 id={`paypal-dialog-title-${product.id}`}>Configure your {product.name.toLowerCase()}</h2>
+						</div>
+						<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 					</div>
-					<form method="dialog"><button class="dialog-close" type="submit" aria-label="Close checkout">Close</button></form>
+					<div class="paypal-dialog-body">
+						<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
+					</div>
 				</div>
-				<div class="paypal-dialog-body">
-					<paypal-add-to-cart-button data-id="7L264VEBTJMMQ"></paypal-add-to-cart-button>
-				</div>
-			</div>
-		</dialog>
+			</dialog>
+		))}
 
 		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 		<script is:inline>
@@ -360,14 +363,17 @@ const storeSchema = {
 				link.addEventListener('click', () => mobileMenu.removeAttribute('open'));
 			});
 
-			const paypalDialog = document.querySelector('#paypal-product-dialog');
+			const paypalDialogs = document.querySelectorAll('[data-paypal-dialog]');
 			const purchaseButtons = document.querySelectorAll('[data-open-paypal]');
 			let paypalReady = false;
 
 			try {
 				if (window.cartPaypal) {
 					window.cartPaypal.Cart({ id: 'pp-view-cart' });
-					window.cartPaypal.AddToCart({ id: '7L264VEBTJMMQ' });
+					document.querySelectorAll('paypal-add-to-cart-button[data-id]').forEach((element) => {
+						const id = element.getAttribute('data-id');
+						if (id) window.cartPaypal.AddToCart({ id });
+					});
 					paypalReady = true;
 				}
 			} catch {
@@ -377,7 +383,9 @@ const storeSchema = {
 			if (paypalReady) {
 				purchaseButtons.forEach((button) => {
 					button.addEventListener('click', () => {
-						if (paypalDialog instanceof HTMLDialogElement) paypalDialog.showModal();
+						if (!(button instanceof HTMLElement)) return;
+						const dialog = document.getElementById(button.dataset.dialogId || '');
+						if (dialog instanceof HTMLDialogElement) dialog.showModal();
 					});
 				});
 			} else {
@@ -393,13 +401,17 @@ const storeSchema = {
 				purchaseButtons.forEach((button) => {
 					button.textContent = 'Email to order';
 					button.addEventListener('click', () => {
-						window.location.href = 'mailto:ansman@gmail.com?subject=Signal%20Ready%204-Radio%20Field%20Kit';
+						if (!(button instanceof HTMLElement)) return;
+						const subject = encodeURIComponent(button.dataset.emailSubject || 'Signal Ready order');
+						window.location.href = `mailto:ansman@gmail.com?subject=${subject}`;
 					});
 				});
 			}
 
-			paypalDialog?.addEventListener('click', (event) => {
-				if (event.target === paypalDialog && paypalDialog instanceof HTMLDialogElement) paypalDialog.close();
+			paypalDialogs.forEach((dialog) => {
+				dialog.addEventListener('click', (event) => {
+					if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
+				});
 			});
 		</script>
 	</body>
