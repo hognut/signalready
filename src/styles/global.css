@@ -120,6 +120,12 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin: 24px 0 38px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
 .check-list li { position: relative; padding-left: 18px; color: #c7c9c1; font-size: 14px; }
 .check-list li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; background: var(--signal); }
+.item-description { margin: -12px 0 30px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.item-description summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 0; color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: .05em; list-style: none; text-transform: uppercase; cursor: pointer; }
+.item-description summary::-webkit-details-marker { display: none; }
+.item-description summary span { display: grid; width: 24px; height: 24px; place-items: center; border: 1px solid var(--line-strong); color: var(--signal); font-size: 18px; font-weight: 400; transition: transform .18s ease; }
+.item-description[open] summary span { transform: rotate(45deg); }
+.item-description p { margin: 0; padding: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.62; white-space: pre-line; }
 .product-purchase { display: grid; grid-template-columns: 1fr minmax(190px, .9fr); gap: 22px; align-items: end; margin-top: auto; }
 .product-price { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 50px; font-weight: 800; line-height: .85; }
 .product-price span { display: block; margin-top: 8px; color: var(--signal); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
@@ -181,6 +187,14 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .use-grid span { display: flex; align-items: flex-end; min-height: 150px; padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #c8cac3; font-size: 17px; }
 .use-grid span::before { content: '+'; align-self: flex-start; margin-right: auto; color: var(--signal); }
 .faq-section { border-top: 1px solid var(--line); }
+.range-guide { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.range-card { display: flex; min-height: 230px; flex-direction: column; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(145deg, rgba(215,250,67,.035), transparent 62%); }
+.range-card > span { min-height: 34px; color: #b7bbb2; font-size: 11px; font-weight: 700; letter-spacing: .1em; line-height: 1.35; text-transform: uppercase; }
+.range-card strong { margin: auto 0 15px; color: var(--ink); font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: clamp(48px, 6vw, 72px); font-weight: 800; letter-spacing: -.03em; line-height: .82; }
+.range-card p { max-width: 290px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.range-card-best { background: linear-gradient(145deg, rgba(215,250,67,.2), rgba(215,250,67,.045)); }
+.range-card-best strong { color: var(--signal); }
+.range-disclaimer { margin: 14px 0 34px; color: #969d91; font-size: 11px; line-height: 1.5; }
 .faq-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .faq-item { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ground-soft); }
 .faq-item summary { display: grid; grid-template-columns: 42px minmax(0, 1fr) 22px; gap: 14px; align-items: start; min-height: 112px; padding: 24px; cursor: pointer; list-style: none; }
@@ -268,6 +282,8 @@ footer { padding: 100px 0 34px; }
 	.brand-banner-notes { margin-top: 12px; }
 	.about-number { display: none; }
 	.use-grid { grid-template-columns: 1fr 1fr; }
+	.range-guide { grid-template-columns: 1fr; }
+	.range-card { min-height: 190px; }
 	.faq-grid { grid-template-columns: 1fr; }
 	.faq-item summary { min-height: 0; }
 	.policy-grid { grid-template-columns: 1fr; }

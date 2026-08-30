@@ -14,6 +14,7 @@ const products = [
 		label: 'Newer-generation radio',
 		bestFor: 'Vehicles, couples, travel, and small teams',
 		description: 'Built around the newer Baofeng Mini-5, with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
+		fullDescription: null,
 		highlights: ['Newer Mini-5 platform', '2,200mAh battery', 'Improved audio, reception, and keypad'],
 		images: [
 			{ src: '/images/two-kit-open.jpg', alt: 'Two Baofeng handheld radios beside an open protective hard case' },
@@ -39,6 +40,7 @@ const products = [
 		label: 'Complete system',
 		bestFor: 'Families, teams, and preparedness kits',
 		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
+		fullDescription: null,
 		highlights: ['Four-radio team setup', 'Custom programming', '1-to-4 USB-C charging'],
 		images: [
 			{ src: '/images/four-kit-open.jpg', alt: 'Four Baofeng handheld radios beside an open Signal Ready hard case' },
@@ -62,14 +64,31 @@ const products = [
 		selectorBadge: 'Next-generation radio',
 		selectorModel: '5 × Mini-5 · 2,200mAh',
 		price: '$300',
-		paypalId: null,
+		paypalId: 'Z5NELZMQT6M24',
 		label: 'Next-generation team system',
 		bestFor: 'Larger teams, events, families, and field operations',
 		description: 'Built around five next-generation Baofeng Mini-5 radios, each with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all organized in a larger five-slot field case.',
+		fullDescription: `Professionally assembled five-radio communications kit built around the next-generation Baofeng Mini-5 HAM-version radio. This larger team system keeps five compact handhelds protected, organized, and ready for quick deployment in a durable hard case with a precision-cut five-slot foam insert.
+
+Each Mini-5 includes a 2,200mAh rechargeable battery, improved audio and reception, and an easier-to-use keypad compared with the UV-5R Mini used in the four-radio kit. Every radio is professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
+
+Included:
+• 5 Baofeng Mini-5 HAM-version radios
+• 5 installed 2,200mAh rechargeable batteries
+• Larger 13½ × 11⅜ × 6 in. hard protective case
+• Precision-cut five-slot foam insert and protective lid foam
+• 5 standard USB-A to USB-C charging cables
+• Custom exterior identification badge
+• Pre-programmed channel configuration
+• Free U.S. shipping
+
+The larger case provides a secure position for each radio while keeping the complete system easy to carry, store in a vehicle, or stage with emergency equipment. It is well suited to families, security teams, event staff, vehicle recovery crews, overlanding groups, outdoor operations, and organizations that need more than a two- or four-radio setup.
+
+The radios arrive organized and programmed for immediate setup and use. The customer remains responsible for proper licensing, frequency selection, and lawful operation. Some programmed channels are intended for monitoring only. Actual range varies with terrain, buildings, foliage, antenna height, power, and line of sight.`,
 		highlights: ['Five next-gen Mini-5 radios', '2,200mAh batteries', 'Improved audio, reception, and keypad'],
 		images: [
-			{ src: '/images/five-kit-radios-open.jpg', alt: 'Five next-generation Baofeng Mini-5 radios beside an open five-slot protective hard case' },
-			{ src: '/images/five-kit-radios-packed.jpg', alt: 'Five next-generation Mini-5 radios secured inside custom-cut foam in the larger field case' },
+			{ src: '/images/five-kit-radios-open-v2.jpg', alt: 'Five next-generation Baofeng Mini-5 radios beside an open five-slot protective hard case' },
+			{ src: '/images/five-kit-radios-packed-v2.jpg', alt: 'Five next-generation Mini-5 radios secured inside custom-cut foam in the larger field case' },
 			{ src: '/images/five-kit-closed.jpg', alt: 'Closed large black five-radio protective case in the Signal Ready studio' },
 			{ src: '/images/five-kit-size-comparison.jpg', alt: 'Large five-radio case beneath the smaller case used for two- and four-radio kits' },
 		],
@@ -78,7 +97,7 @@ const products = [
 			'2,200mAh rechargeable batteries installed',
 			'Larger protective hard case',
 			'Precision-cut five-slot foam insert',
-			'USB-C multi-charging solution',
+			'5 standard USB-A to USB-C charging cables',
 			'Custom exterior identification badge',
 			'Case exterior: 13½ × 11⅜ × 6 in.',
 			'Free shipping within the United States',
@@ -86,28 +105,42 @@ const products = [
 	},
 ];
 
-const programming = ['GMRS channels', 'FRS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
+const programming = ['GMRS channels', 'FRS channels', 'MURS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
+
+const rangeGuide = [
+	{ label: 'Dense or built-up areas', value: '½–2 mi', note: 'Buildings, vehicles, heavy foliage, and uneven ground reduce range.' },
+	{ label: 'Open, relatively clear terrain', value: '2–5 mi', note: 'A practical expectation when both radios have a clearer path.' },
+	{ label: 'Best-case elevated line of sight', value: '10–20+ mi', note: 'High, unobstructed positions can go much farther than street level.', best: true },
+];
 
 const faqs = [
 	{
 		question: 'How far can these handheld radios transmit?',
-		answer: 'Handheld-to-handheld range is usually measured in a few miles on flat, relatively clear terrain—not the maximum-range numbers often printed on packaging. Buildings, hills, dense woods, vehicles, and low antenna height can cut that sharply. High ground, clear line of sight, a suitable antenna, or an authorized repeater can extend range dramatically.',
+		answer: 'Think in terms of line of sight, not a fixed coverage radius. Between two handhelds, roughly ½–2 miles is realistic in dense neighborhoods, buildings, vehicles, or heavy woods; around 2–5 miles is possible across open, relatively clear terrain. In a best-case setup with both operators elevated and a clean, unobstructed path, 10–20+ miles can be achievable, and exceptional summit-to-summit paths may go farther. Hills, valleys, steel structures, wet foliage, and holding the radio low can reduce range sharply. An authorized repeater can provide much wider regional coverage.',
 	},
 	{
 		question: 'How long do the batteries last, and which radio has the larger battery?',
-		answer: 'The UV-5R Mini uses a 1,600mAh battery. The next-generation Mini-5 included in the 2- and 5-radio kits has a 2,200mAh battery—600mAh, or 37.5%, more rated capacity. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. The larger capacity does not guarantee 37.5% longer runtime because the two radios can draw power differently. USB-C makes vehicle or power-bank top-ups easy.',
+		answer: 'The UV-5R Mini uses a 1,600mAh battery. The next-generation Mini-5 included in the 2- and 5-radio kits has a 2,200mAh battery—600mAh, or 37.5%, more rated capacity. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. USB-C makes vehicle or power-bank top-ups easy.',
 	},
 	{
-		question: 'What is the difference between HAM, GMRS, and FRS?',
-		answer: 'Amateur radio (HAM) offers broad frequency privileges and repeater access but requires passing an exam for an individual FCC license. GMRS requires a no-exam FCC license and certified GMRS equipment; one individual license normally covers the license holder and immediate family. FRS is license-free but must be used with compliant FRS radios.',
+		question: 'Which channels are pre-programmed?',
+		answer: 'The standard channel plan includes commonly used GMRS, FRS, and MURS channels; NOAA weather; Marine channels; and selected aviation monitoring frequencies. Custom channel plans can be requested before shipment. Some entries are provided for monitoring only, depending on the radio service, equipment, licensing, and local rules.',
+	},
+	{
+		question: 'What is the difference between HAM, GMRS, FRS, and MURS?',
+		answer: 'Amateur radio (HAM) offers broad frequency privileges and repeater access but requires passing an exam for an individual FCC license. GMRS requires a no-exam FCC license and compliant GMRS equipment; one individual license normally covers the license holder and immediate family. FRS is license-free when used with compliant FRS radios. MURS is a short-distance personal and business radio service that does not require an individual license when used with compliant MURS equipment.',
 	},
 	{
 		question: 'Do I need a license?',
 		answer: 'Receiving ordinary over-the-air signals generally does not require a radio license. Transmitting on amateur bands requires the appropriate amateur license, and transmitting on GMRS requires a GMRS license. FRS does not require an individual license when used with an FCC-compliant FRS radio. The operator is always responsible for the service, frequency, and equipment rules.',
 	},
 	{
-		question: 'Can a HAM-version radio transmit on GMRS, FRS, Marine, or Aviation channels?',
-		answer: 'Programming a channel does not certify the radio for that service or authorize transmission. These kits contain HAM-version transceivers, so GMRS, FRS, Marine, Aviation, and NOAA entries may be provided for monitoring where lawful. Transmit only when both the operator and the equipment are authorized for that radio service; NOAA and Aviation channels in these kits are receive-only.',
+		question: 'Can a HAM-version radio transmit on GMRS, FRS, MURS, Marine, or Aviation channels?',
+		answer: "Programming a channel does not certify the radio for that service or authorize transmission. These kits contain HAM-version transceivers, so GMRS, FRS, MURS, Marine, Aviation, and NOAA entries may be provided for monitoring where lawful. Transmit only if you know what you're doing; NOAA and Aviation entries in these kits are receive-only.",
+	},
+	{
+		question: 'What is a repeater, and how can it improve range?',
+		answer: 'A repeater receives a radio signal at a well-positioned site—often on a tower, hill, or tall building—and retransmits it over a wider area. That higher antenna can reach around terrain and structures that block direct handheld-to-handheld communication. Repeater access requires compatible programming and the appropriate permission or authorization for the radio service.',
 	},
 	{
 		question: 'Do “privacy codes” make a conversation private?',
@@ -120,6 +153,10 @@ const faqs = [
 	{
 		question: 'Does programming increase range?',
 		answer: 'No. Programming makes the radio faster and easier to use, but range depends mainly on antenna height and quality, terrain, obstructions, frequency, transmit power, and repeater access. Moving to higher, clearer ground is often the most effective improvement.',
+	},
+	{
+		question: 'How is the 5-radio kit charged?',
+		answer: 'The kit includes five standard USB-A to USB-C charging cables—one for each Mini-5 radio. The individual cables make it easier to charge from compatible wall adapters, vehicle USB ports, power stations, or other USB-A power sources without relying on one proprietary multi-head splitter.',
 	},
 ];
 
@@ -295,6 +332,12 @@ const faqSchema = {
 								<ul class="check-list">
 									{product.included.map(item => <li>{item}</li>)}
 								</ul>
+								{product.fullDescription && (
+									<details class="item-description">
+										<summary>Read the full item description <span aria-hidden="true">+</span></summary>
+										<p>{product.fullDescription}</p>
+									</details>
+								)}
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
@@ -361,9 +404,19 @@ const faqSchema = {
 
 			<section class="faq-section" id="faq" aria-labelledby="faq-title">
 				<div class="section-heading">
-					<div><p class="eyebrow">HAM + GMRS basics</p><h2 id="faq-title">Frequently asked<br />questions.</h2></div>
+					<div><p class="eyebrow">Range · batteries · radio services</p><h2 id="faq-title">Frequently asked<br />questions.</h2></div>
 					<p>Realistic guidance about range, batteries, compatibility, licensing, and responsible operation before you head into the field.</p>
 				</div>
+				<div class="range-guide" aria-label="Approximate handheld-to-handheld range guide">
+					{rangeGuide.map(item => (
+						<article class:list={{ 'range-card': true, 'range-card-best': item.best }}>
+							<span>{item.label}</span>
+							<strong>{item.value}</strong>
+							<p>{item.note}</p>
+						</article>
+					))}
+				</div>
+				<p class="range-disclaimer">Approximate direct-radio ranges, not guarantees. Antenna height, terrain, buildings, foliage, interference, power, and weather all affect results.</p>
 				<div class="faq-grid">
 					{faqs.map((faq, index) => (
 						<details class="faq-item" open={index === 0}>
