@@ -13,6 +13,11 @@ const products = [
 		paypalId: 'ZZL7S6UZS5VKN',
 		label: 'Newer-generation radio',
 		bestFor: 'Vehicles, couples, travel, and small teams',
+		selectorStats: [
+			{ label: 'Radios', value: '2' },
+			{ label: 'Battery', value: '2,200mAh' },
+			{ label: 'Case length', value: '9¼ in.' },
+		],
 		description: 'Built around the newer Baofeng Mini-5, with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
 		fullDescription: null,
 		highlights: ['Newer Mini-5 platform', '2,200mAh battery', 'Improved audio, reception, and keypad'],
@@ -39,6 +44,11 @@ const products = [
 		paypalId: '7L264VEBTJMMQ',
 		label: 'Complete system',
 		bestFor: 'Families, teams, and preparedness kits',
+		selectorStats: [
+			{ label: 'Radios', value: '4' },
+			{ label: 'Battery', value: '1,600mAh' },
+			{ label: 'Case length', value: '9¼ in.' },
+		],
 		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
 		fullDescription: null,
 		highlights: ['Four-radio team setup', 'Custom programming', '1-to-4 USB-C charging'],
@@ -67,6 +77,11 @@ const products = [
 		paypalId: 'Z5NELZMQT6M24',
 		label: 'Next-generation team system',
 		bestFor: 'Larger teams, events, families, and field operations',
+		selectorStats: [
+			{ label: 'Radios', value: '5' },
+			{ label: 'Battery', value: '2,200mAh' },
+			{ label: 'Case length', value: '13½ in.' },
+		],
 		description: 'Built around five next-generation Baofeng Mini-5 radios, each with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all organized in a larger five-slot field case.',
 		fullDescription: `Professionally assembled five-radio communications kit built around the next-generation Baofeng Mini-5 HAM-version radio. This larger team system keeps five compact handhelds protected, organized, and ready for quick deployment in a durable hard case with a precision-cut five-slot foam insert.
 
@@ -115,46 +130,57 @@ const rangeGuide = [
 
 const faqs = [
 	{
+		topic: 'Range',
 		question: 'How far can these handheld radios transmit?',
 		answer: 'Think in terms of line of sight, not a fixed coverage radius. Between two handhelds, roughly ½–2 miles is realistic in dense neighborhoods, buildings, vehicles, or heavy woods; around 2–5 miles is possible across open, relatively clear terrain. In a best-case setup with both operators elevated and a clean, unobstructed path, 10–20+ miles can be achievable, and exceptional summit-to-summit paths may go farther. Hills, valleys, steel structures, wet foliage, and holding the radio low can reduce range sharply. An authorized repeater can provide much wider regional coverage.',
 	},
 	{
+		topic: 'Battery life',
 		question: 'How long do the batteries last, and which radio has the larger battery?',
 		answer: 'The UV-5R Mini uses a 1,600mAh battery. The next-generation Mini-5 included in the 2- and 5-radio kits has a 2,200mAh battery—600mAh, or 37.5%, more rated capacity. A full charge can often cover a day of light, intermittent use; heavy transmitting, high power, scanning, cold weather, and battery age shorten runtime. USB-C makes vehicle or power-bank top-ups easy.',
 	},
 	{
+		topic: 'Programming',
 		question: 'Which channels are pre-programmed?',
 		answer: 'The standard channel plan includes commonly used GMRS, FRS, and MURS channels; NOAA weather; Marine channels; and selected aviation monitoring frequencies. Custom channel plans can be requested before shipment. Some entries are provided for monitoring only, depending on the radio service, equipment, licensing, and local rules.',
 	},
 	{
+		topic: 'Radio services',
 		question: 'What is the difference between HAM, GMRS, FRS, and MURS?',
 		answer: 'Amateur radio (HAM) offers broad frequency privileges and repeater access but requires passing an exam for an individual FCC license. GMRS requires a no-exam FCC license and compliant GMRS equipment; one individual license normally covers the license holder and immediate family. FRS is license-free when used with compliant FRS radios. MURS is a short-distance personal and business radio service that does not require an individual license when used with compliant MURS equipment.',
 	},
 	{
+		topic: 'Licensing',
 		question: 'Do I need a license?',
 		answer: 'Receiving ordinary over-the-air signals generally does not require a radio license. Transmitting on amateur bands requires the appropriate amateur license, and transmitting on GMRS requires a GMRS license. FRS does not require an individual license when used with an FCC-compliant FRS radio. The operator is always responsible for the service, frequency, and equipment rules.',
 	},
 	{
+		topic: 'Responsible use',
 		question: 'Can a HAM-version radio transmit on GMRS, FRS, MURS, Marine, or Aviation channels?',
 		answer: "Programming a channel does not certify the radio for that service or authorize transmission. These kits contain HAM-version transceivers, so GMRS, FRS, MURS, Marine, Aviation, and NOAA entries may be provided for monitoring where lawful. Transmit only if you know what you're doing; NOAA and Aviation entries in these kits are receive-only.",
 	},
 	{
+		topic: 'Extended range',
 		question: 'What is a repeater, and how can it improve range?',
 		answer: 'A repeater receives a radio signal at a well-positioned site—often on a tower, hill, or tall building—and retransmits it over a wider area. That higher antenna can reach around terrain and structures that block direct handheld-to-handheld communication. Repeater access requires compatible programming and the appropriate permission or authorization for the radio service.',
 	},
 	{
+		topic: 'Privacy',
 		question: 'Do “privacy codes” make a conversation private?',
 		answer: 'No. CTCSS and DCS tones only filter which signals open your radio’s speaker. Anyone listening on the same frequency without that filter can still hear the transmission. They reduce unwanted chatter; they do not encrypt it.',
 	},
 	{
+		topic: 'Compatibility',
 		question: 'Will these radios communicate with other brands?',
 		answer: 'Usually yes when the radios use the same legal radio service, frequency, channel width, tone settings, and repeater configuration. Brand names do not have to match. Signal Ready can help coordinate a compatible channel plan for your team’s existing equipment.',
 	},
 	{
+		topic: 'Performance',
 		question: 'Does programming increase range?',
 		answer: 'No. Programming makes the radio faster and easier to use, but range depends mainly on antenna height and quality, terrain, obstructions, frequency, transmit power, and repeater access. Moving to higher, clearer ground is often the most effective improvement.',
 	},
 	{
+		topic: 'Charging',
 		question: 'How is the 5-radio kit charged?',
 		answer: 'The kit includes five standard USB-A to USB-C charging cables—one for each Mini-5 radio. The individual cables make it easier to charge from compatible wall adapters, vehicle USB ports, power stations, or other USB-A power sources without relying on one proprietary multi-head splitter.',
 	},
@@ -188,7 +214,7 @@ const faqSchema = {
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/og-v2.png" />
-		<meta name="theme-color" content="#2a312a" />
+		<meta name="theme-color" content="#303a31" />
 		<script type="application/ld+json" set:html={JSON.stringify(storeSchema)}></script>
 		<script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
 	</head>
@@ -283,7 +309,7 @@ const faqSchema = {
 
 				<div class="setup-selector" aria-label="Compare Signal Ready setups">
 					{products.map((product, index) => (
-						<article class="setup-option">
+						<article class:list={{ 'setup-option': true, 'setup-option-nextgen': Boolean(product.selectorBadge) }}>
 							<div class="setup-option-top">
 								<span>{String(index + 1).padStart(2, '0')}</span>
 								<small>{product.paypalId ? 'Ready to order' : 'Ask about availability'}</small>
@@ -295,6 +321,9 @@ const faqSchema = {
 									<a class="setup-option-title" href={`#${product.id}`}>{product.name}</a>
 									<p>{product.bestFor}</p>
 								</div>
+							</div>
+							<div class="setup-option-specs" aria-label={`${product.name} quick specifications`}>
+								{product.selectorStats.map(stat => <span><small>{stat.label}</small><strong>{stat.value}</strong></span>)}
 							</div>
 							<div class="setup-option-meta"><b>{product.price}</b><em>{product.selectorModel ?? product.model}</em></div>
 							{product.paypalId ? (
@@ -422,7 +451,7 @@ const faqSchema = {
 						<details class="faq-item" open={index === 0}>
 							<summary>
 								<span class="faq-number">{String(index + 1).padStart(2, '0')}</span>
-								<strong>{faq.question}</strong>
+								<span class="faq-question"><small>{faq.topic}</small><strong>{faq.question}</strong></span>
 								<span class="faq-toggle" aria-hidden="true">+</span>
 							</summary>
 							<p>{faq.answer}</p>
