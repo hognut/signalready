@@ -99,7 +99,7 @@ Included:
 
 The larger case provides a secure position for each radio while keeping the complete system easy to carry, store in a vehicle, or stage with emergency equipment. It is well suited to families, security teams, event staff, vehicle recovery crews, overlanding groups, outdoor operations, and organizations that need more than a two- or four-radio setup.
 
-The radios arrive organized and programmed for immediate setup and use. The customer remains responsible for proper licensing, frequency selection, and lawful operation. Some programmed channels are intended for monitoring only. Actual range varies with terrain, buildings, foliage, antenna height, power, and line of sight.`,
+The radios arrive organized and programmed for immediate setup and use. Actual range varies with terrain, buildings, foliage, antenna height, power, and line of sight.`,
 		highlights: ['Five next-gen Mini-5 radios', '2,200mAh batteries', 'Improved audio, reception, and keypad'],
 		images: [
 			{ src: '/images/five-kit-radios-open-v2.jpg', alt: 'Five next-generation Baofeng Mini-5 radios beside an open five-slot protective hard case' },
@@ -132,7 +132,7 @@ const faqs = [
 	{
 		topic: 'Range',
 		question: 'How far can these handheld radios transmit?',
-		answer: 'Think in terms of line of sight, not a fixed coverage radius. Between two handhelds, roughly ½–2 miles is realistic in dense neighborhoods, buildings, vehicles, or heavy woods; around 2–5 miles is possible across open, relatively clear terrain. In a best-case setup with both operators elevated and a clean, unobstructed path, 10–20+ miles can be achievable, and exceptional summit-to-summit paths may go farther. Hills, valleys, steel structures, wet foliage, and holding the radio low can reduce range sharply. An authorized repeater can provide much wider regional coverage.',
+		answer: 'Think in terms of line of sight, not a fixed coverage radius. Between two handhelds, roughly ½–2 miles is realistic in dense neighborhoods, buildings, vehicles, or heavy woods; around 2–5 miles is possible across open, relatively clear terrain. In a best-case setup with both operators elevated and a clean, unobstructed path, 10–20+ miles can be achievable, and exceptional summit-to-summit paths may go farther. Hills, valleys, steel structures, wet foliage, and holding the radio low can reduce range sharply. A well-positioned repeater can provide much wider regional coverage.',
 	},
 	{
 		topic: 'Battery life',
@@ -142,27 +142,22 @@ const faqs = [
 	{
 		topic: 'Programming',
 		question: 'Which channels are pre-programmed?',
-		answer: 'The standard channel plan includes commonly used GMRS, FRS, and MURS channels; NOAA weather; Marine channels; and selected aviation monitoring frequencies. Custom channel plans can be requested before shipment. Some entries are provided for monitoring only, depending on the radio service, equipment, licensing, and local rules.',
+		answer: 'The standard channel plan includes commonly used GMRS, FRS, and MURS channels; NOAA weather; Marine channels; and selected aviation monitoring frequencies. Custom channel plans can be requested before shipment.',
 	},
 	{
 		topic: 'Radio services',
 		question: 'What is the difference between HAM, GMRS, FRS, and MURS?',
-		answer: 'Amateur radio (HAM) offers broad frequency privileges and repeater access but requires passing an exam for an individual FCC license. GMRS requires a no-exam FCC license and compliant GMRS equipment; one individual license normally covers the license holder and immediate family. FRS is license-free when used with compliant FRS radios. MURS is a short-distance personal and business radio service that does not require an individual license when used with compliant MURS equipment.',
-	},
-	{
-		topic: 'Licensing',
-		question: 'Do I need a license?',
-		answer: 'Receiving ordinary over-the-air signals generally does not require a radio license. Transmitting on amateur bands requires the appropriate amateur license, and transmitting on GMRS requires a GMRS license. FRS does not require an individual license when used with an FCC-compliant FRS radio. The operator is always responsible for the service, frequency, and equipment rules.',
+		answer: 'HAM offers broad flexibility and repeater access. GMRS is popular for family and group communication, while FRS and MURS are commonly used for shorter-range personal or team communication. Each service has different capabilities, but the practical goal is the same: clear, organized communication.',
 	},
 	{
 		topic: 'Responsible use',
-		question: 'Can a HAM-version radio transmit on GMRS, FRS, MURS, Marine, or Aviation channels?',
-		answer: "Programming a channel does not certify the radio for that service or authorize transmission. These kits contain HAM-version transceivers, so GMRS, FRS, MURS, Marine, Aviation, and NOAA entries may be provided for monitoring where lawful. Transmit only if you know what you're doing; NOAA and Aviation entries in these kits are receive-only.",
+		question: 'What should I know before using the radios?',
+		answer: 'Users are responsible for safe, responsible, and lawful use of the radios.',
 	},
 	{
 		topic: 'Extended range',
 		question: 'What is a repeater, and how can it improve range?',
-		answer: 'A repeater receives a radio signal at a well-positioned site—often on a tower, hill, or tall building—and retransmits it over a wider area. That higher antenna can reach around terrain and structures that block direct handheld-to-handheld communication. Repeater access requires compatible programming and the appropriate permission or authorization for the radio service.',
+		answer: 'A repeater receives a radio signal at a well-positioned site—often on a tower, hill, or tall building—and retransmits it over a wider area. That higher antenna can reach around terrain and structures that block direct handheld-to-handheld communication. Repeater access depends on compatible programming and the repeater’s operating setup.',
 	},
 	{
 		topic: 'Privacy',
@@ -172,7 +167,7 @@ const faqs = [
 	{
 		topic: 'Compatibility',
 		question: 'Will these radios communicate with other brands?',
-		answer: 'Usually yes when the radios use the same legal radio service, frequency, channel width, tone settings, and repeater configuration. Brand names do not have to match. Signal Ready can help coordinate a compatible channel plan for your team’s existing equipment.',
+		answer: 'Usually yes when the radios use the same frequency, channel width, tone settings, and repeater configuration. Brand names do not have to match. Signal Ready can help coordinate a compatible channel plan for your team’s existing equipment.',
 	},
 	{
 		topic: 'Performance',
@@ -443,7 +438,7 @@ const productSchema = {
 					<ol>
 						{programming.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}<i aria-hidden="true"></i></li>)}
 					</ol>
-					<p>Frequency availability and transmit authorization depend on radio service, licensing, location, and applicable regulations.</p>
+					<p>Programming is organized for quick reference and straightforward field use.</p>
 				</div>
 			</section>
 
@@ -471,7 +466,7 @@ const productSchema = {
 			<section class="faq-section" id="faq" aria-labelledby="faq-title">
 				<div class="section-heading">
 					<div><p class="eyebrow">Range · batteries · radio services</p><h2 id="faq-title">Frequently asked<br />questions.</h2></div>
-					<p>Realistic guidance about range, batteries, compatibility, licensing, and responsible operation before you head into the field.</p>
+					<p>Practical guidance about range, batteries, compatibility, programming, and everyday operation before you head into the field.</p>
 				</div>
 				<div class="range-guide" aria-label="Approximate handheld-to-handheld range guide">
 					{rangeGuide.map(item => (
@@ -495,7 +490,7 @@ const productSchema = {
 						</details>
 					))}
 				</div>
-				<p class="faq-sources">Information last reviewed August 2026. Radio regulations and manufacturer specifications can change; confirm current FCC rules and the battery label supplied with your kit.</p>
+				<p class="faq-sources">Product information last reviewed August 2026. Manufacturer specifications can change; confirm the battery and equipment details supplied with your kit.</p>
 			</section>
 
 			<section class="policy-section" id="policies">
@@ -511,8 +506,8 @@ const productSchema = {
 			</section>
 
 			<section class="legal-note" aria-labelledby="legal-title">
-				<h2 id="legal-title">Responsible radio use</h2>
-				<p>The user is responsible for proper licensing, frequency use, and legal operation where applicable. Some frequencies may be programmed for monitoring only depending on local laws, radio service rules, and licensing requirements.</p>
+				<h2 id="legal-title">Safe, responsible use</h2>
+				<p>Users are responsible for safe, responsible, and lawful use of the radios.</p>
 			</section>
 		</main>
 
