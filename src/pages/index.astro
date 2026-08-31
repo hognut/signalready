@@ -11,6 +11,10 @@ const products = [
 		selectorModel: 'Mini-5 · 2,200mAh',
 		price: '$125',
 		paypalId: 'ZZL7S6UZS5VKN',
+		radioCount: '2',
+		battery: '2,200mAh',
+		caseSize: '9¼ × 7½ × 4⅜ in.',
+		charging: '1-to-2 USB-C splitter',
 		label: 'Newer-generation radio',
 		bestFor: 'Vehicles, couples, travel, and small teams',
 		selectorStats: [
@@ -42,6 +46,10 @@ const products = [
 		model: 'Baofeng UV-5R Mini',
 		price: '$200',
 		paypalId: '7L264VEBTJMMQ',
+		radioCount: '4',
+		battery: '1,600mAh',
+		caseSize: '9¼ × 7½ × 4⅜ in.',
+		charging: '1-to-4 USB-C splitter',
 		label: 'Complete system',
 		bestFor: 'Families, teams, and preparedness kits',
 		selectorStats: [
@@ -75,6 +83,10 @@ const products = [
 		selectorModel: '5 × Mini-5 · 2,200mAh',
 		price: '$300',
 		paypalId: 'Z5NELZMQT6M24',
+		radioCount: '5',
+		battery: '2,200mAh',
+		caseSize: '13½ × 11⅜ × 6 in.',
+		charging: '5 USB-A to USB-C cables',
 		label: 'Next-generation team system',
 		bestFor: 'Larger teams, events, families, and field operations',
 		selectorStats: [
@@ -252,22 +264,22 @@ const productSchema = {
 				<span>SIGNAL <strong>READY</strong></span>
 			</a>
 			<nav aria-label="Main navigation">
-				<a href="#shop">Shop</a>
-				<a href="#how-it-works">How it works</a>
-				<a href="#field-ready">What you get</a>
-				<a href="#faq">FAQ</a>
-				<a href="#about">About</a>
-				<a href="#policies">Policies</a>
+				<a href="#shop" data-nav-link>Shop</a>
+				<a href="#how-it-works" data-nav-link>How it works</a>
+				<a href="#field-ready" data-nav-link>What you get</a>
+				<a href="#faq" data-nav-link>FAQ</a>
+				<a href="#about" data-nav-link>About</a>
+				<a href="#policies" data-nav-link>Policies</a>
 			</nav>
 			<details class="mobile-menu">
 				<summary>Menu</summary>
 				<nav aria-label="Mobile navigation">
-					<a href="#shop">Shop</a>
-					<a href="#how-it-works">How it works</a>
-					<a href="#field-ready">What you get</a>
-					<a href="#faq">FAQ</a>
-					<a href="#about">About</a>
-					<a href="#policies">Policies</a>
+					<a href="#shop" data-nav-link>Shop</a>
+					<a href="#how-it-works" data-nav-link>How it works</a>
+					<a href="#field-ready" data-nav-link>What you get</a>
+					<a href="#faq" data-nav-link>FAQ</a>
+					<a href="#about" data-nav-link>About</a>
+					<a href="#policies" data-nav-link>Policies</a>
 				</nav>
 			</details>
 			<div class="cart-control" aria-label="Shopping cart">
@@ -354,9 +366,44 @@ const productSchema = {
 							) : (
 								<a class="setup-buy-button" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}><span>Ask about availability</span><b aria-hidden="true">→</b></a>
 							)}
+							<a class="setup-detail-link" href={`#${product.id}`}>View complete kit details <span aria-hidden="true">↓</span></a>
 						</article>
 					))}
 				</div>
+
+				<details class="kit-comparison" id="compare" open>
+					<summary>
+						<span><small>At a glance</small><strong>Compare every kit</strong></span>
+						<span class="comparison-toggle" aria-hidden="true">+</span>
+					</summary>
+					<p class="comparison-mobile-hint" aria-hidden="true">Swipe to compare all kits →</p>
+					<div class="comparison-table-wrap">
+						<table>
+							<caption class="sr-only">Comparison of Signal Ready two-, four-, and five-radio field kits</caption>
+							<thead>
+								<tr>
+									<th scope="col">Kit details</th>
+									{products.map(product => <th scope="col"><a href={`#${product.id}`}>{product.name}</a><small>{product.label}</small></th>)}
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="comparison-price"><th scope="row">Price</th>{products.map(product => <td>{product.price}<small>Free U.S. shipping</small></td>)}</tr>
+								<tr><th scope="row">Radios</th>{products.map(product => <td>{product.radioCount}</td>)}</tr>
+								<tr><th scope="row">Radio model</th>{products.map(product => <td>{product.model}{product.selectorBadge && <small>Next generation</small>}</td>)}</tr>
+								<tr><th scope="row">Battery</th>{products.map(product => <td>{product.battery} each</td>)}</tr>
+								<tr><th scope="row">Charging</th>{products.map(product => <td>{product.charging}</td>)}</tr>
+								<tr><th scope="row">Case size</th>{products.map(product => <td>{product.caseSize}</td>)}</tr>
+								<tr><th scope="row">Best for</th>{products.map(product => <td>{product.bestFor}</td>)}</tr>
+								<tr class="comparison-actions">
+									<th scope="row">Order</th>
+									{products.map(product => (
+										<td><button class="comparison-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`}>Buy {product.radioCount}-radio kit <span aria-hidden="true">→</span></button></td>
+									))}
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</details>
 
 				<aside class="selection-help" aria-label="Help choosing a radio kit">
 					<h3>Not sure which kit fits?</h3>
@@ -533,6 +580,7 @@ const productSchema = {
 						<div>
 							<p class="eyebrow">Secure PayPal checkout</p>
 							<h2 id={`paypal-dialog-title-${product.id}`}>Configure your {product.name.toLowerCase()}</h2>
+							<p class="paypal-dialog-note">Free U.S. shipping · Configured before shipping · Direct builder support</p>
 						</div>
 						<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 					</div>
@@ -581,6 +629,33 @@ const productSchema = {
 			mobileMenu?.querySelectorAll('a').forEach((link) => {
 				link.addEventListener('click', () => mobileMenu.removeAttribute('open'));
 			});
+
+			const navigationLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+			const navigationSections = [...new Set(navigationLinks.map((link) => link.getAttribute('href')?.slice(1)).filter(Boolean))]
+				.map((id) => document.getElementById(id))
+				.filter(Boolean)
+				.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+			let navigationFrame = 0;
+			const updateActiveNavigation = () => {
+				navigationFrame = 0;
+				let activeId = '';
+				for (const section of navigationSections) {
+					if (section.getBoundingClientRect().top <= 180) activeId = section.id;
+				}
+				navigationLinks.forEach((link) => {
+					const isActive = link.getAttribute('href') === `#${activeId}`;
+					if (isActive) link.setAttribute('aria-current', 'location');
+					else link.removeAttribute('aria-current');
+				});
+			};
+			const requestNavigationUpdate = () => {
+				if (navigationFrame) return;
+				navigationFrame = requestAnimationFrame(updateActiveNavigation);
+			};
+			window.addEventListener('scroll', requestNavigationUpdate, { passive: true });
+			window.addEventListener('resize', requestNavigationUpdate);
+			window.addEventListener('hashchange', requestNavigationUpdate);
+			updateActiveNavigation();
 
 			const paypalDialogs = document.querySelectorAll('[data-paypal-dialog]');
 			const purchaseButtons = document.querySelectorAll('[data-open-paypal]');
