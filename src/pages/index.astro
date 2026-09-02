@@ -569,6 +569,7 @@ const productSchema = {
 			</div>
 			<div class="footer-bottom">
 				<span>© {new Date().getFullYear()} Signal Ready</span>
+				<span class="footer-visit-count" data-visitor-counter hidden><i aria-hidden="true"></i><span data-visitor-count></span></span>
 				<span>Free U.S. shipping · Veteran owned business</span>
 			</div>
 		</footer>
@@ -656,6 +657,29 @@ const productSchema = {
 			window.addEventListener('resize', requestNavigationUpdate);
 			window.addEventListener('hashchange', requestNavigationUpdate);
 			updateActiveNavigation();
+
+			const visitorCounter = document.querySelector('[data-visitor-counter]');
+			const visitorCount = document.querySelector('[data-visitor-count]');
+			if (visitorCounter instanceof HTMLElement && visitorCount instanceof HTMLElement) {
+				fetch('/api/visits', {
+					method: 'POST',
+					credentials: 'same-origin',
+					headers: { Accept: 'application/json' },
+				})
+					.then((response) => {
+						if (!response.ok) throw new Error('Visitor counter unavailable');
+						return response.json();
+					})
+					.then((data) => {
+						if (!Number.isSafeInteger(data.count) || data.count < 0) return;
+						const formattedCount = new Intl.NumberFormat('en-US').format(data.count);
+						visitorCount.textContent = `${formattedCount} site ${data.count === 1 ? 'visit' : 'visits'} since Sep. 2026`;
+						visitorCounter.hidden = false;
+					})
+					.catch(() => {
+						visitorCounter.hidden = true;
+					});
+			}
 
 			const paypalDialogs = document.querySelectorAll('[data-paypal-dialog]');
 			const purchaseButtons = document.querySelectorAll('[data-open-paypal]');

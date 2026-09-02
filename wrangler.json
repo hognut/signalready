@@ -7,6 +7,20 @@
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "VISITOR_COUNTER",
+				"class_name": "VisitorCounter"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["VisitorCounter"]
+		}
+	],
 	"observability": {
 		"enabled": true
 	},
