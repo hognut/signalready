@@ -60,7 +60,7 @@ h1 { margin-bottom: 0; max-width: 760px; font-size: clamp(72px, 9vw, 128px); lin
 h1 em, .field-ready h2 em { color: var(--signal); font-style: normal; }
 .lede { max-width: 640px; margin: 34px 0; color: #c8cac3; font-size: 21px; line-height: 1.55; }
 .hero-actions { display: flex; align-items: center; gap: 24px; }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 34px; min-width: 210px; padding: 15px 18px; border: 1px solid transparent; border-radius: 2px; font-weight: 700; text-decoration: none; }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 34px; min-width: 228px; padding: 15px 18px; border: 1px solid transparent; border-radius: 2px; font-weight: 700; text-decoration: none; }
 .button-primary { background: var(--signal); color: #10130e; }
 .button-primary:hover { background: var(--signal-dark); }
 .availability { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
@@ -165,9 +165,12 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .product-model { margin-bottom: 12px; color: var(--signal); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .product-info h3 { margin-bottom: 18px; font-size: clamp(40px, 4.5vw, 62px); line-height: .9; letter-spacing: -.015em; }
 .product-description { max-width: 520px; color: var(--muted); }
+.product-fit { display: flex; gap: 11px; align-items: baseline; margin: 16px 0 0; color: #e0e3da; font-size: 14px; line-height: 1.4; }
+.product-fit span { flex: 0 0 auto; color: var(--signal); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .product-highlights { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
 .product-highlights li { padding: 7px 10px; border: 1px solid rgba(215,250,67,.22); background: rgba(215,250,67,.07); color: #dfe9b0; font-size: 12px; line-height: 1.2; }
-.check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin: 24px 0 38px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
+.included-label { margin: 24px 0 0; padding-top: 22px; border-top: 1px solid var(--line); color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin: 12px 0 38px; padding: 0 0 24px; border-bottom: 1px solid var(--line); list-style: none; }
 .check-list li { position: relative; padding-left: 18px; color: #c7c9c1; font-size: 14px; }
 .check-list li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; background: var(--signal); }
 .item-description { margin: -12px 0 30px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -176,14 +179,14 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .item-description summary span { display: grid; width: 24px; height: 24px; place-items: center; border: 1px solid var(--line-strong); color: var(--signal); font-size: 18px; font-weight: 400; transition: transform .18s ease; }
 .item-description[open] summary span { transform: rotate(45deg); }
 .item-description p { margin: 0; padding: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.62; white-space: pre-line; }
-.product-purchase { display: grid; grid-template-columns: 1fr minmax(190px, .9fr); gap: 22px; align-items: end; margin-top: auto; }
+.product-purchase { display: grid; grid-template-columns: 1fr minmax(190px, .9fr); gap: 22px; align-items: end; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
 .product-price { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 50px; font-weight: 800; line-height: .85; }
 .product-price span { display: block; margin-top: 8px; color: var(--signal); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.button-buy { min-height: 50px; padding: 12px 18px; border: 1px solid var(--signal); border-radius: 2px; background: var(--signal); color: var(--ground); font-weight: 700; cursor: pointer; }
+.button-buy { min-height: 50px; padding: 12px 14px; border: 1px solid var(--signal); border-radius: 2px; background: var(--signal); color: var(--ground); font-size: 15px; font-weight: 700; white-space: nowrap; cursor: pointer; }
 .button-buy:hover, .button-buy:focus-visible { background: var(--signal-dark); border-color: var(--signal-dark); }
 .button-inquiry { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 10px 16px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-size: 13px; font-weight: 700; text-align: center; text-decoration: none; }
 .button-inquiry:hover, .button-inquiry:focus-visible { border-color: var(--signal); color: var(--signal); }
-.purchase-reassurance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 0; padding: 17px 0 0; border-top: 1px solid var(--line); list-style: none; }
+.purchase-reassurance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); list-style: none; }
 .purchase-reassurance li { position: relative; padding-left: 13px; color: #bfc5ba; font-size: 10px; font-weight: 700; letter-spacing: .055em; line-height: 1.35; text-transform: uppercase; }
 .purchase-reassurance li::before { position: absolute; top: .42em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--signal); content: ''; }
 
@@ -337,9 +340,11 @@ footer { padding: 100px 0 34px; }
 	.process-grid li > span { margin-bottom: 42px; }
 	.product-gallery, .product-main-image { min-height: 520px; }
 	.product-info { padding: 34px 26px; }
+	.product-fit { align-items: flex-start; flex-direction: column; gap: 4px; }
 	.product-highlights { display: grid; }
 	.check-list { grid-template-columns: 1fr; }
 	.product-purchase { grid-template-columns: 1fr; }
+	.button-buy { font-size: 16px; white-space: normal; }
 	.purchase-reassurance { grid-template-columns: 1fr; gap: 8px; }
 	.paypal-dialog-header { padding: 20px; }
 	.paypal-dialog-body { padding: 12px; }

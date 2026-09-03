@@ -23,7 +23,13 @@ const products = [
 			{ label: 'Case length', value: '9¼ in.' },
 		],
 		description: 'Built around the newer Baofeng Mini-5, with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
-		fullDescription: null,
+		fullDescription: `Professionally assembled compact communications kit featuring two next-generation Baofeng Mini-5 HAM-version radios organized inside a durable hard protective case with a precision-cut foam insert.
+
+Each Mini-5 includes a 2,200mAh rechargeable battery, improved audio and reception, and an easier-to-use keypad compared with the UV-5R Mini used in the four-radio kit. Both radios are professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
+
+The kit includes two radios with installed batteries, a fitted protective case, custom foam, a 1-to-2 USB-C charging splitter, and a custom exterior identification badge. Its compact 9¼ × 7½ × 4⅜ in. case is easy to stage in a vehicle, carry while traveling, or keep with preparedness equipment.
+
+This grab-and-go setup is a strong fit for couples, vehicles, camping, overlanding, family preparedness, event coordination, and backup communication. The radios arrive organized and programmed for straightforward setup and use. Free shipping is included within the United States.`,
 		highlights: ['Newer Mini-5 platform', '2,200mAh battery', 'Improved audio, reception, and keypad'],
 		images: [
 			{ src: '/images/two-kit-open.jpg', alt: 'Two Baofeng handheld radios beside an open protective hard case' },
@@ -57,8 +63,14 @@ const products = [
 			{ label: 'Battery', value: '1,600mAh' },
 			{ label: 'Case length', value: '9¼ in.' },
 		],
-		description: 'A compact four-radio communications package, professionally programmed and organized for immediate deployment.',
-		fullDescription: null,
+		description: 'A complete four-radio team system with UV-5R Mini handhelds, 1,600mAh rechargeable batteries, custom programming, and one organized charging solution in a fitted protective case.',
+		fullDescription: `Professionally assembled four-radio communications kit featuring Baofeng UV-5R Mini HAM-version radios organized inside a durable hard protective case with a precision-cut foam insert.
+
+Each radio includes an installed 1,600mAh rechargeable battery and is professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
+
+The kit includes four radios with installed batteries, a fitted 9¼ × 7½ × 4⅜ in. protective case, custom foam, a 1-to-4 USB-C charging splitter, and a custom exterior identification badge. Every component has a designated place so the complete system stays protected, organized, and ready to move.
+
+This four-radio setup is well suited to families, small teams, preparedness kits, event staff, vehicle recovery crews, camping, overlanding, and general field use. The radios arrive organized and programmed for straightforward setup and use. Free shipping is included within the United States.`,
 		highlights: ['Four-radio team setup', 'Custom programming', '1-to-4 USB-C charging'],
 		images: [
 			{ src: '/images/four-kit-open.jpg', alt: 'Four Baofeng handheld radios beside an open Signal Ready hard case' },
@@ -295,7 +307,7 @@ const productSchema = {
 					<h1>Ready when<br /><em>networks fail.</em></h1>
 					<p class="lede">Professionally assembled, pre-programmed radio kits built for preparedness, travel, team coordination, and off-grid communication.</p>
 					<div class="hero-actions">
-						<a class="button button-primary" href="#shop">Shop the systems <span aria-hidden="true">↓</span></a>
+						<a class="button button-primary" href="#shop">Shop kits from $125 <span aria-hidden="true">↓</span></a>
 						<div class="availability"><span aria-hidden="true"></span> Built and shipped from Maryland</div>
 					</div>
 				</div>
@@ -429,18 +441,7 @@ const productSchema = {
 								<p class="product-model">{product.model}</p>
 								<h3>{product.name}</h3>
 								<p class="product-description">{product.description}</p>
-								<ul class="product-highlights" aria-label={`${product.name} highlights`}>
-									{product.highlights.map(item => <li>{item}</li>)}
-								</ul>
-								<ul class="check-list">
-									{product.included.map(item => <li>{item}</li>)}
-								</ul>
-								{product.fullDescription && (
-									<details class="item-description">
-										<summary>Read the full item description <span aria-hidden="true">+</span></summary>
-										<p>{product.fullDescription}</p>
-									</details>
-								)}
+								<p class="product-fit"><span>Best for</span>{product.bestFor}</p>
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
@@ -454,6 +455,19 @@ const productSchema = {
 									<li>Configured before shipping</li>
 									<li>Direct builder support</li>
 								</ul>
+								<ul class="product-highlights" aria-label={`${product.name} highlights`}>
+									{product.highlights.map(item => <li>{item}</li>)}
+								</ul>
+								<p class="included-label">Included in this kit</p>
+								<ul class="check-list">
+									{product.included.map(item => <li>{item}</li>)}
+								</ul>
+								{product.fullDescription && (
+									<details class="item-description">
+										<summary>Read the full item description <span aria-hidden="true">+</span></summary>
+										<p>{product.fullDescription}</p>
+									</details>
+								)}
 							</div>
 						</article>
 					))}
@@ -581,7 +595,7 @@ const productSchema = {
 						<div>
 							<p class="eyebrow">Secure PayPal checkout</p>
 							<h2 id={`paypal-dialog-title-${product.id}`}>Configure your {product.name.toLowerCase()}</h2>
-							<p class="paypal-dialog-note">Free U.S. shipping · Configured before shipping · Direct builder support</p>
+							<p class="paypal-dialog-note">Choose any available options below, then use PayPal’s Add to Cart button. Free U.S. shipping is included.</p>
 						</div>
 						<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 					</div>
