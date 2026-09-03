@@ -146,6 +146,30 @@ The radios arrive organized and programmed for immediate setup and use. Actual r
 
 const programming = ['GMRS channels', 'FRS channels', 'MURS channels', 'NOAA weather', 'Marine channels', 'Aviation monitoring'];
 
+const fieldScenarios = [
+	{
+		kit: '2-Radio Kit',
+		title: 'In the vehicle',
+		copy: 'A compact pair for drivers, spotters, road trips, and a glove-box-adjacent backup plan.',
+		image: '/images/use-case-vehicle.jpg',
+		alt: 'Two-radio Signal Ready kit staged in the open cargo area of an SUV at a forest trailhead',
+	},
+	{
+		kit: '4-Radio Kit',
+		title: 'At the campsite',
+		copy: 'Four organized handhelds for family camps, overlanding groups, and keeping everyone on the same channel.',
+		image: '/images/use-case-camping.jpg',
+		alt: 'Four-radio Signal Ready kit arranged on a sunny campsite picnic table',
+	},
+	{
+		kit: '5-Radio Kit',
+		title: 'At the check-in table',
+		copy: 'Five next-gen radios staged for event staff, volunteer teams, recovery crews, and larger groups.',
+		image: '/images/use-case-event.jpg',
+		alt: 'Five-radio Signal Ready kit staged at an outdoor event check-in table',
+	},
+];
+
 const rangeGuide = [
 	{ label: 'Dense or built-up areas', value: '½–2 mi', note: 'Buildings, vehicles, heavy foliage, and uneven ground reduce range.' },
 	{ label: 'Open, relatively clear terrain', value: '2–5 mi', note: 'A practical expectation when both radios have a clearer path.' },
@@ -212,6 +236,11 @@ const faqs = [
 		topic: 'Customization',
 		question: 'Can my kit be customized before it ships?',
 		answer: 'Yes. You can request a custom channel plan and ask about a personalized exterior identification badge for a team name, call sign, vehicle, unit, or other label. Email Signal Ready after ordering if the PayPal options do not cover what you need.',
+	},
+	{
+		topic: 'About Signal Ready',
+		question: 'Who assembles and ships the kits?',
+		answer: 'Signal Ready is a veteran-owned small business in Dunkirk, Maryland. Each kit is assembled, programmed, checked, and packed there, questions go directly to the builder, and payment is handled securely through PayPal.',
 	},
 ];
 
@@ -538,6 +567,27 @@ const productSchema = {
 				<div class="use-grid">
 					<span>Emergency preparedness</span><span>Camping & overlanding</span><span>Vehicle recovery</span><span>Event coordination</span><span>Family communication</span><span>Travel & off-grid use</span>
 				</div>
+				<div class="scenario-grid" aria-label="Signal Ready kits in everyday field settings">
+					{fieldScenarios.map((scenario, index) => (
+						<article class="scenario-card">
+							<div class="scenario-image">
+								<img src={scenario.image} alt={scenario.alt} width="1536" height="1024" loading="lazy" decoding="async" />
+								<span>{String(index + 1).padStart(2, '0')}</span>
+							</div>
+							<div class="scenario-copy"><small>{scenario.kit}</small><h3>{scenario.title}</h3><p>{scenario.copy}</p></div>
+						</article>
+					))}
+				</div>
+				<p class="scenario-disclosure">Field scenes are illustrative. Product configurations and included equipment are shown in the kit details above.</p>
+				<aside class="business-proof" aria-label="About the Signal Ready business">
+					<div><span>Built by a real person</span><h3>Small shop. Straight answers.</h3><p>Every kit is assembled, programmed, checked, and packed in Dunkirk, Maryland—not dropped into a box by an anonymous marketplace seller.</p></div>
+					<ul>
+						<li>Veteran owned</li>
+						<li>Direct access to the builder</li>
+						<li>Secure PayPal checkout</li>
+					</ul>
+					<a href="mailto:ansman@gmail.com?subject=Question%20for%20Signal%20Ready">Ask Steven a question <span aria-hidden="true">→</span></a>
+				</aside>
 			</section>
 
 			<section class="faq-section" id="faq" aria-labelledby="faq-title">
@@ -608,6 +658,8 @@ const productSchema = {
 			</div>
 		</footer>
 
+		<div class="field-toast" data-field-toast role="status" aria-live="polite" hidden></div>
+
 		{products.filter(product => product.paypalId).map(product => (
 			<dialog class="paypal-dialog" id={`paypal-product-dialog-${product.id}`} aria-labelledby={`paypal-dialog-title-${product.id}`} data-paypal-dialog>
 				<div class="paypal-dialog-inner">
@@ -633,6 +685,31 @@ const productSchema = {
 
 		<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 		<script is:inline>
+			// Five quick taps on the header mark unlock field protocol.
+			const easterEggTrigger = document.querySelector('.site-header .brand');
+			const fieldToast = document.querySelector('[data-field-toast]');
+			const fieldMessages = [
+				'WOLVERINES! Field protocol: check batteries, pack snacks, stay calm.',
+				'DEFCON SNACKS: civilization can wait; the cooler is operational.',
+				'End-of-world checklist complete. Somebody remembered the charging cables.',
+			];
+			let easterEggTaps = 0;
+			let easterEggMessage = 0;
+			let easterEggResetTimer;
+			let easterEggHideTimer;
+			easterEggTrigger?.addEventListener('click', () => {
+				easterEggTaps += 1;
+				window.clearTimeout(easterEggResetTimer);
+				easterEggResetTimer = window.setTimeout(() => { easterEggTaps = 0; }, 4000);
+				if (easterEggTaps < 5 || !(fieldToast instanceof HTMLElement)) return;
+				easterEggTaps = 0;
+				fieldToast.textContent = fieldMessages[easterEggMessage % fieldMessages.length];
+				easterEggMessage += 1;
+				fieldToast.hidden = false;
+				window.clearTimeout(easterEggHideTimer);
+				easterEggHideTimer = window.setTimeout(() => { fieldToast.hidden = true; }, 5200);
+			});
+
 			const alignInitialShortcut = () => {
 				if (window.location.hash.length < 2) return;
 				const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
