@@ -23,7 +23,7 @@ const products = [
 			{ label: 'Case length', value: '9¼ in.' },
 		],
 		description: 'Built around the newer Baofeng Mini-5, with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all in a streamlined package for vehicles, travel, and small teams.',
-		fullDescription: `Professionally assembled compact communications kit featuring two next-generation Baofeng Mini-5 HAM-version radios organized inside a durable hard protective case with a precision-cut foam insert.
+		fullDescription: `Professionally assembled compact communications kit featuring two next-generation Baofeng Mini-5 handheld radios organized inside a durable hard protective case with a precision-cut foam insert.
 
 Each Mini-5 includes a 2,200mAh rechargeable battery, improved audio and reception, and an easier-to-use keypad compared with the UV-5R Mini used in the four-radio kit. Both radios are professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
 
@@ -37,7 +37,7 @@ This grab-and-go setup is a strong fit for couples, vehicles, camping, overlandi
 			{ src: '/images/two-kit-closed.jpg', alt: 'Closed black two-radio kit case with a compact black USB-C splitter cable' },
 		],
 		included: [
-			'2 Baofeng Mini-5 HAM-version radios',
+			'2 Baofeng Mini-5 handheld radios',
 			'2,200mAh rechargeable batteries installed',
 			'Custom-fitted protective hard case',
 			'Precision-cut foam insert',
@@ -64,7 +64,7 @@ This grab-and-go setup is a strong fit for couples, vehicles, camping, overlandi
 			{ label: 'Case length', value: '9¼ in.' },
 		],
 		description: 'A complete four-radio team system with UV-5R Mini handhelds, 1,600mAh rechargeable batteries, custom programming, and one organized charging solution in a fitted protective case.',
-		fullDescription: `Professionally assembled four-radio communications kit featuring Baofeng UV-5R Mini HAM-version radios organized inside a durable hard protective case with a precision-cut foam insert.
+		fullDescription: `Professionally assembled four-radio communications kit featuring Baofeng UV-5R Mini handheld radios organized inside a durable hard protective case with a precision-cut foam insert.
 
 Each radio includes an installed 1,600mAh rechargeable battery and is professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
 
@@ -78,7 +78,7 @@ This four-radio setup is well suited to families, small teams, preparedness kits
 			{ src: '/images/four-kit-closed.jpg', alt: 'Closed black protective radio case in a charcoal studio with lime edge lighting' },
 		],
 		included: [
-			'4 Baofeng UV-5R Mini HAM-version radios',
+			'4 Baofeng UV-5R Mini handheld radios',
 			'Rechargeable batteries installed',
 			'Custom-fitted protective hard case',
 			'Precision-cut foam insert',
@@ -107,12 +107,12 @@ This four-radio setup is well suited to families, small teams, preparedness kits
 			{ label: 'Case length', value: '13½ in.' },
 		],
 		description: 'Built around five next-generation Baofeng Mini-5 radios, each with a 2,200mAh battery, improved audio and reception, and an easier-to-use keypad—all organized in a larger five-slot field case.',
-		fullDescription: `Professionally assembled five-radio communications kit built around the next-generation Baofeng Mini-5 HAM-version radio. This larger team system keeps five compact handhelds protected, organized, and ready for quick deployment in a durable hard case with a precision-cut five-slot foam insert.
+		fullDescription: `Professionally assembled five-radio communications kit built around the next-generation Baofeng Mini-5 handheld radio. This larger team system keeps five compact handhelds protected, organized, and ready for quick deployment in a durable hard case with a precision-cut five-slot foam insert.
 
 Each Mini-5 includes a 2,200mAh rechargeable battery, improved audio and reception, and an easier-to-use keypad compared with the UV-5R Mini used in the four-radio kit. Every radio is professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
 
 Included:
-• 5 Baofeng Mini-5 HAM-version radios
+• 5 Baofeng Mini-5 handheld radios
 • 5 installed 2,200mAh rechargeable batteries
 • Larger 13½ × 11⅜ × 6 in. hard protective case
 • Precision-cut five-slot foam insert and protective lid foam
@@ -132,7 +132,7 @@ The radios arrive organized and programmed for immediate setup and use. Actual r
 			{ src: '/images/five-kit-size-comparison.jpg', alt: 'Large five-radio case beneath the smaller case used for two- and four-radio kits' },
 		],
 		included: [
-			'5 Baofeng Mini-5 HAM-version radios',
+			'5 Baofeng Mini-5 handheld radios',
 			'2,200mAh rechargeable batteries installed',
 			'Larger protective hard case',
 			'Precision-cut five-slot foam insert',
@@ -202,6 +202,16 @@ const faqs = [
 		topic: 'Charging',
 		question: 'How is the 5-radio kit charged?',
 		answer: 'The kit includes five standard USB-A to USB-C charging cables—one for each Mini-5 radio. The individual cables make it easier to charge from compatible wall adapters, vehicle USB ports, power stations, or other USB-A power sources without relying on one proprietary multi-head splitter.',
+	},
+	{
+		topic: 'Off-grid use',
+		question: 'Do the radios need cellular service, Wi-Fi, or a subscription?',
+		answer: 'No. Direct radio-to-radio communication works independently of cellular towers, Wi-Fi, apps, and monthly service plans. Range still depends on terrain and line of sight, but the radios are designed to provide a separate communication option when normal networks are unavailable or unreliable.',
+	},
+	{
+		topic: 'Customization',
+		question: 'Can my kit be customized before it ships?',
+		answer: 'Yes. You can request a custom channel plan and ask about a personalized exterior identification badge for a team name, call sign, vehicle, unit, or other label. Email Signal Ready after ordering if the PayPal options do not cover what you need.',
 	},
 ];
 
@@ -278,7 +288,7 @@ const productSchema = {
 			<nav aria-label="Main navigation">
 				<a href="#shop" data-nav-link>Shop</a>
 				<a href="#how-it-works" data-nav-link>How it works</a>
-				<a href="#field-ready" data-nav-link>What you get</a>
+				<a href="#field-ready" data-nav-link>Programming</a>
 				<a href="#faq" data-nav-link>FAQ</a>
 				<a href="#about" data-nav-link>About</a>
 				<a href="#policies" data-nav-link>Policies</a>
@@ -288,7 +298,7 @@ const productSchema = {
 				<nav aria-label="Mobile navigation">
 					<a href="#shop" data-nav-link>Shop</a>
 					<a href="#how-it-works" data-nav-link>How it works</a>
-					<a href="#field-ready" data-nav-link>What you get</a>
+					<a href="#field-ready" data-nav-link>Programming</a>
 					<a href="#faq" data-nav-link>FAQ</a>
 					<a href="#about" data-nav-link>About</a>
 					<a href="#policies" data-nav-link>Policies</a>
@@ -306,6 +316,11 @@ const productSchema = {
 					<p class="eyebrow">Field-ready communication systems</p>
 					<h1>Ready when<br /><em>networks fail.</em></h1>
 					<p class="lede">Professionally assembled, pre-programmed radio kits built for preparedness, travel, team coordination, and off-grid communication.</p>
+					<ul class="hero-proof" aria-label="Signal Ready system benefits">
+						<li>No subscription</li>
+						<li>No app required</li>
+						<li>No cellular network needed</li>
+					</ul>
 					<div class="hero-actions">
 						<a class="button button-primary" href="#shop">Shop kits from $125 <span aria-hidden="true">↓</span></a>
 						<div class="availability"><span aria-hidden="true"></span> Built and shipped from Maryland</div>
@@ -351,6 +366,7 @@ const productSchema = {
 					</div>
 					<p>Every system is carefully organized and prepared for quick deployment—without a complicated setup process.</p>
 				</div>
+				<p class="shop-assurance"><strong>Complete-kit pricing.</strong> Radios, installed batteries, fitted case, charging accessories, programming, and free U.S. shipping are included.</p>
 
 				<div class="setup-selector" aria-label="Compare Signal Ready setups">
 					{products.map((product, index) => (
@@ -383,9 +399,9 @@ const productSchema = {
 					))}
 				</div>
 
-				<details class="kit-comparison" id="compare" open>
+				<details class="kit-comparison" id="compare">
 					<summary>
-						<span><small>At a glance</small><strong>Compare every kit</strong></span>
+						<span><small>Optional side-by-side guide</small><strong>Compare every kit</strong></span>
 						<span class="comparison-toggle" aria-hidden="true">+</span>
 					</summary>
 					<p class="comparison-mobile-hint" aria-hidden="true">Swipe to compare all kits →</p>
@@ -445,7 +461,7 @@ const productSchema = {
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
-										<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`}>Configure & add to cart</button>
+										<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`}>Choose options & add to cart</button>
 									) : (
 										<a class="button-inquiry" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}>Ask about availability</a>
 									)}
@@ -551,6 +567,10 @@ const productSchema = {
 						</details>
 					))}
 				</div>
+				<aside class="faq-contact" aria-label="Contact Signal Ready">
+					<div><span>Still deciding?</span><strong>Get an answer from the person who builds the kits.</strong></div>
+					<a href="mailto:ansman@gmail.com?subject=Signal%20Ready%20product%20question">Ask a question <span aria-hidden="true">→</span></a>
+				</aside>
 				<p class="faq-sources">Product information last reviewed August 2026. Manufacturer specifications can change; confirm the battery and equipment details supplied with your kit.</p>
 			</section>
 
@@ -594,12 +614,17 @@ const productSchema = {
 					<div class="paypal-dialog-header">
 						<div>
 							<p class="eyebrow">Secure PayPal checkout</p>
-							<h2 id={`paypal-dialog-title-${product.id}`}>Configure your {product.name.toLowerCase()}</h2>
+							<h2 id={`paypal-dialog-title-${product.id}`}>Add your {product.name.toLowerCase()}</h2>
 							<p class="paypal-dialog-note">Choose any available options below, then use PayPal’s Add to Cart button. Free U.S. shipping is included.</p>
 						</div>
 						<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 					</div>
 					<div class="paypal-dialog-body">
+						<div class="paypal-product-summary">
+							<img src={product.images[0].src} alt="" width="96" height="96" loading="lazy" />
+							<div><span>{product.model}</span><strong>{product.name}</strong><small>Configured before shipping · Free U.S. shipping</small></div>
+							<b>{product.price}</b>
+						</div>
 						<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
 					</div>
 				</div>
