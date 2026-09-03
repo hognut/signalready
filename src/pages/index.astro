@@ -461,7 +461,7 @@ const productSchema = {
 								<div class="product-purchase">
 									<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 									{product.paypalId ? (
-										<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`}>Choose options & add to cart</button>
+										<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>Buy online <span aria-hidden="true">→</span></button>
 									) : (
 										<a class="button-inquiry" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}>Ask about availability</a>
 									)}

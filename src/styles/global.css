@@ -187,7 +187,8 @@ h2 { margin-bottom: 0; font-size: clamp(52px, 6.4vw, 88px); line-height: .86; le
 .product-purchase { display: grid; grid-template-columns: 1fr minmax(190px, .9fr); gap: 22px; align-items: end; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
 .product-price { font-family: "Barlow Condensed", "Atkinson", sans-serif; font-size: 50px; font-weight: 800; line-height: .85; }
 .product-price span { display: block; margin-top: 8px; color: var(--signal); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.button-buy { min-height: 50px; padding: 12px 14px; border: 1px solid var(--signal); border-radius: 2px; background: var(--signal); color: var(--ground); font-size: 15px; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.button-buy { display: flex; width: 100%; min-width: 0; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border: 1px solid var(--signal); border-radius: 2px; background: var(--signal); color: var(--ground); font-size: 15px; font-weight: 700; line-height: 1.2; white-space: nowrap; cursor: pointer; }
+.button-buy span { flex: 0 0 auto; font-size: 20px; font-weight: 600; line-height: 1; }
 .button-buy:hover, .button-buy:focus-visible { background: var(--signal-dark); border-color: var(--signal-dark); }
 .button-inquiry { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 10px 16px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-size: 13px; font-weight: 700; text-align: center; text-decoration: none; }
 .button-inquiry:hover, .button-inquiry:focus-visible { border-color: var(--signal); color: var(--signal); }
