@@ -148,6 +148,7 @@ const programming = ['GMRS channels', 'FRS channels', 'MURS channels', 'NOAA wea
 
 const fieldScenarios = [
 	{
+		productId: 'two-radio-kit',
 		kit: '2-Radio Kit',
 		title: 'In the vehicle',
 		copy: 'A compact pair for drivers, spotters, road trips, and a glove-box-adjacent backup plan.',
@@ -156,6 +157,7 @@ const fieldScenarios = [
 	},
 	{
 		kit: '4-Radio Kit',
+		productId: 'four-radio-kit',
 		title: 'At the campsite',
 		copy: 'Four organized handhelds for family camps, overlanding groups, and keeping everyone on the same channel.',
 		image: '/images/use-case-camping.jpg',
@@ -163,6 +165,7 @@ const fieldScenarios = [
 	},
 	{
 		kit: '5-Radio Kit',
+		productId: 'five-radio-kit',
 		title: 'At the check-in table',
 		copy: 'Five next-gen radios staged for event staff, volunteer teams, recovery crews, and larger groups.',
 		image: '/images/use-case-event.jpg',
@@ -372,28 +375,13 @@ const productSchema = {
 				<div><strong>04</strong><span>Veteran owned<br />business</span></div>
 			</section>
 
-			<section class="process-section" id="how-it-works" aria-labelledby="process-title">
-				<div class="section-heading">
-					<div>
-						<p class="eyebrow">From the bench to your door</p>
-						<h2 id="process-title">Ready in<br />three steps.</h2>
-					</div>
-					<p>No complicated setup list. Choose the right kit, tell us what you need, and receive an organized system ready for the field.</p>
-				</div>
-				<ol class="process-grid">
-					<li><span>01</span><h3>Choose your system</h3><p>Select a complete two-, four-, or five-radio kit for your household, vehicle, or team.</p></li>
-					<li><span>02</span><h3>We configure it</h3><p>Your complete radio kit is programmed, checked, organized, and packed in Maryland.</p></li>
-					<li><span>03</span><h3>It ships free</h3><p>Your order ships free anywhere in the United States, with direct support from the builder.</p></li>
-				</ol>
-			</section>
-
 			<section class="shop-section" id="shop">
 				<div class="section-heading">
 					<div>
 						<p class="eyebrow">Choose your setup</p>
-						<h2>Built for the field.<br />Not the shelf.</h2>
+						<h2>Find your<br />field kit.</h2>
 					</div>
-					<p>Every system is carefully organized and prepared for quick deployment—without a complicated setup process.</p>
+					<p>Two, four, or five radios. Compare the model, battery, and case size to find the right fit for your group.</p>
 				</div>
 				<p class="shop-assurance"><strong>Complete-kit pricing.</strong> Radios, installed batteries, fitted case, charging accessories, programming, and free U.S. shipping are included.</p>
 
@@ -430,11 +418,11 @@ const productSchema = {
 
 				<details class="kit-comparison" id="compare">
 					<summary>
-						<span><small>Optional side-by-side guide</small><strong>Compare every kit</strong></span>
+						<span><small>Models · batteries · case sizes</small><strong>Compare every kit</strong></span>
 						<span class="comparison-toggle" aria-hidden="true">+</span>
 					</summary>
 					<p class="comparison-mobile-hint" aria-hidden="true">Swipe to compare all kits →</p>
-					<div class="comparison-table-wrap">
+					<div class="comparison-table-wrap" tabindex="0" role="region" aria-label="Kit comparison table; scroll horizontally to see all kits">
 						<table>
 							<caption class="sr-only">Comparison of Signal Ready two-, four-, and five-radio field kits</caption>
 							<thead>
@@ -471,9 +459,12 @@ const productSchema = {
 				<div class="product-grid">
 					{products.map((product, index) => (
 						<article class="product-card" id={product.id}>
-							<div class="product-gallery" data-gallery>
+							<div class="product-gallery" data-gallery data-product-name={product.name}>
 								<div class="product-label"><span>{String(index + 1).padStart(2, '0')}</span>{product.label}</div>
-								<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" data-main-image />
+								<button class="product-image-button" type="button" data-enlarge-image aria-label={`Enlarge ${product.name} photo`} aria-haspopup="dialog" aria-controls="photo-viewer">
+									<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading="lazy" decoding="async" data-main-image />
+									<span class="product-zoom-hint">View larger <span aria-hidden="true">↗</span></span>
+								</button>
 								<div class="product-thumbnails" aria-label={`${product.name} photos`}>
 									{product.images.map((image, imageIndex) => (
 										<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
@@ -517,6 +508,18 @@ const productSchema = {
 						</article>
 					))}
 				</div>
+			</section>
+
+			<section class="process-section" id="how-it-works" aria-labelledby="process-title">
+				<div class="section-heading">
+					<div><p class="eyebrow">From the bench to your door</p><h2 id="process-title">Ready in<br />three steps.</h2></div>
+					<p>Choose your kit and any available options in the cart. We take care of programming, packing, and free U.S. shipping.</p>
+				</div>
+				<ol class="process-grid">
+					<li><span>01</span><h3>Choose your system</h3><p>Select a complete two-, four-, or five-radio kit for your household, vehicle, or team.</p></li>
+					<li><span>02</span><h3>We configure it</h3><p>Your complete radio kit is programmed, checked, organized, and packed in Maryland.</p></li>
+					<li><span>03</span><h3>It ships free</h3><p>Your order ships free anywhere in the United States, with direct support from the builder.</p></li>
+				</ol>
 			</section>
 
 			<section class="brand-banner" aria-label="Signal Ready brand promise">
@@ -574,7 +577,7 @@ const productSchema = {
 								<img src={scenario.image} alt={scenario.alt} width="1536" height="1024" loading="lazy" decoding="async" />
 								<span>{String(index + 1).padStart(2, '0')}</span>
 							</div>
-							<div class="scenario-copy"><small>{scenario.kit}</small><h3>{scenario.title}</h3><p>{scenario.copy}</p></div>
+							<div class="scenario-copy"><small>{scenario.kit}</small><h3>{scenario.title}</h3><p>{scenario.copy}</p><a class="scenario-link" href={`#${scenario.productId}`}>Explore the {scenario.kit.toLowerCase()} <span aria-hidden="true">→</span></a></div>
 						</article>
 					))}
 				</div>
@@ -592,9 +595,16 @@ const productSchema = {
 
 			<section class="faq-section" id="faq" aria-labelledby="faq-title">
 				<div class="section-heading">
-					<div><p class="eyebrow">Range · batteries · radio services</p><h2 id="faq-title">Frequently asked<br />questions.</h2></div>
+					<div><p class="eyebrow">Your questions, answered</p><h2 id="faq-title">FAQ</h2></div>
 					<p>Practical guidance about range, batteries, compatibility, programming, and everyday operation before you head into the field.</p>
 				</div>
+				<nav class="faq-shortcuts" aria-label="Common questions">
+					<a href="#faq-range">Range</a>
+					<a href="#faq-battery-life">Battery life</a>
+					<a href="#faq-programming">Channels</a>
+					<a href="#faq-charging">Charging</a>
+					<a href="#faq-customization">Custom orders</a>
+				</nav>
 				<div class="range-guide" aria-label="Approximate handheld-to-handheld range guide">
 					{rangeGuide.map(item => (
 						<article class:list={{ 'range-card': true, 'range-card-best': item.best }}>
@@ -607,7 +617,7 @@ const productSchema = {
 				<p class="range-disclaimer">Approximate direct-radio ranges, not guarantees. Antenna height, terrain, buildings, foliage, interference, power, and weather all affect results.</p>
 				<div class="faq-grid">
 					{faqs.map((faq, index) => (
-						<details class="faq-item" open={index === 0}>
+						<details class="faq-item" id={`faq-${faq.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} open={index === 0}>
 							<summary>
 								<span class="faq-number">{String(index + 1).padStart(2, '0')}</span>
 								<span class="faq-question"><small>{faq.topic}</small><strong>{faq.question}</strong></span>
@@ -660,6 +670,21 @@ const productSchema = {
 
 		<div class="field-toast" data-field-toast role="status" aria-live="polite" hidden></div>
 
+		<dialog class="photo-viewer" id="photo-viewer" aria-labelledby="photo-viewer-title">
+			<div class="photo-viewer-inner">
+				<header class="photo-viewer-header">
+					<h2 id="photo-viewer-title">Kit photos</h2>
+					<form method="dialog"><button class="dialog-close" autofocus>Close photos</button></form>
+				</header>
+				<img class="photo-viewer-image" data-viewer-image alt="" />
+				<div class="photo-viewer-controls">
+					<button type="button" data-photo-previous aria-label="Previous photo">←</button>
+					<p data-photo-caption role="status" aria-live="polite"></p>
+					<button type="button" data-photo-next aria-label="Next photo">→</button>
+				</div>
+			</div>
+		</dialog>
+
 		{products.filter(product => product.paypalId).map(product => (
 			<dialog class="paypal-dialog" id={`paypal-product-dialog-${product.id}`} aria-labelledby={`paypal-dialog-title-${product.id}`} data-paypal-dialog>
 				<div class="paypal-dialog-inner">
@@ -710,25 +735,63 @@ const productSchema = {
 				easterEggHideTimer = window.setTimeout(() => { fieldToast.hidden = true; }, 5200);
 			});
 
-			const alignInitialShortcut = () => {
+			const alignShortcut = (instant = false) => {
 				if (window.location.hash.length < 2) return;
-				const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+				let id;
+				try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+				const target = document.getElementById(id);
 				if (!target) return;
-				const root = document.documentElement;
-				const previousBehavior = root.style.scrollBehavior;
-				root.style.scrollBehavior = 'auto';
-				target.scrollIntoView({ block: 'start' });
-				root.style.scrollBehavior = previousBehavior;
+				if (target instanceof HTMLDetailsElement) target.open = true;
+				target.scrollIntoView({ block: 'start', behavior: instant ? 'instant' : 'auto' });
 			};
 
 			window.addEventListener('load', () => {
 				Promise.resolve(document.fonts?.ready).then(() => {
-					requestAnimationFrame(() => requestAnimationFrame(alignInitialShortcut));
+					requestAnimationFrame(() => requestAnimationFrame(() => alignShortcut(true)));
 				});
 			}, { once: true });
+			window.addEventListener('hashchange', () => alignShortcut());
+			document.querySelectorAll('a[href^="#faq-"]').forEach((link) => {
+				link.addEventListener('click', () => {
+					if (link.getAttribute('href') === window.location.hash) alignShortcut();
+				});
+			});
+
+			const photoViewer = document.getElementById('photo-viewer');
+			const viewerImage = document.querySelector('[data-viewer-image]');
+			const viewerTitle = document.getElementById('photo-viewer-title');
+			const viewerCaption = document.querySelector('[data-photo-caption]');
+			let activePhotoButtons = [];
+			let activePhotoIndex = 0;
+			const photoLabels = ['Kit overview', 'Packed case', 'Closed case', 'Size comparison'];
+			const showViewerPhoto = (index) => {
+				if (!activePhotoButtons.length || !(viewerImage instanceof HTMLImageElement)) return;
+				activePhotoIndex = (index + activePhotoButtons.length) % activePhotoButtons.length;
+				const button = activePhotoButtons[activePhotoIndex];
+				viewerImage.src = button.dataset.src;
+				viewerImage.alt = button.dataset.alt;
+				viewerCaption.textContent = `${photoLabels[activePhotoIndex] || 'Kit photo'} · ${activePhotoIndex + 1} of ${activePhotoButtons.length}`;
+			};
+			document.querySelector('[data-photo-previous]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex - 1));
+			document.querySelector('[data-photo-next]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex + 1));
+			photoViewer?.addEventListener('keydown', (event) => {
+				if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+				event.preventDefault();
+				showViewerPhoto(activePhotoIndex + (event.key === 'ArrowRight' ? 1 : -1));
+			});
+			photoViewer?.addEventListener('click', (event) => {
+				if (event.target === photoViewer) photoViewer.close();
+			});
 
 			document.querySelectorAll('[data-gallery]').forEach((gallery) => {
 				const mainImage = gallery.querySelector('[data-main-image]');
+				gallery.querySelector('[data-enlarge-image]')?.addEventListener('click', () => {
+					if (!(photoViewer instanceof HTMLDialogElement)) return;
+					activePhotoButtons = Array.from(gallery.querySelectorAll('[data-gallery-button]'));
+					viewerTitle.textContent = gallery.dataset.productName;
+					showViewerPhoto(Math.max(0, activePhotoButtons.findIndex(button => button.getAttribute('aria-pressed') === 'true')));
+					photoViewer.showModal();
+				});
 				gallery.querySelectorAll('[data-gallery-button]').forEach((button) => {
 					button.addEventListener('click', () => {
 						if (!(mainImage instanceof HTMLImageElement) || !(button instanceof HTMLElement)) return;
@@ -745,6 +808,15 @@ const productSchema = {
 			const mobileMenu = document.querySelector('.mobile-menu');
 			mobileMenu?.querySelectorAll('a').forEach((link) => {
 				link.addEventListener('click', () => mobileMenu.removeAttribute('open'));
+			});
+			document.addEventListener('click', (event) => {
+				if (mobileMenu?.open && !mobileMenu.contains(event.target)) mobileMenu.open = false;
+			});
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape' && mobileMenu?.open) {
+					mobileMenu.open = false;
+					mobileMenu.querySelector('summary')?.focus();
+				}
 			});
 
 			const navigationLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
