@@ -1,0 +1,40 @@
+---
+interface Props { isHome?: boolean }
+const { isHome = false } = Astro.props;
+const homeLink = (id: string) => `${isHome ? '' : '/'}#${id}`;
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="utility-bar">
+	<div><span>Free shipping</span> anywhere in the United States</div>
+	<div>Assembled in Maryland <i aria-hidden="true"></i> Veteran owned business</div>
+</div>
+
+<header class="site-header">
+	<a class="brand" href={homeLink('top')} aria-label="Signal Ready home">
+		<img class="brand-logo" src="/images/signal-ready-logo-lime.png" alt="" width="40" height="40" />
+		<span>SIGNAL <strong>READY</strong></span>
+	</a>
+	<nav aria-label="Main navigation">
+		<a href={homeLink('shop')} data-nav-link={isHome ? true : undefined}>Shop</a>
+		<a href={homeLink('how-it-works')} data-nav-link={isHome ? true : undefined}>How it works</a>
+		<a href={homeLink('field-ready')} data-nav-link={isHome ? true : undefined}>Programming</a>
+		<a href={homeLink('faq')} data-nav-link={isHome ? true : undefined}>FAQ</a>
+		<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>About</a>
+		<a href={homeLink('policies')} data-nav-link={isHome ? true : undefined}>Policies</a>
+	</nav>
+	<details class="mobile-menu">
+		<summary>Menu</summary>
+		<nav aria-label="Mobile navigation">
+			<a href={homeLink('shop')} data-nav-link={isHome ? true : undefined}>Shop</a>
+			<a href={homeLink('how-it-works')} data-nav-link={isHome ? true : undefined}>How it works</a>
+			<a href={homeLink('field-ready')} data-nav-link={isHome ? true : undefined}>Programming</a>
+			<a href={homeLink('faq')} data-nav-link={isHome ? true : undefined}>FAQ</a>
+			<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>About</a>
+			<a href={homeLink('policies')} data-nav-link={isHome ? true : undefined}>Policies</a>
+		</nav>
+	</details>
+	<div class="cart-control" aria-label="Shopping cart">
+		<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+	</div>
+</header>

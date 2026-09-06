@@ -1,0 +1,45 @@
+---
+import type { Product } from '../data/store';
+interface Props { products: Product[] }
+const { products } = Astro.props;
+---
+
+<div class="field-toast" data-field-toast role="status" aria-live="polite" hidden></div>
+
+<dialog class="photo-viewer" id="photo-viewer" aria-labelledby="photo-viewer-title">
+	<div class="photo-viewer-inner">
+		<header class="photo-viewer-header">
+			<h2 id="photo-viewer-title">Kit photos</h2>
+			<form method="dialog"><button class="dialog-close" autofocus>Close photos</button></form>
+		</header>
+		<img class="photo-viewer-image" data-viewer-image alt="" />
+		<div class="photo-viewer-controls">
+			<button type="button" data-photo-previous aria-label="Previous photo">←</button>
+			<p data-photo-caption role="status" aria-live="polite"></p>
+			<button type="button" data-photo-next aria-label="Next photo">→</button>
+		</div>
+	</div>
+</dialog>
+
+{products.filter(product => product.paypalId).map(product => (
+	<dialog class="paypal-dialog" id={`paypal-product-dialog-${product.id}`} aria-labelledby={`paypal-dialog-title-${product.id}`} data-paypal-dialog>
+		<div class="paypal-dialog-inner">
+			<div class="paypal-dialog-header">
+				<div>
+					<p class="eyebrow">Secure PayPal checkout</p>
+					<h2 id={`paypal-dialog-title-${product.id}`}>Add your {product.name.toLowerCase()}</h2>
+					<p class="paypal-dialog-note">Choose any available options below, then use PayPal’s Add to Cart button. Free U.S. shipping is included.</p>
+				</div>
+				<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
+			</div>
+			<div class="paypal-dialog-body">
+				<div class="paypal-product-summary">
+					<img src={product.images[0].src} alt="" width="96" height="96" loading="lazy" />
+					<div><span>{product.model}</span><strong>{product.name}</strong><small>Configured before shipping · Free U.S. shipping</small></div>
+					<b>{product.price}</b>
+				</div>
+				<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
+			</div>
+		</div>
+	</dialog>
+))}

@@ -1,0 +1,212 @@
+<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
+<script is:inline>
+	// Five quick taps on the header mark unlock field protocol.
+	const easterEggTrigger = document.querySelector('.site-header .brand');
+	const fieldToast = document.querySelector('[data-field-toast]');
+	const fieldMessages = [
+		'WOLVERINES! Field protocol: check batteries, pack snacks, stay calm.',
+		'DEFCON SNACKS: civilization can wait; the cooler is operational.',
+		'End-of-world checklist complete. Somebody remembered the charging cables.',
+	];
+	let easterEggTaps = 0;
+	let easterEggMessage = 0;
+	let easterEggResetTimer;
+	let easterEggHideTimer;
+	easterEggTrigger?.addEventListener('click', () => {
+		easterEggTaps += 1;
+		window.clearTimeout(easterEggResetTimer);
+		easterEggResetTimer = window.setTimeout(() => { easterEggTaps = 0; }, 4000);
+		if (easterEggTaps < 5 || !(fieldToast instanceof HTMLElement)) return;
+		easterEggTaps = 0;
+		fieldToast.textContent = fieldMessages[easterEggMessage % fieldMessages.length];
+		easterEggMessage += 1;
+		fieldToast.hidden = false;
+		window.clearTimeout(easterEggHideTimer);
+		easterEggHideTimer = window.setTimeout(() => { fieldToast.hidden = true; }, 5200);
+	});
+
+	const alignShortcut = (instant = false) => {
+		if (window.location.hash.length < 2) return;
+		let id;
+		try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+		const target = document.getElementById(id);
+		if (!target) return;
+		if (target instanceof HTMLDetailsElement) target.open = true;
+		target.scrollIntoView({ block: 'start', behavior: instant ? 'instant' : 'auto' });
+	};
+
+	window.addEventListener('load', () => {
+		Promise.resolve(document.fonts?.ready).then(() => {
+			requestAnimationFrame(() => requestAnimationFrame(() => alignShortcut(true)));
+		});
+	}, { once: true });
+	window.addEventListener('hashchange', () => alignShortcut());
+	document.querySelectorAll('a[href^="#faq-"]').forEach((link) => {
+		link.addEventListener('click', () => {
+			if (link.getAttribute('href') === window.location.hash) alignShortcut();
+		});
+	});
+
+	const photoViewer = document.getElementById('photo-viewer');
+	const viewerImage = document.querySelector('[data-viewer-image]');
+	const viewerTitle = document.getElementById('photo-viewer-title');
+	const viewerCaption = document.querySelector('[data-photo-caption]');
+	let activePhotoButtons = [];
+	let activePhotoIndex = 0;
+	const photoLabels = ['Kit overview', 'Packed case', 'Closed case', 'Size comparison'];
+	const showViewerPhoto = (index) => {
+		if (!activePhotoButtons.length || !(viewerImage instanceof HTMLImageElement)) return;
+		activePhotoIndex = (index + activePhotoButtons.length) % activePhotoButtons.length;
+		const button = activePhotoButtons[activePhotoIndex];
+		viewerImage.src = button.dataset.src;
+		viewerImage.alt = button.dataset.alt;
+		viewerCaption.textContent = `${photoLabels[activePhotoIndex] || 'Kit photo'} · ${activePhotoIndex + 1} of ${activePhotoButtons.length}`;
+	};
+	document.querySelector('[data-photo-previous]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex - 1));
+	document.querySelector('[data-photo-next]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex + 1));
+	photoViewer?.addEventListener('keydown', (event) => {
+		if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+		event.preventDefault();
+		showViewerPhoto(activePhotoIndex + (event.key === 'ArrowRight' ? 1 : -1));
+	});
+	photoViewer?.addEventListener('click', (event) => {
+		if (event.target === photoViewer) photoViewer.close();
+	});
+
+	document.querySelectorAll('[data-gallery]').forEach((gallery) => {
+		const mainImage = gallery.querySelector('[data-main-image]');
+		gallery.querySelector('[data-enlarge-image]')?.addEventListener('click', () => {
+			if (!(photoViewer instanceof HTMLDialogElement)) return;
+			activePhotoButtons = Array.from(gallery.querySelectorAll('[data-gallery-button]'));
+			viewerTitle.textContent = gallery.dataset.productName;
+			showViewerPhoto(Math.max(0, activePhotoButtons.findIndex(button => button.getAttribute('aria-pressed') === 'true')));
+			photoViewer.showModal();
+		});
+		gallery.querySelectorAll('[data-gallery-button]').forEach((button) => {
+			button.addEventListener('click', () => {
+				if (!(mainImage instanceof HTMLImageElement) || !(button instanceof HTMLElement)) return;
+				mainImage.src = button.dataset.src || mainImage.src;
+				mainImage.alt = button.dataset.alt || mainImage.alt;
+				gallery.querySelectorAll('[data-gallery-button]').forEach((item) => {
+					item.classList.toggle('active', item === button);
+					item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+				});
+			});
+		});
+	});
+
+	const mobileMenu = document.querySelector('.mobile-menu');
+	mobileMenu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => mobileMenu.removeAttribute('open'));
+	});
+	document.addEventListener('click', (event) => {
+		if (mobileMenu?.open && !mobileMenu.contains(event.target)) mobileMenu.open = false;
+	});
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && mobileMenu?.open) {
+			mobileMenu.open = false;
+			mobileMenu.querySelector('summary')?.focus();
+		}
+	});
+
+	const navigationLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+	const navigationSections = [...new Set(navigationLinks.map((link) => link.getAttribute('href')?.slice(1)).filter(Boolean))]
+		.map((id) => document.getElementById(id))
+		.filter(Boolean)
+		.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+	let navigationFrame = 0;
+	const updateActiveNavigation = () => {
+		navigationFrame = 0;
+		let activeId = '';
+		for (const section of navigationSections) {
+			if (section.getBoundingClientRect().top <= 180) activeId = section.id;
+		}
+		navigationLinks.forEach((link) => {
+			const isActive = link.getAttribute('href') === `#${activeId}`;
+			if (isActive) link.setAttribute('aria-current', 'location');
+			else link.removeAttribute('aria-current');
+		});
+	};
+	const requestNavigationUpdate = () => {
+		if (navigationFrame) return;
+		navigationFrame = requestAnimationFrame(updateActiveNavigation);
+	};
+	window.addEventListener('scroll', requestNavigationUpdate, { passive: true });
+	window.addEventListener('resize', requestNavigationUpdate);
+	window.addEventListener('hashchange', requestNavigationUpdate);
+	updateActiveNavigation();
+
+	const visitorCounter = document.querySelector('[data-visitor-counter]');
+	const visitorCount = document.querySelector('[data-visitor-count]');
+	if (visitorCounter instanceof HTMLElement && visitorCount instanceof HTMLElement) {
+		fetch('/api/visits', {
+			method: 'POST',
+			credentials: 'same-origin',
+			headers: { Accept: 'application/json' },
+		})
+			.then((response) => {
+				if (!response.ok) throw new Error('Visitor counter unavailable');
+				return response.json();
+			})
+			.then((data) => {
+				if (!Number.isSafeInteger(data.count) || data.count < 0) return;
+				const formattedCount = new Intl.NumberFormat('en-US').format(data.count);
+				visitorCount.textContent = `${formattedCount} site ${data.count === 1 ? 'visit' : 'visits'} since Sep. 2026`;
+				visitorCounter.hidden = false;
+			})
+			.catch(() => {
+				visitorCounter.hidden = true;
+			});
+	}
+
+	const paypalDialogs = document.querySelectorAll('[data-paypal-dialog]');
+	const purchaseButtons = document.querySelectorAll('[data-open-paypal]');
+	let paypalReady = false;
+
+	try {
+		if (window.cartPaypal) {
+			window.cartPaypal.Cart({ id: 'pp-view-cart' });
+			document.querySelectorAll('paypal-add-to-cart-button[data-id]').forEach((element) => {
+				const id = element.getAttribute('data-id');
+				if (id) window.cartPaypal.AddToCart({ id });
+			});
+			paypalReady = true;
+		}
+	} catch {
+		paypalReady = false;
+	}
+
+	if (paypalReady) {
+		purchaseButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				if (!(button instanceof HTMLElement)) return;
+				const dialog = document.getElementById(button.dataset.dialogId || '');
+				if (dialog instanceof HTMLDialogElement) dialog.showModal();
+			});
+		});
+	} else {
+		const cartControl = document.querySelector('.cart-control');
+		if (cartControl) {
+			cartControl.replaceChildren();
+			const fallbackLink = document.createElement('a');
+			fallbackLink.className = 'cart-fallback';
+			fallbackLink.href = 'mailto:ansman@gmail.com?subject=Signal%20Ready%20order';
+			fallbackLink.textContent = 'Order by email';
+			cartControl.append(fallbackLink);
+		}
+		purchaseButtons.forEach((button) => {
+			button.textContent = 'Email to order';
+			button.addEventListener('click', () => {
+				if (!(button instanceof HTMLElement)) return;
+				const subject = encodeURIComponent(button.dataset.emailSubject || 'Signal Ready order');
+				window.location.href = `mailto:ansman@gmail.com?subject=${subject}`;
+			});
+		});
+	}
+
+	paypalDialogs.forEach((dialog) => {
+		dialog.addEventListener('click', (event) => {
+			if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
+		});
+	});
+</script>

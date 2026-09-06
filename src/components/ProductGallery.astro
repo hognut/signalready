@@ -1,0 +1,20 @@
+---
+import type { Product } from '../data/store';
+interface Props { product: Product; index: number }
+const { product, index } = Astro.props;
+---
+
+<div class="product-gallery" data-gallery data-product-name={product.name}>
+	<div class="product-label"><span>{String(index + 1).padStart(2, '0')}</span>{product.label}</div>
+	<button class="product-image-button" type="button" data-enlarge-image aria-label={`Enlarge ${product.name} photo`} aria-haspopup="dialog" aria-controls="photo-viewer">
+		<img class="product-main-image" src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading="eager" fetchpriority="high" decoding="async" data-main-image />
+		<span class="product-zoom-hint">View larger <span aria-hidden="true">↗</span></span>
+	</button>
+	<div class="product-thumbnails" aria-label={`${product.name} photos`}>
+		{product.images.map((image, imageIndex) => (
+			<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
+				<img src={image.src} alt="" width="72" height="72" loading="lazy" decoding="async" />
+			</button>
+		))}
+	</div>
+</div>
