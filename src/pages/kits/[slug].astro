@@ -5,7 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import ProductGallery from '../../components/ProductGallery.astro';
 import StorefrontDialogs from '../../components/StorefrontDialogs.astro';
 import StorefrontScripts from '../../components/StorefrontScripts.astro';
-import { products, programming, faqs, productStructuredData, type Product } from '../../data/store';
+import { products, programming, productStructuredData, type Product } from '../../data/store';
 
 export const prerender = true;
 export function getStaticPaths() {
@@ -15,7 +15,6 @@ interface Props { product: Product; index: number }
 const { product, index } = Astro.props;
 const title = `${product.name} — ${product.model} | Signal Ready`;
 const description = `${product.name} with ${product.model} radios, ${product.battery} batteries, a fitted hard case, charging cables, and programming. ${product.price} with free U.S. shipping.`;
-const commonQuestions = faqs.filter(faq => ['Programming', 'Customization', 'Off-grid use'].includes(faq.topic));
 const specs = [
 	['Radio model', product.model],
 	['Radios included', product.radioCount],
@@ -68,12 +67,6 @@ const breadcrumbs = {
 						<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>Buy online <span aria-hidden="true">→</span></button>
 					</div>
 					<p class="kit-checkout-note">Choose badge wording and any available options in the PayPal cart.</p>
-					<ul class="purchase-reassurance" aria-label="Ordering benefits">
-						<li>Secure PayPal checkout</li><li>Configured before shipping</li><li>Direct builder support</li>
-					</ul>
-					<ul class="product-highlights" aria-label={`${product.name} highlights`}>
-						{product.highlights.map(highlight => <li>{highlight}</li>)}
-					</ul>
 					<div class="kit-overview-links">
 						<a href="#kit-details">What's included <span aria-hidden="true">↓</span></a>
 						<a href="/#compare">Compare all kits <span aria-hidden="true">→</span></a>
@@ -81,39 +74,23 @@ const breadcrumbs = {
 				</div>
 			</article>
 
-			<section class="kit-details-grid" id="kit-details" aria-label="Included equipment and specifications">
-				<div class="kit-detail-panel">
-					<p class="eyebrow">One complete system</p><h2>In the case.</h2>
+			<div class="kit-details-grid" aria-label="Included equipment and specifications">
+				<details class="kit-detail-panel kit-disclosure" id="kit-details">
+					<summary>What's included <span aria-hidden="true">+</span></summary>
 					<ul class="check-list">{product.included.map(item => <li>{item}</li>)}</ul>
 					<p class="kit-programming-note">Pre-programmed with {programming.join(', ')}. Custom channel plans are available upon request.</p>
-				</div>
-				<div class="kit-detail-panel">
-					<p class="eyebrow">The details at a glance</p><h2>Specifications.</h2>
+				</details>
+				<details class="kit-detail-panel kit-disclosure" id="kit-specifications">
+					<summary>Specifications <span aria-hidden="true">+</span></summary>
 					<dl class="kit-specs">{specs.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-				</div>
-			</section>
+				</details>
+			</div>
 			<details class="item-description kit-description">
 				<summary>Full product description <span aria-hidden="true">+</span></summary>
 				<p>{product.fullDescription}</p>
 			</details>
 
-			<section class="kit-questions" aria-labelledby="kit-questions-title">
-				<div class="kit-section-heading"><h2 id="kit-questions-title">Before you order.</h2><a href="/#faq">Read the full FAQ <span aria-hidden="true">→</span></a></div>
-				<div class="faq-grid">
-					{commonQuestions.map((faq, questionIndex) => <details class="faq-item">
-						<summary><span class="faq-number">{String(questionIndex + 1).padStart(2, '0')}</span><span class="faq-question"><small>{faq.topic}</small><strong>{faq.question}</strong></span><span class="faq-toggle" aria-hidden="true">+</span></summary>
-						<p>{faq.answer}</p>
-					</details>)}
-				</div>
-			</section>
-			<aside class="faq-contact" aria-label="Ask about this kit">
-				<div><span>Talk to the builder</span><strong>Need a custom setup?</strong></div>
-				<a href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Question about the ${product.name}`)}`}>Ask about this kit <span aria-hidden="true">→</span></a>
-			</aside>
-			<section class="legal-note" aria-labelledby="legal-title">
-				<h2 id="legal-title">Safe, responsible use</h2>
-				<p>Users are responsible for safe, responsible, and lawful use of the radios.</p>
-			</section>
+			<p class="kit-help">Questions about range, batteries, or custom options? <a href="/#faq">Read the FAQ</a> or <a href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Question about the ${product.name}`)}`}>ask the builder</a>.</p>
 		</main>
 		<SiteFooter />
 		<StorefrontDialogs products={[product]} />

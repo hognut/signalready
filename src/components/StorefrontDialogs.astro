@@ -28,16 +28,11 @@ const { products } = Astro.props;
 				<div>
 					<p class="eyebrow">Secure PayPal checkout</p>
 					<h2 id={`paypal-dialog-title-${product.id}`}>Add your {product.name.toLowerCase()}</h2>
-					<p class="paypal-dialog-note">Choose any available options below, then use PayPal’s Add to Cart button. Free U.S. shipping is included.</p>
+					<p class="paypal-dialog-note">Choose your options, then add to cart. Shipping is free within the U.S.</p>
 				</div>
 				<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 			</div>
 			<div class="paypal-dialog-body">
-				<div class="paypal-product-summary">
-					<img src={product.images[0].src} alt="" width="96" height="96" loading="lazy" />
-					<div><span>{product.model}</span><strong>{product.name}</strong><small>Configured before shipping · Free U.S. shipping</small></div>
-					<b>{product.price}</b>
-				</div>
 				<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
 			</div>
 		</div>

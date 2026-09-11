@@ -1,0 +1,15 @@
+---
+interface Props {
+	items: { topic: string; question: string; answer: string; id?: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="question-list">
+	{items.map(faq => (
+		<details class="question-item" id={faq.id ?? `faq-${faq.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+			<summary><strong>{faq.question}</strong><span aria-hidden="true">+</span></summary>
+			<p id={faq.topic === 'Programming' ? 'field-ready' : undefined}>{faq.answer}</p>
+		</details>
+	))}
+</div>

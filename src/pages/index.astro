@@ -1,10 +1,11 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import FaqList from '../components/FaqList.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import StorefrontDialogs from '../components/StorefrontDialogs.astro';
 import StorefrontScripts from '../components/StorefrontScripts.astro';
-import { products, programming, fieldScenarios, rangeGuide, faqs, productStructuredData } from '../data/store';
+import { products, faqs, productStructuredData } from '../data/store';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const storeSchema = {
@@ -20,10 +21,32 @@ const storeSchema = {
 	slogan: 'Ready when networks fail.',
 };
 
+const primaryTopics = ['Range', 'Battery life', 'Programming', 'Customization'];
+const shortQuestions: Record<string, string> = {
+	Range: 'How far can they reach?',
+	'Battery life': 'How long do the batteries last?',
+	Programming: 'Which channels are included?',
+	Customization: 'Can I customize my kit?',
+};
+const shopQuestions = [
+	{ topic: 'Ordering', id: 'how-it-works', question: 'How does ordering work?', answer: 'Choose a kit and select any available options in the PayPal cart. We program, check, and pack your radios in Maryland, then ship your complete kit to you.' },
+	{ topic: 'Shipping & payment', id: 'policies', question: 'What about shipping and payment?', answer: 'Shipping is always free within the United States. We do not currently ship internationally. PayPal handles checkout and payment details; this website does not store your card information.' },
+];
+const primaryQuestions = [
+	...faqs.filter(faq => primaryTopics.includes(faq.topic)).map(faq => ({ ...faq, question: shortQuestions[faq.topic] })),
+	...shopQuestions,
+];
+const moreQuestions = faqs.filter(faq => !primaryTopics.includes(faq.topic));
+const cardFit: Record<string, string> = {
+	'2': 'For couples and small teams.',
+	'4': 'For families and group use.',
+	'5': 'For larger teams. Bigger case.',
+};
+
 const faqSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'FAQPage',
-	mainEntity: faqs.map(faq => ({
+	mainEntity: [...primaryQuestions, ...moreQuestions].map(faq => ({
 		'@type': 'Question',
 		name: faq.question,
 		acceptedAnswer: { '@type': 'Answer', text: faq.answer },
@@ -53,82 +76,37 @@ const productSchema = {
 	</head>
 	<body>
 		<SiteHeader isHome />
-
-		<main id="main">
+		<main class="simple-store" id="main">
 			<noscript><p class="noscript-notice">PayPal checkout requires JavaScript. <a href="mailto:ansman@gmail.com?subject=Signal%20Ready%20order">Email Signal Ready to order.</a></p></noscript>
-			<section class="hero" id="top">
-				<div class="hero-copy">
-					<p class="eyebrow">Field-ready communication systems</p>
-					<h1>Ready when<br /><em>networks fail.</em></h1>
-					<p class="lede">Professionally assembled, pre-programmed radio kits built for preparedness, travel, team coordination, and off-grid communication.</p>
-					<ul class="hero-proof" aria-label="Signal Ready system benefits">
-						<li>No subscription</li>
-						<li>No app required</li>
-						<li>No cellular network needed</li>
-					</ul>
-					<div class="hero-actions">
-						<a class="button button-primary" href="#shop">Shop kits from $125 <span aria-hidden="true">↓</span></a>
-						<div class="availability"><span aria-hidden="true"></span> Built and shipped from Maryland</div>
-					</div>
-				</div>
-				<div class="hero-visual">
-					<div class="image-frame">
-						<img src="/images/hero-field-kit-day.jpg" alt="Four handheld radios, an open protective case, and a charging cable arranged on a truck tailgate in daylight" width="1086" height="1448" fetchpriority="high" />
-					</div>
-					<div class="hero-image-label"><span>SR–04</span><strong>Field system</strong></div>
-					<div class="status-card"><span aria-hidden="true"></span> Programmed · Packed · Ready</div>
-					<div class="coordinates" aria-hidden="true">38.7218° N<br />76.6605° W</div>
-				</div>
+			<section class="shop-intro" id="top" aria-labelledby="intro-title">
+				<h1 id="intro-title">Ready when <em>networks fail.</em></h1>
+				<p>Pre-programmed radio kits for family, travel, and teams.<br class="desktop-break" /> No cell service or subscription required.</p>
 			</section>
 
-			<section class="trust-strip" aria-label="Store benefits">
-				<div><strong>01</strong><span>Pre-programmed<br />before delivery</span></div>
-				<div><strong>02</strong><span>Organized in a<br />custom foam case</span></div>
-				<div><strong>03</strong><span>Free shipping<br />across the U.S.</span></div>
-				<div><strong>04</strong><span>Veteran owned<br />business</span></div>
-			</section>
-
-			<section class="shop-section" id="shop">
-				<div class="section-heading">
-					<div>
-						<p class="eyebrow">Choose your setup</p>
-						<h2>Find your<br />field kit.</h2>
-					</div>
-					<p>Two, four, or five radios. Compare the model, battery, and case size to find the right fit for your group.</p>
+			<section class="simple-shop" id="shop" aria-labelledby="shop-title">
+				<div class="simple-section-heading">
+					<h2 id="shop-title">Choose your kit.</h2>
+					<p>Radios, batteries, case, charging cables, and programming included.</p>
 				</div>
-				<p class="shop-assurance"><strong>Complete-kit pricing.</strong> Radios, installed batteries, fitted case, charging accessories, programming, and free U.S. shipping are included.</p>
-
-				<div class="setup-selector" aria-label="Compare Signal Ready setups">
-					{products.map((product, index) => (
-						<article id={product.id} class:list={{ 'setup-option': true, 'setup-option-nextgen': Boolean(product.selectorBadge) }}>
-							<div class="setup-option-top">
-								<span>{String(index + 1).padStart(2, '0')}</span>
-								<small>{product.paypalId ? 'Ready to order' : 'Ask about availability'}</small>
+				<div class="kit-choices">
+					{products.map(product => (
+						<article class="shop-kit-card" id={product.id} aria-labelledby={`card-title-${product.id}`}>
+							<a class="shop-kit-photo" href={product.path} aria-label={`View ${product.name} photos and details`}>
+								<img src={product.images[0].src} alt={product.images[0].alt} width="1086" height="1448" loading="eager" decoding="async" />
+							</a>
+							<div class="shop-kit-copy">
+								<p class="shop-kit-model">{product.selectorBadge ? 'Next-gen Mini-5' : 'UV-5R Mini'}<span>{product.battery}</span></p>
+								<h3 id={`card-title-${product.id}`}><a href={product.path}>{product.name}</a></h3>
+								<p class="shop-kit-fit">{cardFit[product.radioCount]}</p>
+								<strong class="shop-kit-price">{product.price}</strong>
 							</div>
-							<div class="setup-option-visual">
-								<img class="setup-option-image" src={product.images[0].src} alt="" width="1086" height="1448" loading="lazy" decoding="async" />
-								<div class="setup-option-copy">
-									{product.selectorBadge && <span class="setup-option-badge">{product.selectorBadge}</span>}
-									<a class="setup-option-title" href={product.path}>{product.name}</a>
-									<p>{product.bestFor}</p>
-								</div>
+							<div class="shop-kit-actions">
+								<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>Buy online</button>
+								<a href={product.path} aria-label={`Photos and details for ${product.name}`}>Photos &amp; details</a>
 							</div>
-							<div class="setup-option-specs" aria-label={`${product.name} quick specifications`}>
-								{product.selectorStats.map(stat => <span><small>{stat.label}</small><strong>{stat.value}</strong></span>)}
-							</div>
-							<div class="setup-option-meta"><b>{product.price}</b><em>{product.selectorModel ?? product.model}</em></div>
-							{product.paypalId ? (
-								<button class="setup-buy-button" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>
-									<span>Buy online</span><b aria-hidden="true">→</b>
-								</button>
-							) : (
-								<a class="setup-buy-button" href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`}><span>Ask about availability</span><b aria-hidden="true">→</b></a>
-							)}
-							<a class="setup-detail-link" href={product.path}>View complete kit details <span aria-hidden="true">→</span></a>
 						</article>
 					))}
 				</div>
-
 				<details class="kit-comparison" id="compare">
 					<summary>
 						<span><small>Models · batteries · case sizes</small><strong>Compare every kit</strong></span>
@@ -163,160 +141,22 @@ const productSchema = {
 					</div>
 				</details>
 
-				<aside class="selection-help" aria-label="Help choosing a radio kit">
-					<h3>Not sure which kit fits?</h3>
-					<p><strong>Choose 2</strong> for a vehicle or pair, <strong>4</strong> for a family or small team, and <strong>5</strong> when you need the next-generation radios for a larger group.</p>
-					<a href="mailto:ansman@gmail.com?subject=Help%20choosing%20a%20Signal%20Ready%20kit">Ask the builder <span aria-hidden="true">→</span></a>
-				</aside>
-
 			</section>
 
-			<section class="process-section" id="how-it-works" aria-labelledby="process-title">
-				<div class="section-heading">
-					<div><p class="eyebrow">From the bench to your door</p><h2 id="process-title">Ready in<br />three steps.</h2></div>
-					<p>Choose your kit and any available options in the cart. We take care of programming, packing, and free U.S. shipping.</p>
+			<section class="simple-faq" id="faq" aria-labelledby="faq-title">
+				<div class="simple-section-heading">
+					<h2 id="faq-title">FAQ</h2>
+					<p>A few answers before you order.</p>
 				</div>
-				<ol class="process-grid">
-					<li><span>01</span><h3>Choose your system</h3><p>Select a complete two-, four-, or five-radio kit for your household, vehicle, or team.</p></li>
-					<li><span>02</span><h3>We configure it</h3><p>Your complete radio kit is programmed, checked, organized, and packed in Maryland.</p></li>
-					<li><span>03</span><h3>It ships free</h3><p>Your order ships free anywhere in the United States, with direct support from the builder.</p></li>
-				</ol>
-			</section>
-
-			<section class="brand-banner" aria-label="Signal Ready brand promise">
-				<div class="brand-banner-index" aria-hidden="true">SR<span>01</span></div>
-				<div class="brand-banner-copy">
-					<p class="eyebrow">Veteran owned · Built in Maryland</p>
-					<h2>Purpose-built.<br /><em>Field ready.</em></h2>
-				</div>
-				<div class="brand-banner-notes">
-					<span>Programmed before delivery</span>
-					<span>Free shipping across the U.S.</span>
-					<span>Direct support from the builder</span>
-				</div>
-			</section>
-
-			<section class="field-ready" id="field-ready">
-				<div class="field-ready-copy">
-					<p class="eyebrow">Configured before it ships</p>
-					<h2>No setup.<br /><em>No guesswork.</em></h2>
-					<p>Radio kits arrive organized and pre-programmed with a practical field configuration. Additional custom channel configurations are available upon request.</p>
-					<a class="text-link" href="mailto:ansman@gmail.com?subject=Signal%20Ready%20custom%20configuration">Ask about a custom configuration <span aria-hidden="true">→</span></a>
-				</div>
-				<div class="channel-panel">
-					<div class="panel-head"><span>Standard channel groups</span><span>SR–01</span></div>
-					<ol>
-						{programming.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}<i aria-hidden="true"></i></li>)}
-					</ol>
-					<p>Programming is organized for quick reference and straightforward field use.</p>
-				</div>
-			</section>
-
-			<section class="about-section" id="about">
-				<div class="about-number" aria-hidden="true">SR</div>
-				<div class="about-copy">
-					<p class="eyebrow">Why Signal Ready</p>
-					<h2>Communication should still work when everything else doesn’t.</h2>
-					<div class="about-columns">
-						<p>Signal Ready builds portable radio systems for people who value reliability, simplicity, and fast deployment.</p>
-						<p>Whether you are preparing a family emergency kit, outfitting a vehicle recovery team, coordinating an event, or traveling off-grid, every kit is assembled to be practical, durable, and easy to use.</p>
-					</div>
-				</div>
-			</section>
-
-			<section class="use-cases" aria-labelledby="use-cases-title">
-				<div class="section-heading compact">
-					<div><p class="eyebrow">Made to move</p><h2 id="use-cases-title">One system.<br />Plenty of missions.</h2></div>
-				</div>
-				<div class="use-grid">
-					<span>Emergency preparedness</span><span>Camping & overlanding</span><span>Vehicle recovery</span><span>Event coordination</span><span>Family communication</span><span>Travel & off-grid use</span>
-				</div>
-				<div class="scenario-grid" aria-label="Signal Ready kits in everyday field settings">
-					{fieldScenarios.map((scenario, index) => (
-						<article class="scenario-card">
-							<div class="scenario-image">
-								<img src={scenario.image} alt={scenario.alt} width="1536" height="1024" loading="lazy" decoding="async" />
-								<span>{String(index + 1).padStart(2, '0')}</span>
-							</div>
-							<div class="scenario-copy"><small>{scenario.kit}</small><h3>{scenario.title}</h3><p>{scenario.copy}</p><a class="scenario-link" href={products.find(product => product.id === scenario.productId)?.path ?? '/#shop'}>Explore the {scenario.kit.toLowerCase()} <span aria-hidden="true">→</span></a></div>
-						</article>
-					))}
-				</div>
-				<p class="scenario-disclosure">Field scenes are illustrative. Product configurations and included equipment are shown in the kit details above.</p>
-				<aside class="business-proof" aria-label="About the Signal Ready business">
-					<div><span>Built by a real person</span><h3>Small shop. Straight answers.</h3><p>Every kit is assembled, programmed, checked, and packed in Dunkirk, Maryland—not dropped into a box by an anonymous marketplace seller.</p></div>
-					<ul>
-						<li>Veteran owned</li>
-						<li>Direct access to the builder</li>
-						<li>Secure PayPal checkout</li>
-					</ul>
-					<a href="mailto:ansman@gmail.com?subject=Question%20for%20Signal%20Ready">Ask the builder <span aria-hidden="true">→</span></a>
-				</aside>
-			</section>
-
-			<section class="faq-section" id="faq" aria-labelledby="faq-title">
-				<div class="section-heading">
-					<div><p class="eyebrow">Your questions, answered</p><h2 id="faq-title">FAQ</h2></div>
-					<p>Practical guidance about range, batteries, compatibility, programming, and everyday operation before you head into the field.</p>
-				</div>
-				<nav class="faq-shortcuts" aria-label="Common questions">
-					<a href="#faq-range">Range</a>
-					<a href="#faq-battery-life">Battery life</a>
-					<a href="#faq-programming">Channels</a>
-					<a href="#faq-charging">Charging</a>
-					<a href="#faq-customization">Custom orders</a>
-				</nav>
-				<div class="range-guide" aria-label="Approximate handheld-to-handheld range guide">
-					{rangeGuide.map(item => (
-						<article class:list={{ 'range-card': true, 'range-card-best': item.best }}>
-							<span>{item.label}</span>
-							<strong>{item.value}</strong>
-							<p>{item.note}</p>
-						</article>
-					))}
-				</div>
-				<p class="range-disclaimer">Approximate direct-radio ranges, not guarantees. Antenna height, terrain, buildings, foliage, interference, power, and weather all affect results.</p>
-				<div class="faq-grid">
-					{faqs.map((faq, index) => (
-						<details class="faq-item" id={`faq-${faq.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} open={index === 0}>
-							<summary>
-								<span class="faq-number">{String(index + 1).padStart(2, '0')}</span>
-								<span class="faq-question"><small>{faq.topic}</small><strong>{faq.question}</strong></span>
-								<span class="faq-toggle" aria-hidden="true">+</span>
-							</summary>
-							<p>{faq.answer}</p>
-						</details>
-					))}
-				</div>
-				<aside class="faq-contact" aria-label="Contact Signal Ready">
-					<div><span>Still deciding?</span><strong>Get an answer from the person who builds the kits.</strong></div>
-					<a href="mailto:ansman@gmail.com?subject=Signal%20Ready%20product%20question">Ask a question <span aria-hidden="true">→</span></a>
-				</aside>
-				<p class="faq-sources">Product information last reviewed August 2026. Manufacturer specifications can change; confirm the battery and equipment details supplied with your kit.</p>
-			</section>
-
-			<section class="policy-section" id="policies">
-				<div class="section-heading compact">
-					<div><p class="eyebrow">Straightforward policies</p><h2>Know before<br />you order.</h2></div>
-				</div>
-				<div class="policy-grid">
-					<div><span>Shipping</span><h3>Free. Every day.</h3><p>All orders ship free to addresses within the United States. International shipping is not currently available.</p></div>
-					<div><span>Ownership</span><h3>Veteran owned business.</h3><p>Signal Ready is proudly veteran owned and focused on practical, dependable communication systems.</p></div>
-					<div><span>Support</span><h3>Talk to the builder.</h3><p>Questions about a system, custom badge, or channel configuration? Email <a href="mailto:ansman@gmail.com">ansman@gmail.com</a>.</p></div>
-					<div><span>Payment</span><h3>Checkout by PayPal.</h3><p>Payments and payment details are handled securely by PayPal. This storefront does not store your payment card information.</p></div>
-				</div>
-			</section>
-
-			<section class="legal-note" aria-labelledby="legal-title">
-				<h2 id="legal-title">Safe, responsible use</h2>
-				<p>Users are responsible for safe, responsible, and lawful use of the radios.</p>
+				<FaqList items={primaryQuestions} />
+				<details class="more-questions" id="more-questions">
+					<summary>More radio questions <span aria-hidden="true">+</span></summary>
+					<FaqList items={moreQuestions} />
+				</details>
 			</section>
 		</main>
-
 		<SiteFooter isHome />
-
 		<StorefrontDialogs products={products} />
-
 		<StorefrontScripts />
 	</body>
 </html>

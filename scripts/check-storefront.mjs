@@ -73,4 +73,9 @@ for (const kit of kits) {
   assert(pages.get('/').includes(`href="${path}"`), 'Link product pages from homepage');
 }
 assert.equal(attr(meta(pages.get('/'), 'og:image'), 'content'), `${origin}/og-v2.png`, 'Preserve home sharing artwork');
+for (const shortcut of ['how-it-works', 'field-ready', 'about', 'policies', 'compare', 'faq', 'faq-charging', 'faq-battery-life']) {
+  assert(ids(pages.get('/')).includes(shortcut), `Preserve existing shortcut #${shortcut}`);
+}
+assert.equal(tags(pages.get('/'), 'article').filter(tag => attr(tag, 'class') === 'shop-kit-card').length, 3);
+assert(!tags(pages.get('/'), 'details').some(tag => /\sopen(?:[\s=>])/.test(tag)), 'Homepage details start closed');
 console.log('All 4 pages passed: routes, shortcuts, checkout targets, galleries, metadata, schemas, and script syntax.');

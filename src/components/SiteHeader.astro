@@ -17,23 +17,9 @@ const homeLink = (id: string) => `${isHome ? '' : '/'}#${id}`;
 	</a>
 	<nav aria-label="Main navigation">
 		<a href={homeLink('shop')} data-nav-link={isHome ? true : undefined}>Shop</a>
-		<a href={homeLink('how-it-works')} data-nav-link={isHome ? true : undefined}>How it works</a>
-		<a href={homeLink('field-ready')} data-nav-link={isHome ? true : undefined}>Programming</a>
 		<a href={homeLink('faq')} data-nav-link={isHome ? true : undefined}>FAQ</a>
-		<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>About</a>
-		<a href={homeLink('policies')} data-nav-link={isHome ? true : undefined}>Policies</a>
+		<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>Contact</a>
 	</nav>
-	<details class="mobile-menu">
-		<summary>Menu</summary>
-		<nav aria-label="Mobile navigation">
-			<a href={homeLink('shop')} data-nav-link={isHome ? true : undefined}>Shop</a>
-			<a href={homeLink('how-it-works')} data-nav-link={isHome ? true : undefined}>How it works</a>
-			<a href={homeLink('field-ready')} data-nav-link={isHome ? true : undefined}>Programming</a>
-			<a href={homeLink('faq')} data-nav-link={isHome ? true : undefined}>FAQ</a>
-			<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>About</a>
-			<a href={homeLink('policies')} data-nav-link={isHome ? true : undefined}>Policies</a>
-		</nav>
-	</details>
 	<div class="cart-control" aria-label="Shopping cart">
 		<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
 	</div>
