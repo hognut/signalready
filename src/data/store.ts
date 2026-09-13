@@ -138,7 +138,15 @@ The radios arrive organized and programmed for immediate setup and use. Actual r
 			'Free shipping within the United States',
 		],
 	},
-].map(product => ({ ...product, slug: `${product.radioCount}-radio-kit`, path: `/kits/${product.radioCount}-radio-kit/` }));
+].map(product => ({
+	...product,
+	slug: `${product.radioCount}-radio-kit`,
+	path: `/kits/${product.radioCount}-radio-kit/`,
+	images: product.images.map((image, index) => ({
+		...image,
+		label: ['Full kit', 'Packed', 'Closed', 'Case size'][index],
+	})),
+}));
 
 export type Product = (typeof products)[number];
 
@@ -225,8 +233,8 @@ export const faqs = [
 	},
 	{
 		topic: 'Charging',
-		question: 'How is the 5-radio kit charged?',
-		answer: 'The kit includes five standard USB-A to USB-C charging cables—one for each Mini-5 radio. The individual cables make it easier to charge from compatible wall adapters, vehicle USB ports, power stations, or other USB-A power sources without relying on one proprietary multi-head splitter.',
+		question: 'Which charging cables come with each kit?',
+		answer: 'The 2-radio kit includes a 1-to-2 USB-C charging splitter. The 4-radio kit includes a 1-to-4 USB-C charging splitter. The 5-radio kit includes five separate USB-A to USB-C cables—one for each Mini-5. Use a compatible USB power source, such as a wall adapter, vehicle USB port, or power bank.',
 	},
 	{
 		topic: 'Off-grid use',

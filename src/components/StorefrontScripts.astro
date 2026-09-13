@@ -58,14 +58,13 @@
 	const viewerCaption = document.querySelector('[data-photo-caption]');
 	let activePhotoButtons = [];
 	let activePhotoIndex = 0;
-	const photoLabels = ['Kit overview', 'Packed case', 'Closed case', 'Size comparison'];
 	const showViewerPhoto = (index) => {
 		if (!activePhotoButtons.length || !(viewerImage instanceof HTMLImageElement)) return;
 		activePhotoIndex = (index + activePhotoButtons.length) % activePhotoButtons.length;
 		const button = activePhotoButtons[activePhotoIndex];
 		viewerImage.src = button.dataset.src;
 		viewerImage.alt = button.dataset.alt;
-		viewerCaption.textContent = `${photoLabels[activePhotoIndex] || 'Kit photo'} · ${activePhotoIndex + 1} of ${activePhotoButtons.length}`;
+		viewerCaption.textContent = `${button.dataset.photoLabel || 'Kit photo'} · ${activePhotoIndex + 1} of ${activePhotoButtons.length}`;
 	};
 	document.querySelector('[data-photo-previous]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex - 1));
 	document.querySelector('[data-photo-next]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex + 1));

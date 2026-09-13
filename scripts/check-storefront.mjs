@@ -47,6 +47,13 @@ for (const [route, html] of pages) {
   }
   for (const tag of tags(html, 'button').filter(tag => tag.includes('data-open-paypal'))) {
     assert(pageIds.includes(attr(tag, 'data-dialog-id')), `${route}: missing purchase dialog`);
+    assert.equal(attr(tag, 'aria-haspopup'), 'dialog', `${route}: announce purchase dialog`);
+    assert.equal(attr(tag, 'aria-controls'), attr(tag, 'data-dialog-id'), `${route}: purchase control must identify its dialog`);
+  }
+  for (const tag of tags(html, 'td')) {
+    const headers = attr(tag, 'headers');
+    assert(headers, `${route}: comparison cells need explicit headers`);
+    for (const header of headers.split(' ')) assert(pageIds.includes(header), `${route}: missing table header ${header}`);
   }
   for (const script of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
     if (script[1].includes('application/ld+json')) JSON.parse(script[2]);
@@ -69,6 +76,8 @@ for (const kit of kits) {
   assert.equal(schema.offers.price, kit.price);
   assert.equal(schema.offers.url, `${origin}${path}`);
   assert.equal(tags(html, 'button').filter(tag => tag.includes('data-gallery-button')).length, kit.count === 5 ? 4 : 3);
+  const photoLabels = tags(html, 'button').filter(tag => tag.includes('data-gallery-button')).map(tag => attr(tag, 'data-photo-label'));
+  assert.deepEqual(photoLabels, ['Full kit', 'Packed', 'Closed', ...(kit.count === 5 ? ['Case size'] : [])]);
   assert(pages.get('/').includes(`id="${kit.id}"`), 'Preserve existing product shortcuts');
   assert(pages.get('/').includes(`href="${path}"`), 'Link product pages from homepage');
 }

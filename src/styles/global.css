@@ -648,6 +648,30 @@ footer { padding: 100px 0 34px; }
 	.simple-footer .footer-main > p { text-align: left; }
 }
 
+/* Readable comparisons and labeled photos, without extra page sections. */
+.kit-comparison table { min-width: 0; }
+.kit-comparison thead th:first-child { width: 180px; font-size: .875rem; letter-spacing: 0; text-transform: none; }
+.kit-comparison tbody th { font-size: .875rem; letter-spacing: 0; text-transform: none; line-height: 1.45; }
+.kit-comparison td small { font-size: .75rem; letter-spacing: 0; text-transform: none; }
+.comparison-buy { justify-content: center; min-height: 44px; font-size: .875rem; letter-spacing: 0; }
+.product-thumbnails { flex-wrap: nowrap; gap: 8px; padding: 12px; }
+.product-thumbnails button { display: grid; grid-template-rows: 54px auto; gap: 6px; flex: 1 1 0; width: auto; max-width: 88px; min-width: 0; height: auto; padding: 5px; }
+.product-thumbnails img { height: 54px; }
+.product-thumbnails button > span { padding-bottom: 2px; color: var(--ink); font-size: .75rem; line-height: 1.3; }
+.product-thumbnails button.active > span { color: var(--signal); }
+@media (max-width: 760px) {
+	.kit-comparison table, .kit-comparison thead, .kit-comparison tbody { display: block; width: 100%; }
+	.kit-comparison tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.kit-comparison .comparison-label-column { display: none; }
+	.kit-comparison thead th { padding: 16px 8px; }
+	.kit-comparison thead a { font-size: 1.375rem; line-height: 1.15; }
+	.kit-comparison tbody th { grid-column: 1 / -1; padding: 9px 12px; border: 0; border-top: 1px solid var(--line); background: rgba(250,248,239,.04); color: var(--muted); }
+	.kit-comparison tbody td { min-width: 0; padding: 14px 8px; border-bottom: 0; font-size: .875rem; line-height: 1.45; overflow-wrap: anywhere; }
+	.kit-comparison .comparison-price td { font-size: 1.875rem !important; line-height: 1.1 !important; }
+	.kit-comparison .comparison-actions td { padding: 12px 8px; }
+	.comparison-buy { padding: 10px 6px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 	*, *::before, *::after { transition: none !important; animation: none !important; }

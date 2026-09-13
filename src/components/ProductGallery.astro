@@ -12,8 +12,9 @@ const { product, index } = Astro.props;
 	</button>
 	<div class="product-thumbnails" aria-label={`${product.name} photos`}>
 		{product.images.map((image, imageIndex) => (
-			<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} aria-label={`Show ${product.name} photo ${imageIndex + 1}`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
+			<button type="button" class:list={{ active: imageIndex === 0 }} data-gallery-button data-src={image.src} data-alt={image.alt} data-photo-label={image.label} aria-label={`Show ${product.name} ${image.label.toLowerCase()} photo`} aria-pressed={imageIndex === 0 ? 'true' : 'false'}>
 				<img src={image.src} alt="" width="72" height="72" loading="lazy" decoding="async" />
+				<span>{image.label}</span>
 			</button>
 		))}
 	</div>

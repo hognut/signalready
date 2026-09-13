@@ -64,7 +64,7 @@ const breadcrumbs = {
 					<p class="product-fit"><span>Best for</span>{product.bestFor}</p>
 					<div class="product-purchase">
 						<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
-						<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`}>Buy online <span aria-hidden="true">→</span></button>
+						<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`} aria-haspopup="dialog" aria-controls={`paypal-product-dialog-${product.id}`}>Buy online <span aria-hidden="true">→</span></button>
 					</div>
 					<p class="kit-checkout-note">Choose badge wording and any available options in the PayPal cart.</p>
 					<div class="kit-overview-links">
