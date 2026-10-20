@@ -672,6 +672,36 @@ footer { padding: 100px 0 34px; }
 	.comparison-buy { padding: 10px 6px; }
 }
 
+/* Keep buying essentials visible before the gallery on small screens. */
+.kit-overview.product-card { grid-template-areas: 'photos purchase' 'photos details'; grid-template-rows: auto 1fr; }
+.kit-overview .product-gallery { grid-area: photos; }
+.kit-purchase-summary { grid-area: purchase; padding: clamp(26px, 3.2vw, 44px) clamp(26px, 3.2vw, 44px) 24px; }
+.kit-overview .product-info { grid-area: details; justify-content: flex-start; padding-top: 0; }
+.kit-overview .product-purchase { margin-top: 0; padding-top: 0; border-top: 0; }
+.kit-overview .button-buy { justify-content: center; gap: 12px; white-space: nowrap; }
+.kit-checkout-note { max-width: 38ch; }
+.cart-loading { align-self: center; min-width: 96px; color: var(--muted); font-size: .75rem; text-align: center; }
+.cart-control [hidden], .checkout-status[hidden], .checkout-status [hidden] { display: none !important; }
+.checkout-status { padding: 22px; border: 1px solid #c8ccbf; border-radius: 3px; background: #fff; color: #303a31; font-size: 1rem; line-height: 1.5; }
+.checkout-status p { margin: 0; }
+.checkout-status a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; color: #303a31; font-weight: 700; text-underline-offset: 4px; }
+.checkout-status a:focus-visible { outline-color: #303a31; }
+@media (max-width: 980px) {
+	.kit-purchase-summary { padding: 26px 26px 24px; }
+}
+@media (max-width: 760px) {
+	.kit-overview.product-card { grid-template-areas: 'purchase' 'photos' 'details'; grid-template-rows: auto; }
+	.kit-purchase-summary { padding: 22px 20px; }
+	.kit-overview .product-info { padding: 24px 20px; }
+	.kit-page h1 { margin-bottom: 20px; font-size: clamp(2.25rem, 8vw, 3rem); }
+	.kit-overview .product-purchase { grid-template-columns: auto minmax(0, 1fr); gap: 18px; }
+	.kit-overview .product-price { font-size: 2.75rem; }
+	.kit-overview .product-price span { font-family: 'Atkinson', sans-serif; font-size: .6875rem; letter-spacing: 0; }
+	.kit-overview .button-buy { min-height: 48px; padding: 12px; }
+	.kit-overview .button-buy > span { display: none; }
+	.kit-overview .product-gallery { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+}
+
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 	*, *::before, *::after { transition: none !important; animation: none !important; }

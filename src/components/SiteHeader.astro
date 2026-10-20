@@ -21,6 +21,8 @@ const homeLink = (id: string) => `${isHome ? '' : '/'}#${id}`;
 		<a href={homeLink('about')} data-nav-link={isHome ? true : undefined}>Contact</a>
 	</nav>
 	<div class="cart-control" aria-label="Shopping cart">
-		<paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+		<span class="cart-loading" data-cart-loading role="status">Loading cart…</span>
+		<a class="cart-fallback" data-cart-fallback href="mailto:ansman@gmail.com?subject=Signal%20Ready%20order" hidden>Order by email</a>
+		<paypal-cart-button data-id="pp-view-cart" hidden></paypal-cart-button>
 	</div>
 </header>

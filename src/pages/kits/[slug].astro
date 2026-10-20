@@ -56,17 +56,19 @@ const breadcrumbs = {
 			</nav>
 
 			<article class="kit-overview product-card" id={product.id} aria-labelledby="kit-title">
-				<ProductGallery product={product} index={index} />
-				<div class="product-info">
+				<header class="kit-purchase-summary">
 					<p class="product-model">{product.model} · {product.label}</p>
 					<h1 id="kit-title">{product.name}</h1>
-					<p class="product-description">{product.description}</p>
-					<p class="product-fit"><span>Best for</span>{product.bestFor}</p>
 					<div class="product-purchase">
 						<div class="product-price">{product.price}<span>Free U.S. shipping</span></div>
 						<button class="button-buy" type="button" data-open-paypal data-dialog-id={`paypal-product-dialog-${product.id}`} data-email-subject={`Signal Ready — ${product.name}`} aria-label={`Buy ${product.name} online`} aria-haspopup="dialog" aria-controls={`paypal-product-dialog-${product.id}`}>Buy online <span aria-hidden="true">→</span></button>
 					</div>
 					<p class="kit-checkout-note">Choose badge wording and any available options in the PayPal cart.</p>
+				</header>
+				<ProductGallery product={product} index={index} />
+				<div class="product-info">
+					<p class="product-description">{product.description}</p>
+					<p class="product-fit"><span>Best for</span>{product.bestFor}</p>
 					<div class="kit-overview-links">
 						<a href="#kit-details">What's included <span aria-hidden="true">↓</span></a>
 						<a href="/#compare">Compare all kits <span aria-hidden="true">→</span></a>

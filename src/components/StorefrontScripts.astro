@@ -1,4 +1,4 @@
-<script is:inline src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
+<script is:inline defer id="paypal-cart-sdk" src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="Z3JCP68TFDYL8"></script>
 <script is:inline>
 	// Five quick taps on the header mark unlock field protocol.
 	const easterEggTrigger = document.querySelector('.site-header .brand');
@@ -40,11 +40,10 @@
 		target.scrollIntoView({ block: 'start', behavior: instant ? 'instant' : 'auto' });
 	};
 
-	window.addEventListener('load', () => {
-		Promise.resolve(document.fonts?.ready).then(() => {
-			requestAnimationFrame(() => requestAnimationFrame(() => alignShortcut(true)));
-		});
-	}, { once: true });
+	// Shortcuts and browsing must not wait for a third-party checkout download.
+	Promise.resolve(document.fonts?.ready).then(() => {
+		requestAnimationFrame(() => requestAnimationFrame(() => alignShortcut(true)));
+	});
 	window.addEventListener('hashchange', () => alignShortcut());
 	document.querySelectorAll('a[href^="#"]').forEach((link) => {
 		link.addEventListener('click', () => {
@@ -65,6 +64,7 @@
 		viewerImage.src = button.dataset.src;
 		viewerImage.alt = button.dataset.alt;
 		viewerCaption.textContent = `${button.dataset.photoLabel || 'Kit photo'} · ${activePhotoIndex + 1} of ${activePhotoButtons.length}`;
+		button.click();
 	};
 	document.querySelector('[data-photo-previous]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex - 1));
 	document.querySelector('[data-photo-next]')?.addEventListener('click', () => showViewerPhoto(activePhotoIndex + 1));
@@ -149,54 +149,85 @@
 			});
 	}
 
-	const paypalDialogs = document.querySelectorAll('[data-paypal-dialog]');
-	const purchaseButtons = document.querySelectorAll('[data-open-paypal]');
-	let paypalReady = false;
+	// Checkout controls respond immediately, including while PayPal is loading.
+	const paypalDialogs = Array.from(document.querySelectorAll('[data-paypal-dialog]'));
+	const cartWidget = document.querySelector('paypal-cart-button');
+	const cartLoading = document.querySelector('[data-cart-loading]');
+	const cartFallback = document.querySelector('[data-cart-fallback]');
+	const sdk = document.getElementById('paypal-cart-sdk');
+	let paypalStarted = false;
+	let cartReady = false;
+	const readyDialogs = new Set();
+	const failedDialogs = new Set();
+	const checkoutUnavailable = 'PayPal couldn’t load. Please refresh this page or email us for help.';
 
-	try {
-		if (window.cartPaypal) {
-			window.cartPaypal.Cart({ id: 'pp-view-cart' });
-			document.querySelectorAll('paypal-add-to-cart-button[data-id]').forEach((element) => {
-				const id = element.getAttribute('data-id');
-				if (id) window.cartPaypal.AddToCart({ id });
-			});
-			paypalReady = true;
-		}
-	} catch {
-		paypalReady = false;
-	}
+	const showCheckoutHelp = (dialog, message) => {
+		if (readyDialogs.has(dialog) || failedDialogs.has(dialog)) return;
+		if (message === checkoutUnavailable) failedDialogs.add(dialog);
+		dialog.querySelector('[data-paypal-message]').textContent = message;
+		dialog.querySelector('[data-paypal-help]').hidden = false;
+		dialog.querySelector('paypal-add-to-cart-button').setAttribute('aria-busy', 'false');
+	};
+	const showCartHelp = () => {
+		if (cartReady) return;
+		cartLoading.hidden = true;
+		cartFallback.hidden = false;
+	};
+	const showAllCheckoutHelp = (message) => {
+		paypalDialogs.forEach(dialog => showCheckoutHelp(dialog, message));
+		showCartHelp();
+	};
+	const checkoutTimer = window.setTimeout(() => {
+		showAllCheckoutHelp('PayPal is taking longer than usual. You can keep waiting or email us for help.');
+	}, 12000);
+	const finishLoading = () => {
+		if (cartReady && readyDialogs.size === paypalDialogs.length) window.clearTimeout(checkoutTimer);
+	};
 
-	if (paypalReady) {
-		purchaseButtons.forEach((button) => {
-			button.addEventListener('click', () => {
-				if (!(button instanceof HTMLElement)) return;
-				const dialog = document.getElementById(button.dataset.dialogId || '');
-				if (dialog instanceof HTMLDialogElement) dialog.showModal();
-			});
+	document.querySelectorAll('[data-open-paypal]').forEach(button => {
+		button.addEventListener('click', () => {
+			const dialog = document.getElementById(button.dataset.dialogId || '');
+			if (dialog instanceof HTMLDialogElement) dialog.showModal();
 		});
-	} else {
-		const cartControl = document.querySelector('.cart-control');
-		if (cartControl) {
-			cartControl.replaceChildren();
-			const fallbackLink = document.createElement('a');
-			fallbackLink.className = 'cart-fallback';
-			fallbackLink.href = 'mailto:ansman@gmail.com?subject=Signal%20Ready%20order';
-			fallbackLink.textContent = 'Order by email';
-			cartControl.append(fallbackLink);
-		}
-		purchaseButtons.forEach((button) => {
-			button.textContent = 'Email to order';
-			button.addEventListener('click', () => {
-				if (!(button instanceof HTMLElement)) return;
-				const subject = encodeURIComponent(button.dataset.emailSubject || 'Signal Ready order');
-				window.location.href = `mailto:ansman@gmail.com?subject=${subject}`;
-			});
-		});
-	}
-
-	paypalDialogs.forEach((dialog) => {
+	});
+	paypalDialogs.forEach(dialog => {
 		dialog.addEventListener('click', (event) => {
 			if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
 		});
 	});
+
+	const initializePayPal = () => {
+		if (paypalStarted) return;
+		paypalStarted = true;
+		if (!window.cartPaypal) {
+			window.clearTimeout(checkoutTimer);
+			showAllCheckoutHelp(checkoutUnavailable);
+			return;
+		}
+		Promise.resolve().then(() => window.cartPaypal.Cart({ id: 'pp-view-cart' })).then(() => {
+			// The SDK can resolve even after a network error; confirm it rendered a control.
+			if (!cartWidget.querySelector('button')) throw new Error('Cart did not render');
+			cartReady = true;
+			cartWidget.hidden = false;
+			cartLoading.hidden = true;
+			cartFallback.hidden = true;
+			finishLoading();
+		}).catch(showCartHelp);
+		paypalDialogs.forEach(dialog => {
+			const widget = dialog.querySelector('paypal-add-to-cart-button');
+			Promise.resolve().then(() => window.cartPaypal.AddToCart({ id: widget.getAttribute('data-id') })).then(() => {
+				if (!widget.querySelector('button')) throw new Error('Checkout did not render');
+				readyDialogs.add(dialog);
+				widget.setAttribute('aria-busy', 'false');
+				dialog.querySelector('[data-paypal-status]').hidden = true;
+				finishLoading();
+			}).catch(() => showCheckoutHelp(dialog, checkoutUnavailable));
+		});
+	};
+	sdk?.addEventListener('load', initializePayPal, { once: true });
+	sdk?.addEventListener('error', () => {
+		window.clearTimeout(checkoutTimer);
+		showAllCheckoutHelp(checkoutUnavailable);
+	}, { once: true });
+	if (window.cartPaypal) initializePayPal();
 </script>

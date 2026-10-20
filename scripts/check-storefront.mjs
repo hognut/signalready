@@ -23,7 +23,9 @@ for (const [route, html] of pages) {
   const pageIds = ids(html);
   assert.equal(pageIds.length, new Set(pageIds).size, `${route}: IDs must be unique`);
   assert.equal(attr(tags(html, 'link').find(tag => attr(tag, 'rel') === 'canonical'), 'href'), `${origin}${route}`);
-  assert.equal(tags(html, 'script').filter(tag => attr(tag, 'src') === 'https://www.paypalobjects.com/ncp/cart/cart.js').length, 1);
+  const paypalScripts = tags(html, 'script').filter(tag => attr(tag, 'src') === 'https://www.paypalobjects.com/ncp/cart/cart.js');
+  assert.equal(paypalScripts.length, 1);
+  assert(/\sdefer(?:[\s=>])/.test(paypalScripts[0]), `${route}: PayPal must not block browsing`);
   assert.equal(tags(html, 'paypal-cart-button').length, 1, `${route}: one shared cart`);
   assert(!/printed channel guide|30.day return|case.only product|\bSteven\b/i.test(html));
 
@@ -66,6 +68,7 @@ for (const kit of kits) {
   const html = pages.get(path);
   const name = `${kit.count}-Radio Field Kit`;
   assert(html.includes(`<h1 id="kit-title">${name}</h1>`));
+  assert(html.indexOf('class="kit-purchase-summary"') < html.indexOf('data-gallery'), `${path}: buying essentials precede photos on mobile`);
   assert.equal(tags(html, 'paypal-add-to-cart-button').length, 1);
   assert.equal(attr(tags(html, 'paypal-add-to-cart-button')[0], 'data-id'), kit.paypal);
   assert.equal(attr(meta(html, 'og:image'), 'content'), `${origin}/images/${kit.image}`);

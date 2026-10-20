@@ -33,7 +33,11 @@ const { products } = Astro.props;
 				<form method="dialog"><button class="dialog-close" type="submit" aria-label={`Close ${product.name} checkout`}>Close</button></form>
 			</div>
 			<div class="paypal-dialog-body">
-				<paypal-add-to-cart-button data-id={product.paypalId}></paypal-add-to-cart-button>
+				<div class="checkout-status" data-paypal-status role="status">
+					<p data-paypal-message>Loading secure PayPal checkout…</p>
+					<a data-paypal-help href={`mailto:ansman@gmail.com?subject=${encodeURIComponent(`Signal Ready — ${product.name}`)}`} hidden>Email us about this kit</a>
+				</div>
+				<paypal-add-to-cart-button data-id={product.paypalId} aria-busy="true"></paypal-add-to-cart-button>
 			</div>
 		</div>
 	</dialog>
