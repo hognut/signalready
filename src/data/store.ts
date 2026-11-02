@@ -51,7 +51,7 @@ This grab-and-go setup is a strong fit for couples, vehicles, camping, overlandi
 		radioCount: '4',
 		battery: '1,600mAh',
 		caseSize: '9¼ × 7½ × 4⅜ in.',
-		charging: '1-to-4 USB-C splitter',
+		charging: '4 USB-C charging cables',
 		label: 'Complete system',
 		bestFor: 'Families, teams, and preparedness kits',
 		selectorStats: [
@@ -59,15 +59,15 @@ This grab-and-go setup is a strong fit for couples, vehicles, camping, overlandi
 			{ label: 'Battery', value: '1,600mAh' },
 			{ label: 'Case length', value: '9¼ in.' },
 		],
-		description: 'A complete four-radio team system with UV-5R Mini handhelds, 1,600mAh rechargeable batteries, custom programming, and one organized charging solution in a fitted protective case.',
+		description: 'A complete four-radio team system with UV-5R Mini handhelds, 1,600mAh rechargeable batteries, custom programming, and four USB-C charging cables in a fitted protective case.',
 		fullDescription: `Professionally assembled four-radio communications kit featuring Baofeng UV-5R Mini handheld radios organized inside a durable hard protective case with a precision-cut foam insert.
 
 Each radio includes an installed 1,600mAh rechargeable battery and is professionally programmed before shipment with commonly used GMRS, FRS, MURS, NOAA weather, Marine, and select aviation monitoring channels. Custom channel plans are available upon request.
 
-The kit includes four radios with installed batteries, a fitted 9¼ × 7½ × 4⅜ in. protective case, custom foam, a 1-to-4 USB-C charging splitter, and a custom exterior identification badge. Every component has a designated place so the complete system stays protected, organized, and ready to move.
+The kit includes four radios with installed batteries, a fitted 9¼ × 7½ × 4⅜ in. protective case, custom foam, four USB-C charging cables (one per radio), and a custom exterior identification badge. Every component has a designated place so the complete system stays protected, organized, and ready to move.
 
 This four-radio setup is well suited to families, small teams, preparedness kits, event staff, vehicle recovery crews, camping, overlanding, and general field use. The radios arrive organized and programmed for straightforward setup and use. Free shipping is included within the United States.`,
-		highlights: ['Four-radio team setup', 'Custom programming', '1-to-4 USB-C charging'],
+		highlights: ['Four-radio team setup', 'Custom programming', '4 USB-C charging cables'],
 		images: [
 			{ src: '/images/four-kit-open.jpg', alt: 'Four Baofeng handheld radios beside an open Signal Ready hard case' },
 			{ src: '/images/four-kit-packed.jpg', alt: 'Four radios and charging accessories organized inside a protective hard case' },
@@ -78,7 +78,7 @@ This four-radio setup is well suited to families, small teams, preparedness kits
 			'Rechargeable batteries installed',
 			'Custom-fitted protective hard case',
 			'Precision-cut foam insert',
-			'1-to-4 USB-C charging splitter',
+			'4 USB-C charging cables',
 			'Custom exterior identification badge',
 			'Case exterior: 9¼ × 7½ × 4⅜ in.',
 		],
@@ -234,7 +234,7 @@ export const faqs = [
 	{
 		topic: 'Charging',
 		question: 'Which charging cables come with each kit?',
-		answer: 'The 2-radio kit includes a 1-to-2 USB-C charging splitter. The 4-radio kit includes a 1-to-4 USB-C charging splitter. The 5-radio kit includes five separate USB-A to USB-C cables—one for each Mini-5. Use a compatible USB power source, such as a wall adapter, vehicle USB port, or power bank.',
+		answer: 'The 2-radio kit includes a 1-to-2 USB-C charging splitter. The 4-radio kit includes four separate USB-C charging cables—one per radio. The 5-radio kit includes five separate USB-A to USB-C cables—one for each Mini-5. Use a compatible USB power source, such as a wall adapter, vehicle USB port, or power bank.',
 	},
 	{
 		topic: 'Off-grid use',
